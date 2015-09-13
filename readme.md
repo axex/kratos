@@ -29,6 +29,7 @@ Listen 8000
     CustomLog "logs/kratos-access.log" common
 
     <Directory "/var/www/kratos/public">
+        AllowOverride All
         Require all granted
     </Directory>
 </VirtualHost>
