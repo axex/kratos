@@ -56,7 +56,7 @@
           </a>
           <a class="login-open-btn login-open-weibo" href="#">
             <i class="fa fa-weibo"></i>
-            <span>Login with GitHub</span>
+            <span>Login with Weibo</span>
           </a>
         </div>
 
