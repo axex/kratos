@@ -1,0 +1,21 @@
+{
+  "name": "kratos",
+  "version": "0.0.1",
+  "homepage": "https://github.com/axex/kratos",
+  "authors": [
+    "iissnan <iissnan@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/assets/vendors",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "fontawesome": "~4.4.0"
+  }
+}
