@@ -1,0 +1,22 @@
+$text-base-color: #8899aa;
+$border-base-radius: 2px;
+
+
+body {
+  font: 13px/1.6 "Lato", "Open Sans", "Microsoft YaHei", "sans-serif";
+  color: $text-base-color;
+  background: #EEF2F4;
+}
+
+.form-control, .btn, .btn-block {
+  border-radius: $border-base-radius;
+}
+
+.form-control {
+  border-color: #c5d2d8;
+
+  &:focus {
+    border-color: #b3c0c6;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  }
+}

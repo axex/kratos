@@ -11,6 +11,10 @@ var elixir = require('laravel-elixir');
  |
  */
 
+var cssPath = 'public/assets/css';
+var jsPath  = 'public/assets/js';
+
 elixir(function(mix) {
-    mix.sass('app.scss');
+  mix.sass('app.scss', cssPath);
+  mix.sass('pages/login.scss', cssPath);
 });
