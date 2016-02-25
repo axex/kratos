@@ -17,7 +17,8 @@ class PasswordController extends Controller
     | explore this trait and override any methods you wish to tweak.
     |
     */
-
+    protected $subject = 'Krotos\'s password reset link!';  // 设置发出去的邮件的主题
+    protected $redirectTo = '/';    // 重置密码成功后跳转的路径
     use ResetsPasswords;
 
     /**

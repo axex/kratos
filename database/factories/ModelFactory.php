@@ -11,11 +11,71 @@
 |
 */
 
+// 用户
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->email,
+        'name' => $faker->unique()->name,
+        'email' => $faker->unique()->email,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
+    ];
+});
+
+// 分类
+$factory->define(App\Category::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->unique()->word,
+        'slug' => $faker->word,
+        'desc' => $faker->paragraph
+    ];
+});
+
+// 期数
+$factory->define(App\Issue::class, function (Faker\Generator $faker) {
+        return [
+            'issue' => $faker->unique()->numberBetween(1, 30),
+            'published_at' => $faker->dateTimeThisYear
+        ];
+});
+
+// 文章
+$factory->define(App\Article::class, function (Faker\Generator $faker) {
+    $issueIds = \App\Issue::lists('id')->toArray();
+    $categoryIds = \App\Category::lists('id')->toArray();
+    return [
+        'issue_id' => $faker->randomElement($issueIds),
+        'category_id' => $faker->randomElement($categoryIds),
+        'title' => $faker->sentence(),
+        'desc' => $faker->paragraph,
+        'url' => $faker->url,
+        'presenter' => $faker->name,
+        'is_check' => $faker->randomElement([0, 1])
+    ];
+});
+
+// 标签
+$factory->define(App\Tag::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->unique()->word,
+    ];
+});
+
+// 文章和标签之间的关联关系
+$factory->define(App\ArticleTag::class, function (Faker\Generator $faker) {
+    $articleIds = \App\Article::lists('id')->toArray();
+    $tagIds = \App\Tag::lists('id')->toArray();
+    return [
+        'article_id' => $faker->randomElement($articleIds),
+        'tag_id' => $faker->randomElement($tagIds),
+    ];
+});
+
+// 订阅用户
+$factory->define(App\Subscribe::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'email' => $faker->unique()->email,
+        'confirm_code' => str_random(48),
+        'is_confirmed' => $faker->randomElement([0, 1]),
     ];
 });

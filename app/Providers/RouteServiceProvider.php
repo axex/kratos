@@ -24,8 +24,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        //
-
+        // 重置密码的确认码必须是48位
+        $router->pattern('reset_code', '[A-Za-z0-9]{48}');
         parent::boot($router);
     }
 

@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Shanghai',
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'zh_CN',
 
     /*
     |--------------------------------------------------------------------------
@@ -113,6 +113,11 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        Ender\UEditor\UEditorServiceProvider::class, // ueditor
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,  // ide-helper
+        Barryvdh\Debugbar\ServiceProvider::class,   // Laravel Debugbar
+        Zizaco\Entrust\EntrustServiceProvider::class,   // Entrust RBAC
+        Maatwebsite\Excel\ExcelServiceProvider::class,  // lravel-excel
         Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -160,6 +165,10 @@ return [
 
     'aliases' => [
 
+        'UEditor'   => Ender\UEditor\UEditor::class,
+        'Debugbar'  => Barryvdh\Debugbar\Facade::class,   // Laravel Debugbar
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class, // Entrust
+        'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
         'App'       => Illuminate\Support\Facades\App::class,
         'Artisan'   => Illuminate\Support\Facades\Artisan::class,
         'Auth'      => Illuminate\Support\Facades\Auth::class,
@@ -193,7 +202,6 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-
     ],
 
 ];

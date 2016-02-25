@@ -14,9 +14,13 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('username')->unique();
+            $table->string('realname')->nullable();
             $table->string('email')->unique();
+            $table->string('avatar')->nullable();
             $table->string('password', 60);
+            $table->string('reset_code', 60)->nullable();
+            $table->unsignedTinyInteger('is_lock')->default(0)->comment('是否锁定限制用户登录，1锁定,0正常');
             $table->rememberToken();
             $table->timestamps();
         });

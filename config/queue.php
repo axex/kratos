@@ -69,8 +69,8 @@ return [
         'redis' => [
             'driver' => 'redis',
             'connection' => 'default',
-            'queue'  => 'default',
-            'expire' => 60,
+            'queue'  => 'default',  // 默认队列名称
+            'expire' => 60, // 队列任务过期时间（秒）
         ],
 
     ],

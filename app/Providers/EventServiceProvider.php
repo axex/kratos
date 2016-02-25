@@ -18,10 +18,15 @@ class EventServiceProvider extends ServiceProvider
         ],
     ];
 
+    // 注册事件订阅者
+    protected $subscribe = [
+        \App\Listeners\UserEventListener::class,
+    ];
+
     /**
      * Register any other events for your application.
      *
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
+     * @param  \Illuminate\Contracts\Events\Dispatcher $events
      * @return void
      */
     public function boot(DispatcherContract $events)
@@ -30,4 +35,5 @@ class EventServiceProvider extends ServiceProvider
 
         //
     }
+
 }

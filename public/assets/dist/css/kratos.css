@@ -1,0 +1,42 @@
+section.content .box-primary {
+    overflow: hidden;
+}
+
+section.content .box-primary #setting-form {
+    width: 100%;
+    float: left;
+}
+
+section.content .box-primary #upload-form {
+    width: 100%;
+    float: right;
+}
+
+section.content .box-primary .avatar-group img {
+    width: 140px;
+    height: 140px;
+    display: block;
+    margin-bottom: 10px;
+}
+input[type=file] {
+    opacity: 0;
+    filter: alpha(opacity=0);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 82px;
+    height: 34px;
+}
+.btn-position {
+    position: relative;
+    overflow: hidden;
+}
+label.choice {
+    padding: 5px;
+}
+.box-tools .input-group-btn:last-child>.btn {
+    margin-left: 0;
+}
+.box-header > .box-tips {
+    margin-top: 20px;
+}

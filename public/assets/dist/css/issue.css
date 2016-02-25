@@ -1,0 +1,456 @@
+html,
+body,
+h1,
+h2,
+h3,
+p,
+ul,
+li,
+ol,
+dl,
+dt,
+dd {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+article,
+header,
+footer,
+section {
+    display: block;
+}
+
+body {
+    font: normal 14px/1.7 "Segoe UI", "Microsoft Yahei", arial, sans-serif;
+    background: #f5f5f5;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    margin: 0 auto;
+    min-width: 240px;
+    max-width: 960px;
+    _width: 800px;
+}
+
+#doc {
+    *zoom: 1
+}
+
+#hd {
+    background: #333 url(http://p0.qhimg.com/t016cd65e58d77a94ee.png);
+    color: #fff;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+#hd .container {
+    position: relative;
+}
+
+#hd .logo {
+    overflow: hidden;
+    margin-left: 10px;
+}
+
+#hd .logo a {
+    display: block;
+    overflow: hidden;
+    margin: 8px 0;
+    height: 0;
+    padding-top: 32px;
+    width: 128px;
+    background: url(http://p7.qhimg.com/t0126069643f3e2a090.png) no-repeat 0 0;
+}
+
+#hd .issue {
+    position: absolute;
+    top: 0;
+    right: 90px;
+    width: 48px;
+    height: 58px;
+    font-family: Georgia;
+    background: #649F0C;
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.2;
+    padding-top: 6px;
+}
+
+#hd .issue:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    bottom: 0;
+    left: 0;
+    border: 24px solid transparent;
+    border-bottom: 11px solid #f5f5f5;
+    border-top: none;
+    z-index: 1;
+}
+
+#hd .issue em {
+    display: block;
+    font-style: normal;
+    font-size: 18px;
+}
+
+#hd .share,
+#hd .add-link {
+    position: absolute;
+    top: 8px;
+    display: block;
+    width: 32px;
+    height: 0;
+    padding-top: 32px;
+    overflow: hidden;
+    opacity: 0.7;
+    -webkit-transition: opacity 0.1s ease-in;
+    transition: opacity 0.1s ease-in;
+}
+
+#hd .share {
+    right: 8px;
+    background: url(http://p4.qhimg.com/t015d93ebb25351027f.png) no-repeat;
+}
+
+#hd .add-link {
+    right: 45px;
+    background: url(http://p9.qhimg.com/t011016d2abc4e457e8.png) no-repeat;
+}
+
+#hd .add-link:hover,
+#hd .share:hover {
+    opacity: 1;
+}
+
+#main {
+    display: block;
+    top: 48px;
+    position: relative;
+    padding: 15px 0;
+    min-height: 100%;
+    overflow: hidden;
+}
+
+#main:after {
+    display: block;
+    content: '';
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+#content {
+    margin-right: 300px;
+}
+
+#aside {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    bottom: 0;
+    width: 240px;
+    padding: 25px 15px 15px;
+    display: block;
+}
+
+#aside h2 {
+    font: normal 22px/1.25 "Segoe UI Light", "Segoe UI", "Microsoft Jhenghei", "Microsoft Yahei", arial, sans-serif;
+    color: #777;
+}
+
+.issues {
+    margin-top: 10px;
+    line-height: 3;
+}
+
+.issues li {
+    border-top: 1px solid #eee;
+}
+
+.issues a {
+    color: #777;
+}
+
+.issues .date {
+    font-size: 12px;
+    color: #bbb;
+    float: right;
+    margin-top: 3px;
+}
+
+.article {
+    padding: 10px 15px;
+}
+
+.article:hover {
+    background: #f0f0f0;
+}
+
+.article .title {
+    font: normal 22px/1.25 "Segoe UI Light", "Segoe UI", "Microsoft Jhenghei", "Microsoft Yahei", arial, sans-serif;
+}
+
+.article .title a {
+    /*color: #649F0C;*/
+
+    color: #333;
+}
+
+.article .title a:visited {
+    color: purple;
+}
+
+.article .desc {
+    margin-top: 10px;
+    padding-left: 2px;
+    color: #666;
+}
+
+.article .desc a {
+    color: #666;
+    text-decoration: underline;
+}
+
+.article .desc a:hover {
+    color: #333;
+}
+
+.article .meta {
+    padding: 2px 0;
+    zoom: 1;
+    overflow: hidden;
+}
+
+.article .tag {
+    color: #999;
+    padding: 1px 4px;
+    margin-right: 5px;
+}
+
+.article .provider {
+    float: right;
+    color: #ccc;
+}
+
+.article:hover .tag {
+    background: #e1e1e1;
+    color: #666;
+}
+
+.article:hover .provider {
+    color: #666;
+}
+
+.subscribe {
+    margin: 20px 0 30px;
+}
+
+.subscribe .email {
+    border: 1px solid #999;
+    -webkit-box-shadow: none;
+    padding: 8px 0 8px 4px;
+    width: 150px;
+    font-size: 14px;
+}
+
+.subscribe .action {
+    display: inline;
+    text-align: right;
+    margin-top: 5px;
+}
+
+.subscribe .button {
+    background: #649F0C;
+    border-radius: 4px;
+    line-height: 2.5;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    font-family: "Microsoft Yahei";
+    color: #fff;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.subscribe .button:hover {
+    background: #389F0C;
+}
+
+.subscribe .button:active {
+    background: #7DC219;
+}
+
+#content h2 {
+    font: normal 22px/1.25 "Segoe UI Light", "Segoe UI", "Microsoft Jhenghei", "Microsoft Yahei", arial, sans-serif;
+    line-height: 2;
+    padding: 0 15px;
+    background: #649F0C;
+    color: #fff;
+    margin: 1em .5em 1em 0;
+}
+
+#ft {
+    padding: 24px 0;
+    text-align: center;
+    color: #ccc;
+    font-size: 12px;
+}
+
+.comments {
+    background: #f5f5f5;
+    margin-top: 60px;
+    overflow: hidden;
+    padding: 0 15px;
+}
+
+#disqus_thread {
+    margin: 15px 15px 15px;
+}
+
+@media screen and (max-width: 600px) {
+    #aside {
+        position: static;
+    }
+
+    #content {
+        margin: 0;
+    }
+
+    .article .title,
+    #aside h2 {
+        font-size: 18px;
+    }
+
+    #aside {
+        width: inherit;
+    }
+
+    #content h2 {
+        font-size: 18px;
+        margin-left: 0;
+        margin-right: 0
+    }
+
+    #hd .add-link {
+        right: 50px;
+    }
+}
+
+@media screen and (min-width: 1310px) {
+    #hd .logo {
+        margin-left: 0;
+    }
+
+    #hd .share {
+        right: 2px;
+    }
+}
+
+#main {
+    min-height: 1100px;
+    _height: 1100px;
+}
+
+#content {
+    margin-top: 12px;
+}
+
+#content em {
+    color: red;
+    font-style: normal;
+}
+
+#st-search-form {
+    margin-bottom: 20px;
+}
+
+#st-search-input {
+    width: 530px;
+    height: 20px;
+    padding: 10px 9px 10px 7px;
+    line-height: 20px;
+    font-size: 16px;
+    border: solid 1px #ccc;
+}
+
+#st-search-btn {
+    width: 104px;
+    border: 0;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    color: #fff;
+    background: #649F0C;
+    padding: 0;
+    cursor: pointer;
+}
+
+div.st-result {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+}
+
+/* paginate */
+
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;;
+}
+
+.pagination > li {
+    display: inline;
+}
+
+.pagination > li:first-child > a, .pagination > li:first-child > span {
+    margin-left: 0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.pagination > .disabled > span, .pagination > .disabled > span:hover, .pagination > .disabled > span:focus, .pagination > .disabled > a, .pagination > .disabled > a:hover, .pagination > .disabled > a:focus {
+    color: #777;
+    cursor: not-allowed;
+    background-color: #fff;
+    border-color: #ddd;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+.pagination > li > a, .pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: 1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}

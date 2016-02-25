@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\Inspire::class,
+        \App\Console\Commands\SendIssue::class, // 把 SendIssue 这个任务添加进来，这样等下才能用php artisan sendIssue
     ];
 
     /**
@@ -24,7 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('inspire')
-                 ->hourly();
+//        $schedule->command('inspire')->hourly();
+        $schedule->command('sendIssue')->weekly()->fridays()->at('10:30');
     }
 }
