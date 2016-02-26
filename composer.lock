@@ -4,126 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1aaea7d0461b4f8882120683c2e7c018",
-    "content-hash": "5935f9f22e18d80ba4080f057d63d87d",
+    "hash": "de071072cd6c735684e49a1195db59b1",
+    "content-hash": "9e59242b6de7850c8c7c99da34cbe5d2",
     "packages": [
-        {
-            "name": "barryvdh/laravel-debugbar",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "974fd16e328ca851a081449100d9509af59cf0ff"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/barryvdh/laravel-debugbar/974fd16e328ca851a081449100d9509af59cf0ff.zip",
-                "reference": "974fd16e328ca851a081449100d9509af59cf0ff",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~5.0.17|5.1.*|5.2.*",
-                "maximebf/debugbar": "~1.11.0",
-                "php": ">=5.4.0",
-                "symfony/finder": "~2.6|~3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Barryvdh\\Debugbar\\": "src/"
-                },
-                "files": [
-                    "src/helpers.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Barry vd. Heuvel",
-                    "email": "barryvdh@gmail.com"
-                }
-            ],
-            "description": "PHP Debugbar integration for Laravel",
-            "keywords": [
-                "debug",
-                "debugbar",
-                "laravel",
-                "profiler",
-                "webprofiler"
-            ],
-            "time": "2015-12-22 06:22:38"
-        },
-        {
-            "name": "barryvdh/laravel-ide-helper",
-            "version": "v2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/barryvdh/laravel-ide-helper.git",
-                "reference": "83999f8467374adcb8893f566c9171c9d9691f50"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/barryvdh/laravel-ide-helper/83999f8467374adcb8893f566c9171c9d9691f50.zip",
-                "reference": "83999f8467374adcb8893f566c9171c9d9691f50",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/console": "5.0.x|5.1.x",
-                "illuminate/filesystem": "5.0.x|5.1.x",
-                "illuminate/support": "5.0.x|5.1.x",
-                "php": ">=5.4.0",
-                "phpdocumentor/reflection-docblock": "2.0.4",
-                "symfony/class-loader": "~2.3"
-            },
-            "require-dev": {
-                "doctrine/dbal": "~2.3"
-            },
-            "suggest": {
-                "doctrine/dbal": "Load information from the database about models for phpdocs (~2.3)"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Barryvdh\\LaravelIdeHelper\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Barry vd. Heuvel",
-                    "email": "barryvdh@gmail.com"
-                }
-            ],
-            "description": "Laravel IDE Helper, generates correct PHPDocs for all Facade classes, to improve auto-completion.",
-            "keywords": [
-                "autocomplete",
-                "codeintel",
-                "helper",
-                "ide",
-                "laravel",
-                "netbeans",
-                "phpdoc",
-                "phpstorm",
-                "sublime"
-            ],
-            "time": "2015-08-13 11:40:00"
-        },
         {
             "name": "classpreloader/classpreloader",
             "version": "3.0.0",
@@ -529,16 +412,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.1.29",
+            "version": "v5.1.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "7e7ba568ffbc8f3f00778f2e8f41fb92127944fd"
+                "reference": "d899fbda59bf3ffcde11a9b443c01043b76f40b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/laravel/framework/7e7ba568ffbc8f3f00778f2e8f41fb92127944fd.zip",
-                "reference": "7e7ba568ffbc8f3f00778f2e8f41fb92127944fd",
+                "url": "http://packagist.phpcomposer.com/files/laravel/framework/d899fbda59bf3ffcde11a9b443c01043b76f40b3.zip",
+                "reference": "d899fbda59bf3ffcde11a9b443c01043b76f40b3",
                 "shasum": ""
             },
             "require": {
@@ -554,7 +437,7 @@
                 "nesbot/carbon": "~1.19",
                 "paragonie/random_compat": "~1.1",
                 "php": ">=5.5.9",
-                "psy/psysh": "0.6.*",
+                "psy/psysh": "0.7.*",
                 "swiftmailer/swiftmailer": "~5.1",
                 "symfony/console": "2.7.*",
                 "symfony/css-selector": "2.7.*",
@@ -653,20 +536,20 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2016-02-02 14:56:40"
+            "time": "2016-02-24 15:13:21"
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.16",
+            "version": "1.0.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "183e1a610664baf6dcd6fceda415baf43cbdc031"
+                "reference": "02f5b6c9a8b9278c8381e3361e7bd9d641c740ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/thephpleague/flysystem/183e1a610664baf6dcd6fceda415baf43cbdc031.zip",
-                "reference": "183e1a610664baf6dcd6fceda415baf43cbdc031",
+                "url": "http://packagist.phpcomposer.com/files/thephpleague/flysystem/02f5b6c9a8b9278c8381e3361e7bd9d641c740ca.zip",
+                "reference": "02f5b6c9a8b9278c8381e3361e7bd9d641c740ca",
                 "shasum": ""
             },
             "require": {
@@ -679,8 +562,7 @@
                 "ext-fileinfo": "*",
                 "mockery/mockery": "~0.9",
                 "phpspec/phpspec": "^2.2",
-                "phpspec/prophecy-phpunit": "~1.0",
-                "phpunit/phpunit": "~4.8"
+                "phpunit/phpunit": "~4.8 || ~5.0"
             },
             "suggest": {
                 "ext-fileinfo": "Required for MimeType",
@@ -737,7 +619,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2015-12-19 20:16:43"
+            "time": "2016-02-19 15:35:38"
         },
         {
             "name": "maatwebsite/excel",
@@ -806,67 +688,6 @@
                 "laravel"
             ],
             "time": "2015-12-15 20:14:50"
-        },
-        {
-            "name": "maximebf/debugbar",
-            "version": "v1.11.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/maximebf/php-debugbar.git",
-                "reference": "07741d84d39d10f00551c94284cdefcc69703e77"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/maximebf/php-debugbar/07741d84d39d10f00551c94284cdefcc69703e77.zip",
-                "reference": "07741d84d39d10f00551c94284cdefcc69703e77",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0",
-                "psr/log": "^1.0",
-                "symfony/var-dumper": "^2.6|^3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.0|^5.0"
-            },
-            "suggest": {
-                "kriswallsmith/assetic": "The best way to manage assets",
-                "monolog/monolog": "Log using Monolog",
-                "predis/predis": "Redis storage"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.11-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "DebugBar\\": "src/DebugBar/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Maxime Bouroumeau-Fuseau",
-                    "email": "maxime.bouroumeau@gmail.com",
-                    "homepage": "http://maximebf.com"
-                },
-                {
-                    "name": "Barry vd. Heuvel",
-                    "email": "barryvdh@gmail.com"
-                }
-            ],
-            "description": "Debug bar in the browser for php application",
-            "homepage": "https://github.com/maximebf/php-debugbar",
-            "keywords": [
-                "debug",
-                "debugbar"
-            ],
-            "time": "2015-12-10 09:50:24"
         },
         {
             "name": "monolog/monolog",
@@ -1136,55 +957,6 @@
             "time": "2016-02-06 03:52:05"
         },
         {
-            "name": "phpdocumentor/reflection-docblock",
-            "version": "2.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/d68dbdc53dc358a816f00b300704702b2eaff7b8",
-                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "suggest": {
-                "dflydev/markdown": "~1.0",
-                "erusev/parsedown": "~1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "phpDocumentor": [
-                        "src/"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mike van Riel",
-                    "email": "mike.vanriel@naenius.com"
-                }
-            ],
-            "time": "2015-02-03 12:10:50"
-        },
-        {
             "name": "phpoffice/phpexcel",
             "version": "1.8.1",
             "source": {
@@ -1281,16 +1053,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.6.1",
+            "version": "v0.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "0f04df0b23663799a8941fae13cd8e6299bde3ed"
+                "reference": "1573b36948a32bdaf43db525edf5e95d5a08ed06"
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/bobthecow/psysh/0f04df0b23663799a8941fae13cd8e6299bde3ed.zip",
-                "reference": "0f04df0b23663799a8941fae13cd8e6299bde3ed",
+                "url": "http://packagist.phpcomposer.com/files/bobthecow/psysh/1573b36948a32bdaf43db525edf5e95d5a08ed06.zip",
+                "reference": "1573b36948a32bdaf43db525edf5e95d5a08ed06",
                 "shasum": ""
             },
             "require": {
@@ -1349,7 +1121,7 @@
                 "interactive",
                 "shell"
             ],
-            "time": "2015-11-12 16:18:56"
+            "time": "2016-02-20 16:27:05"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1403,58 +1175,6 @@
                 "mailer"
             ],
             "time": "2015-06-06 14:19:39"
-        },
-        {
-            "name": "symfony/class-loader",
-            "version": "v2.8.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/class-loader.git",
-                "reference": "98e9089a428ed0e39423b67352c57ef5910a3269"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/symfony/class-loader/98e9089a428ed0e39423b67352c57ef5910a3269.zip",
-                "reference": "98e9089a428ed0e39423b67352c57ef5910a3269",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.9"
-            },
-            "require-dev": {
-                "symfony/finder": "~2.0,>=2.0.5|~3.0.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.8-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\ClassLoader\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony ClassLoader Component",
-            "homepage": "https://symfony.com",
-            "time": "2016-01-03 15:33:41"
         },
         {
             "name": "symfony/console",
@@ -2441,6 +2161,123 @@
     ],
     "packages-dev": [
         {
+            "name": "barryvdh/laravel-debugbar",
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/laravel-debugbar.git",
+                "reference": "13b7058d2120c8d5af7f1ada21b7c44dd87b666a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "http://packagist.phpcomposer.com/files/barryvdh/laravel-debugbar/13b7058d2120c8d5af7f1ada21b7c44dd87b666a.zip",
+                "reference": "13b7058d2120c8d5af7f1ada21b7c44dd87b666a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.1.*|5.2.*",
+                "maximebf/debugbar": "~1.11.0",
+                "php": ">=5.5.9",
+                "symfony/finder": "~2.7|~3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Barryvdh\\Debugbar\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "PHP Debugbar integration for Laravel",
+            "keywords": [
+                "debug",
+                "debugbar",
+                "laravel",
+                "profiler",
+                "webprofiler"
+            ],
+            "time": "2016-02-17 08:32:21"
+        },
+        {
+            "name": "barryvdh/laravel-ide-helper",
+            "version": "v2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/laravel-ide-helper.git",
+                "reference": "83999f8467374adcb8893f566c9171c9d9691f50"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "http://packagist.phpcomposer.com/files/barryvdh/laravel-ide-helper/83999f8467374adcb8893f566c9171c9d9691f50.zip",
+                "reference": "83999f8467374adcb8893f566c9171c9d9691f50",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "5.0.x|5.1.x",
+                "illuminate/filesystem": "5.0.x|5.1.x",
+                "illuminate/support": "5.0.x|5.1.x",
+                "php": ">=5.4.0",
+                "phpdocumentor/reflection-docblock": "2.0.4",
+                "symfony/class-loader": "~2.3"
+            },
+            "require-dev": {
+                "doctrine/dbal": "~2.3"
+            },
+            "suggest": {
+                "doctrine/dbal": "Load information from the database about models for phpdocs (~2.3)"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Barryvdh\\LaravelIdeHelper\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "Laravel IDE Helper, generates correct PHPDocs for all Facade classes, to improve auto-completion.",
+            "keywords": [
+                "autocomplete",
+                "codeintel",
+                "helper",
+                "ide",
+                "laravel",
+                "netbeans",
+                "phpdoc",
+                "phpstorm",
+                "sublime"
+            ],
+            "time": "2015-08-13 11:40:00"
+        },
+        {
             "name": "doctrine/instantiator",
             "version": "1.0.5",
             "source": {
@@ -2547,115 +2384,6 @@
             "time": "2015-05-29 06:29:14"
         },
         {
-            "name": "guzzlehttp/promises",
-            "version": "1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/promises.git",
-                "reference": "b1e1c0d55f8083c71eda2c28c12a228d708294ea"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/guzzle/promises/b1e1c0d55f8083c71eda2c28c12a228d708294ea.zip",
-                "reference": "b1e1c0d55f8083c71eda2c28c12a228d708294ea",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Promise\\": "src/"
-                },
-                "files": [
-                    "src/functions_include.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                }
-            ],
-            "description": "Guzzle promises library",
-            "keywords": [
-                "promise"
-            ],
-            "time": "2015-10-15 22:28:00"
-        },
-        {
-            "name": "guzzlehttp/psr7",
-            "version": "1.2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/psr7.git",
-                "reference": "2e89629ff057ebb49492ba08e6995d3a6a80021b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/guzzle/psr7/2e89629ff057ebb49492ba08e6995d3a6a80021b.zip",
-                "reference": "2e89629ff057ebb49492ba08e6995d3a6a80021b",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0",
-                "psr/http-message": "~1.0"
-            },
-            "provide": {
-                "psr/http-message-implementation": "1.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Psr7\\": "src/"
-                },
-                "files": [
-                    "src/functions_include.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                }
-            ],
-            "description": "PSR-7 message implementation",
-            "keywords": [
-                "http",
-                "message",
-                "stream",
-                "uri"
-            ],
-            "time": "2016-02-18 21:54:00"
-        },
-        {
             "name": "hamcrest/hamcrest-php",
             "version": "v1.2.2",
             "source": {
@@ -2702,16 +2430,16 @@
         },
         {
             "name": "illuminate/cache",
-            "version": "v5.1.28",
+            "version": "v5.1.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/cache.git",
-                "reference": "3721b684d82e1cea05081cef2eafa04ef5fe2795"
+                "reference": "f337b2c3f55f301039483f83bead2c8c4d4681e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/illuminate/cache/3721b684d82e1cea05081cef2eafa04ef5fe2795.zip",
-                "reference": "3721b684d82e1cea05081cef2eafa04ef5fe2795",
+                "url": "http://packagist.phpcomposer.com/files/illuminate/cache/f337b2c3f55f301039483f83bead2c8c4d4681e4.zip",
+                "reference": "f337b2c3f55f301039483f83bead2c8c4d4681e4",
                 "shasum": ""
             },
             "require": {
@@ -2748,11 +2476,11 @@
             ],
             "description": "The Illuminate Cache package.",
             "homepage": "http://laravel.com",
-            "time": "2015-12-28 21:20:38"
+            "time": "2016-02-05 14:57:16"
         },
         {
             "name": "illuminate/config",
-            "version": "v5.1.28",
+            "version": "v5.1.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/config.git",
@@ -2797,7 +2525,7 @@
         },
         {
             "name": "illuminate/console",
-            "version": "v5.1.28",
+            "version": "v5.1.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/console.git",
@@ -2848,7 +2576,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v5.1.28",
+            "version": "v5.1.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -2890,16 +2618,16 @@
         },
         {
             "name": "illuminate/filesystem",
-            "version": "v5.1.28",
+            "version": "v5.1.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/filesystem.git",
-                "reference": "a1cc4b69d9cde4e8617506fa84576c4197ca0cf0"
+                "reference": "9371a2893ef759b585f27d7c3bf8e2b54268ec46"
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/illuminate/filesystem/a1cc4b69d9cde4e8617506fa84576c4197ca0cf0.zip",
-                "reference": "a1cc4b69d9cde4e8617506fa84576c4197ca0cf0",
+                "url": "http://packagist.phpcomposer.com/files/illuminate/filesystem/9371a2893ef759b585f27d7c3bf8e2b54268ec46.zip",
+                "reference": "9371a2893ef759b585f27d7c3bf8e2b54268ec46",
                 "shasum": ""
             },
             "require": {
@@ -2936,20 +2664,20 @@
             ],
             "description": "The Illuminate Filesystem package.",
             "homepage": "http://laravel.com",
-            "time": "2015-12-20 15:51:01"
+            "time": "2016-02-16 14:02:58"
         },
         {
             "name": "illuminate/support",
-            "version": "v5.1.28",
+            "version": "v5.1.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "8d62c6e1064d3013609ccc9ab6221efd86c31403"
+                "reference": "96e4fa331ed8bad83314a6bdb26a998970a0d8c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/illuminate/support/8d62c6e1064d3013609ccc9ab6221efd86c31403.zip",
-                "reference": "8d62c6e1064d3013609ccc9ab6221efd86c31403",
+                "url": "http://packagist.phpcomposer.com/files/illuminate/support/96e4fa331ed8bad83314a6bdb26a998970a0d8c2.zip",
+                "reference": "96e4fa331ed8bad83314a6bdb26a998970a0d8c2",
                 "shasum": ""
             },
             "require": {
@@ -2990,7 +2718,68 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "http://laravel.com",
-            "time": "2015-12-28 21:10:29"
+            "time": "2016-02-15 19:41:59"
+        },
+        {
+            "name": "maximebf/debugbar",
+            "version": "v1.11.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maximebf/php-debugbar.git",
+                "reference": "d9302891c1f0a0ac5a4f66725163a00537c6359f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "http://packagist.phpcomposer.com/files/maximebf/php-debugbar/d9302891c1f0a0ac5a4f66725163a00537c6359f.zip",
+                "reference": "d9302891c1f0a0ac5a4f66725163a00537c6359f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "psr/log": "^1.0",
+                "symfony/var-dumper": "^2.6|^3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0|^5.0"
+            },
+            "suggest": {
+                "kriswallsmith/assetic": "The best way to manage assets",
+                "monolog/monolog": "Log using Monolog",
+                "predis/predis": "Redis storage"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.11-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DebugBar\\": "src/DebugBar/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maxime Bouroumeau-Fuseau",
+                    "email": "maxime.bouroumeau@gmail.com",
+                    "homepage": "http://maximebf.com"
+                },
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "Debug bar in the browser for php application",
+            "homepage": "https://github.com/maximebf/php-debugbar",
+            "keywords": [
+                "debug",
+                "debugbar"
+            ],
+            "time": "2016-01-22 12:22:23"
         },
         {
             "name": "mockery/mockery",
@@ -3056,6 +2845,55 @@
                 "testing"
             ],
             "time": "2015-04-02 19:54:00"
+        },
+        {
+            "name": "phpdocumentor/reflection-docblock",
+            "version": "2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
+                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/d68dbdc53dc358a816f00b300704702b2eaff7b8",
+                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "dflydev/markdown": "~1.0",
+                "erusev/parsedown": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "phpDocumentor": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike van Riel",
+                    "email": "mike.vanriel@naenius.com"
+                }
+            ],
+            "time": "2015-02-03 12:10:50"
         },
         {
             "name": "phpspec/php-diff",
@@ -3600,55 +3438,6 @@
             "time": "2015-10-02 06:51:40"
         },
         {
-            "name": "psr/http-message",
-            "version": "1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/http-message.git",
-                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/php-fig/http-message/85d63699f0dbedb190bbd4b0d2b9dc707ea4c298.zip",
-                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Http\\Message\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interface for HTTP messages",
-            "keywords": [
-                "http",
-                "http-message",
-                "psr",
-                "psr-7",
-                "request",
-                "response"
-            ],
-            "time": "2015-05-04 20:22:00"
-        },
-        {
             "name": "sebastian/comparator",
             "version": "1.2.0",
             "source": {
@@ -4018,6 +3807,58 @@
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
             "time": "2015-06-21 13:59:46"
+        },
+        {
+            "name": "symfony/class-loader",
+            "version": "v2.8.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/class-loader.git",
+                "reference": "98e9089a428ed0e39423b67352c57ef5910a3269"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "http://packagist.phpcomposer.com/files/symfony/class-loader/98e9089a428ed0e39423b67352c57ef5910a3269.zip",
+                "reference": "98e9089a428ed0e39423b67352c57ef5910a3269",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "symfony/finder": "~2.0,>=2.0.5|~3.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\ClassLoader\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony ClassLoader Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-01-03 15:33:41"
         },
         {
             "name": "symfony/yaml",
