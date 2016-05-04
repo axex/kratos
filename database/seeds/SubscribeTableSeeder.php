@@ -11,6 +11,7 @@ class SubscribeTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Subscribe::class, 30)->create();
+        $subscribes = factory(\App\Subscribe::class)->times(30)->make();
+        \App\Subscribe::insert($subscribes->toArray());
     }
 }

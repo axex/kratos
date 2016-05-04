@@ -11,6 +11,7 @@ class ArticleTbaleSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Article::class, 100)->create();
+        $articles = factory(\App\Article::class)->times(100)->make();
+        \App\Article::insert($articles->toArray());
     }
 }

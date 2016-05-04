@@ -11,6 +11,7 @@ class ArticleTagTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\ArticleTag::class, 100)->create();
+        $articleTag = factory(\App\ArticleTag::class)->times(100)->make();
+        \App\ArticleTag::insert($articleTag->toArray());
     }
 }

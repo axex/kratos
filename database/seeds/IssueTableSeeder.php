@@ -11,6 +11,7 @@ class IssueTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Issue::class, 30)->create();
+        $issues = factory(\App\Issue::class)->times(30)->make();
+        \App\Issue::insert($issues->toArray());
     }
 }
