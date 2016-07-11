@@ -66,7 +66,7 @@ class UserEventListener
         \Log::info('user ' . $user->username . '[' . $user->email . '] has update his/her personal information');
         $log = [
             'user_id' => $user->id,
-            'url' => route('backend.me'),
+            'url' => route('dashboard.me'),
             'content' => '用户：' . $user->username . '[' . $user->email . '] 更新了个人资料。',
         ];
         writeToSystemLog($log);
@@ -78,7 +78,7 @@ class UserEventListener
         \Log::info('user ' . $user->username . '[' . $user->email . '] has been created');
         $logs = [
             'user_id' => $user->id,
-            'url' => route('backend.user.create'),
+            'url' => route('dashboard.user.create'),
             'content' => '创建新用户：' . $user->username . '[' . $user->email . ']'
         ];
         writeToSystemLog($logs);

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Article;
 
 class ArticleTbaleSeeder extends Seeder
 {
@@ -11,7 +12,7 @@ class ArticleTbaleSeeder extends Seeder
      */
     public function run()
     {
-        $articles = factory(\App\Article::class)->times(100)->make();
-        \App\Article::insert($articles->toArray());
+        $articles = factory(Article::class)->times(100)->make();
+        Article::insert($articles->toArray());
     }
 }

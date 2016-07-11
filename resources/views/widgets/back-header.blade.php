@@ -1,6 +1,6 @@
 <header class="main-header">
     <!-- Logo -->
-    <a href="{{ route('backend.console') }}" class="logo">
+    <a href="{{ route('dashboard.console') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>K</b></span>
         <!-- logo for regular state and mobile devices -->
@@ -55,7 +55,7 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="{{ route('backend.me') }}" class="btn btn-default btn-flat">个人资料</a>
+                                <a href="{{ route('dashboard.me') }}" class="btn btn-default btn-flat">个人资料</a>
                             </div>
                             <div class="pull-right">
                                 <a href="{{ route('logout') }}" class="btn btn-default btn-flat">退出</a>

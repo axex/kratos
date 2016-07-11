@@ -20,7 +20,7 @@ class PermissionDenied
     {
         $permissions = empty($permissions) ? 'manage_contents' : $permissions;
         if (! $request->user()->can($permissions)) {
-            return response()->view('backend.exceptions.deny403', [], 403);
+            return response()->view('dashboard.exceptions.deny403', [], 403);
         }
         return $next($request);
     }

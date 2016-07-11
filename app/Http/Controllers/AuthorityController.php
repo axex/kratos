@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\UserLogin;
 use App\Events\UserLogout;
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -28,7 +28,7 @@ class AuthorityController extends Controller
         \Auth::login(User::create(
             array_merge($request->all(), ['reset_code' => str_random(48)])
         ));
-        return redirect()->intended(route('backend.console'));
+        return redirect()->intended(route('dashboard.console'));
     }
 
     public function getLogin()
@@ -45,7 +45,7 @@ class AuthorityController extends Controller
         ], $request->has('remember'))) {
             event(new UserLogin(\Auth::user()));    // 触发登录事件
             // intended 方法将会将用户重定向到登录之前用户想要访问的URL，在目标URL无效的情况下备用URI将会传递给该方法。
-            return redirect()->intended(route('backend.console'));
+            return redirect()->intended(route('dashboard.console'));
         }
         return back()->withInput()->withErrors(trans('auth.failed'));
     }

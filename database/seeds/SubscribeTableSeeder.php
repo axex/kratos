@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Subscribe;
 
 class SubscribeTableSeeder extends Seeder
 {
@@ -11,7 +12,7 @@ class SubscribeTableSeeder extends Seeder
      */
     public function run()
     {
-        $subscribes = factory(\App\Subscribe::class)->times(30)->make();
-        \App\Subscribe::insert($subscribes->toArray());
+        $subscribes = factory(Subscribe::class)->times(30)->make();
+        Subscribe::insert($subscribes->toArray());
     }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Article;
-use App\Category;
-use App\Issue;
+use App\Models\Article;
+use App\Models\Category;
+use App\Models\Issue;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\SystemLog;
 /*
 |--------------------------------------------------------------------------
 | 自定义公共函数库Helper
@@ -17,12 +18,12 @@ if (! function_exists('currentNav')) {
      * @return string 返回经过处理之后路径
      */
     function currentNav($route = '')
-    { // backend.system.setting
+    { // dashboard.system.setting
         $routeArray = explode('.', $route);
-        // 后台的路由前缀都是 backend, 出现 backend/*/ 的链接是一级链接
+        // 后台的路由前缀都是 dashboard, 出现 dashboard/*/ 的链接是一级链接
         if (is_array($routeArray) && count($routeArray) >= 2) {
             // 二级链接
-            // 如 kratos.com/backend/article  对应的路由别名是 backend.article.index, 所以碰到别名有 index 的要手动加上
+            // 如 kratos.com/dashboard/article  对应的路由别名是 dashboard.article.index, 所以碰到别名有 index 的要手动加上
             $route1 = $routeArray[0] . '.' . $routeArray[1] . '.index';
             if (Route::getRoutes()->hasNamedRoute($route1)) {
                 return route($route1);
@@ -73,7 +74,7 @@ if (! function_exists('writeToSystemLog')) {
         if (is_array($log) && array_key_exists('content', $log)) { // 操作内容不存在则不写入
             $log = array_add($log, 'user_id', 0);
             $log = array_add($log, 'operator_ip', Request::getClientIp());  //操作者ip
-            \App\SystemLog::create($log);
+            SystemLog::create($log);
             return true;
         }
         return false;

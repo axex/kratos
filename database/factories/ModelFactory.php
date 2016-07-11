@@ -12,7 +12,7 @@
 */
 
 // 用户
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->unique()->name,
         'email' => $faker->unique()->email,
@@ -22,7 +22,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 });
 
 // 分类
-$factory->define(App\Category::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Category::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->unique()->word,
         'slug' => $faker->word,
@@ -31,7 +31,7 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) {
 });
 
 // 期数
-$factory->define(App\Issue::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Issue::class, function (Faker\Generator $faker) {
         return [
             'issue' => $faker->unique()->numberBetween(1, 30),
             'published_at' => $faker->dateTimeThisYear
@@ -39,9 +39,9 @@ $factory->define(App\Issue::class, function (Faker\Generator $faker) {
 });
 
 // 文章
-$factory->define(App\Article::class, function (Faker\Generator $faker) {
-    $issueIds = \App\Issue::lists('id')->toArray();
-    $categoryIds = \App\Category::lists('id')->toArray();
+$factory->define(App\Models\Article::class, function (Faker\Generator $faker) {
+    $issueIds = \App\Models\Issue::lists('id')->toArray();
+    $categoryIds = \App\Models\Category::lists('id')->toArray();
     return [
         'issue_id' => $faker->randomElement($issueIds),
         'category_id' => $faker->randomElement($categoryIds),
@@ -54,16 +54,16 @@ $factory->define(App\Article::class, function (Faker\Generator $faker) {
 });
 
 // 标签
-$factory->define(App\Tag::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Tag::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->unique()->word,
     ];
 });
 
 // 文章和标签之间的关联关系
-$factory->define(App\ArticleTag::class, function (Faker\Generator $faker) {
-    $articleIds = \App\Article::lists('id')->toArray();
-    $tagIds = \App\Tag::lists('id')->toArray();
+$factory->define(App\Models\ArticleTag::class, function (Faker\Generator $faker) {
+    $articleIds = \App\Models\Article::lists('id')->toArray();
+    $tagIds = \App\Models\Tag::lists('id')->toArray();
     return [
         'article_id' => $faker->randomElement($articleIds),
         'tag_id' => $faker->randomElement($tagIds),
@@ -71,7 +71,7 @@ $factory->define(App\ArticleTag::class, function (Faker\Generator $faker) {
 });
 
 // 订阅用户
-$factory->define(App\Subscribe::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Subscribe::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->email,

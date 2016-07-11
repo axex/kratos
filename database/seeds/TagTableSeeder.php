@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Tag;
 
 class TagTableSeeder extends Seeder
 {
@@ -11,7 +12,7 @@ class TagTableSeeder extends Seeder
      */
     public function run()
     {
-        $tags = factory(\App\Tag::class)->times(100)->make();
-        \App\Tag::insert($tags);
+        $tags = factory(Tag::class)->times(100)->make();
+        Tag::insert($tags->toArray());
     }
 }

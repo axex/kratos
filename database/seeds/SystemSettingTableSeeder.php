@@ -1,6 +1,6 @@
 <?php
 
-use App\SystemSetting;
+use App\Models\SystemSetting;
 use Illuminate\Database\Seeder;
 
 class SystemSettingTableSeeder extends Seeder

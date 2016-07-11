@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\ArticleTag;
 
 class ArticleTagTableSeeder extends Seeder
 {
@@ -11,7 +12,7 @@ class ArticleTagTableSeeder extends Seeder
      */
     public function run()
     {
-        $articleTag = factory(\App\ArticleTag::class)->times(100)->make();
-        \App\ArticleTag::insert($articleTag->toArray());
+        $articleTag = factory(ArticleTag::class)->times(100)->make();
+        ArticleTag::insert($articleTag->toArray());
     }
 }

@@ -32,7 +32,7 @@ php artisan db:seed
 
 **demo/demo**
 
-通过 `http://www.yourdomain.com/backend` 可以跳到后台登录页面
+通过 `http://www.yourdomain.com/dashboard` 可以跳到后台登录页面
 
 ### 定时任务
 

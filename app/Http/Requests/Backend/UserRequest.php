@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Backend;
+namespace App\Http\Requests\Dashboard;
 
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\Request;

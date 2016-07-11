@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Subscribe;
+use App\Models\Subscribe;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;

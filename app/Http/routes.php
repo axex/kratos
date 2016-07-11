@@ -88,9 +88,9 @@ Route::group(['prefix' => 'auth'], function () {
 |--------------------------------------------------------------------------
 */
 
-Route::group(['prefix' => 'backend', 'middleware' => 'auth', 'namespace' => 'Backend'], function () {
+Route::group(['prefix' => 'dashboard', 'middleware' => 'auth', 'namespace' => 'Dashboard'], function () {
 
-    $as = 'backend.';
+    $as = 'dashboard.';
 
     # 后台首页
     Route::get('/', ['as' => $as . 'console', 'uses' => 'AdminController@console']);
