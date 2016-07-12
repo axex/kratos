@@ -35,7 +35,7 @@
                 @endforeach
                 @endif
             </div>
-            {!! $articles->appends(['kword' => Input::get('kword')])->render() !!}
+            {!! $articles->appends(['kword' => Request::get('kword')])->render() !!}
         </section>
         <aside id="aside">
             <h2>最新发布</h2>

@@ -5,18 +5,19 @@
 
 <script type="text/javascript">
 
-    var ue = UE.getEditor('ueditor', { //用辅助方法生成的话默认id是ueditor
-        pasteplain:true // 纯文本粘贴
-    }); // 获取纯文本内容
+  var ue = UE.getEditor('ueditor', { //用辅助方法生成的话默认id是ueditor
+    pasteplain: false, // 纯文本粘贴
+    initialFrameHeight: 300 // 设置默认高度
+  }); // 获取纯文本内容
 
-    /* 自定义路由 */
-    /*
-     var serverUrl=UE.getOrigin()+'/ueditor/test'; //你的自定义上传路由
-     var ue = UE.getEditor('ueditor',{'serverUrl':serverUrl}); //如果不使用默认路由，就需要在初始化就设定这个值
-     */
+  /* 自定义路由 */
+  /*
+   var serverUrl=UE.getOrigin()+'/ueditor/test'; //你的自定义上传路由
+   var ue = UE.getEditor('ueditor',{'serverUrl':serverUrl}); //如果不使用默认路由，就需要在初始化就设定这个值
+   */
 
-    ue.ready(function() {
-        ue.execCommand('serverparam', '_token', '{{ csrf_token() }}');
-    });
+  ue.ready(function () {
+    ue.execCommand('serverparam', '_token', '{{ csrf_token() }}');
+  });
 
 </script>

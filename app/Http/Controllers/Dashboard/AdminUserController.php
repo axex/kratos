@@ -76,7 +76,7 @@ class AdminUserController extends Controller
         $user = User::findOrFail($id);
         $roles = Role::get();
         // 当前用户所属的用户组
-        $currentRole = $user->roles()->pluck('id');
+        $currentRole = $user->roles()->value('id');
         return view('dashboard.user.edit', compact('user', 'roles', 'currentRole'));
     }
 

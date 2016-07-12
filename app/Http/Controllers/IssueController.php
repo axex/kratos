@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Issue;
+use App\Repositories\ArticleRepository;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -18,8 +19,8 @@ class IssueController extends Controller
         // 对数据库操作的方法可以在 vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php 里查询
         // Carbon 相关的方法可以在 vendor/nesbot/carbon/src/Carbon/Carbon.php 里查询
         $issueArticles = Issue::where(['issue' => $issue])->published()->first()->articles->groupBy('category_id');
-        $recommendId = Category::recommend()->pluck('id');
-        $otherId = Category::other()->pluck('id');
+        $recommendId = Category::recommend()->value('id');
+        $otherId = Category::other()->value('id');
         $recommArticles = [];
         $normalArticles = collect(); // 创建一个新集合
         $otherArticles = [];
@@ -41,22 +42,23 @@ class IssueController extends Controller
         return view('frontend.issues.template', compact('issue', 'articles', 'latestIssues'));
     }
 
+
     /**
-     * http://wenda.golaravel.com/question/1094
-     *
+     * @link http://wenda.golaravel.com/question/1094
+     * @param ArticleRepository $articleRepository
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function search()
+    public function search(ArticleRepository $articleRepository)
     {
-        $kwords = \Input::get('kword', '');
+        $kwords = \Request::get('kword', '');
         $kwords = explode(' ', $kwords);
         $whereStr = '';
         foreach ($kwords as $k => $kword) {
             $whereStr .= "title like '%" . $kword . "%'";
-            $k !== (count($kwords) - 1) ? $whereStr .= ' or ' : '';
+            $k != (count($kwords) - 1) ? $whereStr .= ' or ' : '';
         }
-        $articles = Article::whereRaw($whereStr)->paginate(15);
-        $latestIssues = Issue::latest('issue')->published()->get()->take(20);
+        $articles = $articleRepository->search($whereStr, 15);
+        $latestIssues = Issue::latest('issue')->published()->limit(20)->get();
 
         return view('frontend.issues.search', compact('articles', 'latestIssues'));
     }

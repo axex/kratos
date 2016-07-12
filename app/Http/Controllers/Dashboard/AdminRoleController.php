@@ -69,7 +69,7 @@ class AdminRoleController extends Controller
     {
         $role = Role::findOrFail($id);
         $permissions = Permission::get();
-        $ownPermissions = $role->perms->pluck('id')->all();
+        $ownPermissions = $role->perms->value('id')->all();
         return view('dashboard.role.edit', compact('role', 'permissions', 'ownPermissions'));
     }
 

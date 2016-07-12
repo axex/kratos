@@ -66,3 +66,9 @@ sudo supervisorctl status
 ```
 
 这样，推送到队列的任务就可以自动被执行了
+
+### TODO
+
+- [ ] 使用 Repository 模式，在 repository 里完成数据库逻辑操作
+- [ ] 模板里代码复用
+- [ ] 精简 routes.php
