@@ -6,9 +6,9 @@ use App\Models\Article;
 use App\Models\Category;
 use App\Models\Issue;
 use App\Models\Tag;
+use App\Http\Requests\SubmissionRequest;
+use App\Repositories\ArticleRepository;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class SubmissionController extends Controller
@@ -18,10 +18,10 @@ class SubmissionController extends Controller
         return view('frontend.submission.add');
     }
 
-    public function store(Requests\SubmissionRequest $request)
+    public function store(SubmissionRequest $request, ArticleRepository $articleRepository)
     {
         // url 已经被提交过
-        $url = Article::where('url', $request->get('url'))->first();
+        $url = $articleRepository->checkUrl($request->get('url'));
         if ($url) {
             return back()->with('repeatUrl', $url->issue->issue)->withInput();
         }

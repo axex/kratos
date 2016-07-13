@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
 use App\Models\Category;
 use App\Models\Issue;
 use App\Repositories\ArticleRepository;
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class IssueController extends Controller

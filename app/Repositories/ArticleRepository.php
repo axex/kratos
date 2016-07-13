@@ -21,4 +21,14 @@ class ArticleRepository
     {
         return $this->article->whereRaw($sql)->paginate($num);
     }
+
+    public function checkUrl($url)
+    {
+        return $this->article->whereUrl($url)->first();
+    }
+
+    public function create()
+    {
+
+    }
 }

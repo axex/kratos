@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Requests\Dashboard\IssueRequest;
 use App\Models\Issue;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-use App\Http\Requests\Dashboard;
 use App\Http\Controllers\Controller;
 
 class AdminIssueController extends Controller
@@ -46,10 +46,10 @@ class AdminIssueController extends Controller
     /**
      * 发布日期没写则用当前时间
      *
-     * @param Dashboard\IssueRequest $request
+     * @param IssueRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Dashboard\IssueRequest $request)
+    public function store(IssueRequest $request)
     {
         $publishedAt = $request->get('published_at');
         if (! $publishedAt) {

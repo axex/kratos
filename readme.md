@@ -72,3 +72,4 @@ sudo supervisorctl status
 - [ ] 使用 Repository 模式，在 repository 里完成数据库逻辑操作
 - [ ] 模板里代码复用
 - [ ] 精简 routes.php
+- [ ] 拆分 articles 表，区分投稿文章
