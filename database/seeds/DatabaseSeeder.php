@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(IssueTableSeeder::class);
         $this->call(ArticleTbaleSeeder::class);
         $this->call(TagTableSeeder::class);
+        $this->call(ContributeArticleTableSeeder::class);
         $this->call(ArticleTagTableSeeder::class);
         $this->call(SubscribeTableSeeder::class);
         $this->call(SystemSettingTableSeeder::class);
