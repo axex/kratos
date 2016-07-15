@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArticleTagTable extends Migration
+class CreatePublishingArticleTagTable extends Migration
 {
     /**
      * Run the migrations.
@@ -23,15 +23,12 @@ class CreateArticleTagTable extends Migration
     */
     public function up()
     {
-        Schema::create('article_tag', function (Blueprint $table) {
+        Schema::create('publishing_article_tag', function (Blueprint $table) {
             $table->integer('article_id')->unsigned()->index();
-            $table->integer('contribute_article_id')->unsigned()->index();
             $table->integer('tag_id')->unsigned()->index();
-            $table->foreign('article_id')->references('id')->on('articles')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('contribute_article_id')->references('id')->on('contribute_articles')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('tag_id')->references('id')->on('tags')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('article_id')->references('id')->on('publishing_articles')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('tag_id')->references('id')->on('publishing_tags')->onUpdate('cascade')->onDelete('cascade');
             $table->unique(['article_id', 'tag_id']);
-            $table->unique(['contribute_article_id', 'tag_id']);
             $table->timestamps();
         });
     }

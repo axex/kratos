@@ -17,14 +17,19 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Tag whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Tag whereUpdatedAt($value)
  */
-class Tag extends Model
+class PublishingTag extends Model
 {
-    protected $table = 'tags';
+    protected $table = 'publishing_tags';
 
     protected $fillable = ['name'];
 
     public function articles()
     {
-        return $this->belongsToMany(Article::class)->withTimestamps();
+        return $this->belongsToMany(PublishingArticle::class)->withTimestamps();
+    }
+
+    public function contributeArticles()
+    {
+        return $this->belongsToMany(ContributeArticle::class, 'article_tag')->withTimestamps();
     }
 }

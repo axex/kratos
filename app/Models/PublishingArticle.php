@@ -37,11 +37,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Article whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Article isCheck($type)
  */
-class Article extends Model
+class PublishingArticle extends Model
 {
     use ForCheckArticle;
 
-    protected $table = 'articles';
+    protected $table = 'publishing_articles';
     protected $guarded = [];
 
     public function category()
@@ -58,7 +58,7 @@ class Article extends Model
     public function tags()
     {
         // withTimestamps() 用来同步时间, 不然在 article_tag 表里面时间的空的
-        return $this->belongsToMany(Tag::class)->withTimestamps();
+        return $this->belongsToMany(PublishingTag::class)->withTimestamps();
     }
 
 }
