@@ -32,7 +32,7 @@ class Issue extends Model
 
     public function articles()
     {
-        return $this->hasMany(Article::class);
+        return $this->hasMany(PublishingArticle::class);
     }
 
     public function scopePublished($query)

@@ -11,6 +11,6 @@ class ContributeArticle extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'article_tag')->withTimestamps();
+        return $this->belongsToMany(ContributeTag::class, 'article_tag')->withTimestamps();
     }
 }

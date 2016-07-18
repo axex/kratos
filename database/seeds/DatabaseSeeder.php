@@ -19,10 +19,12 @@ class DatabaseSeeder extends Seeder
         $this->call(UserTableSeeder::class);
         $this->call(CategoryTableSeeder::class);
         $this->call(IssueTableSeeder::class);
-        $this->call(ArticleTbaleSeeder::class);
-        $this->call(TagTableSeeder::class);
+        $this->call(PublishingArticleTbaleSeeder::class);
+        $this->call(PublishingTagTableSeeder::class);
+        $this->call(PublishingArticleTagTableSeeder::class);
         $this->call(ContributeArticleTableSeeder::class);
-        $this->call(ArticleTagTableSeeder::class);
+        $this->call(ContributeTagTableSeeder::class);
+        $this->call(ContributeArticleTagTableSeeder::class);
         $this->call(SubscribeTableSeeder::class);
         $this->call(SystemSettingTableSeeder::class);
 

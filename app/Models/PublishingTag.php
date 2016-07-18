@@ -25,11 +25,6 @@ class PublishingTag extends Model
 
     public function articles()
     {
-        return $this->belongsToMany(PublishingArticle::class)->withTimestamps();
-    }
-
-    public function contributeArticles()
-    {
-        return $this->belongsToMany(ContributeArticle::class, 'article_tag')->withTimestamps();
+        return $this->belongsToMany(PublishingArticle::class, 'publishing_article_tag', 'tag_id', 'article_id')->withTimestamps();
     }
 }

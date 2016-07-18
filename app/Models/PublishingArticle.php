@@ -58,7 +58,7 @@ class PublishingArticle extends Model
     public function tags()
     {
         // withTimestamps() 用来同步时间, 不然在 article_tag 表里面时间的空的
-        return $this->belongsToMany(PublishingTag::class)->withTimestamps();
+        return $this->belongsToMany(PublishingTag::class, 'publishing_article_tag', 'article_id', 'tag_id')->withTimestamps();
     }
 
 }

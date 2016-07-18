@@ -16,14 +16,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\ArticleTag whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\ArticleTag whereUpdatedAt($value)
  */
-class ArticleTag extends Model
+class PublishingArticleTag extends Model
 {
     /*
      * 本类只是在生成测试数据时才有用
      *
      *
      */
-    protected $table = 'article_tag';
+    protected $table = 'publishing_article_tag';
 
     protected $guarded = [];
 }

@@ -3,10 +3,12 @@
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Issue;
-use App\Models\Article;
+use App\Models\PublishingArticle;
+use App\Models\PublishingTag;
+use App\Models\PublishingArticleTag;
 use App\Models\ContributeArticle;
-use App\Models\Tag;
-use App\Models\ArticleTag;
+use App\Models\ContributeTag;
+use App\Models\ContributeArticleTag;
 use App\Models\Subscribe;
 use Faker\Generator;
 
@@ -54,7 +56,7 @@ $factory->define(Issue::class, function (Generator $faker) use ($dates) {
 });
 
 // 文章
-$factory->define(Article::class, function (Generator $faker) use ($dates) {
+$factory->define(PublishingArticle::class, function (Generator $faker) use ($dates) {
     $issueIds = Issue::lists('id')->toArray();
     $categoryIds = Category::lists('id')->toArray();
     return array_merge([
@@ -65,6 +67,23 @@ $factory->define(Article::class, function (Generator $faker) use ($dates) {
         'url' => $faker->url,
         'presenter' => $faker->name,
         'is_check' => $faker->randomElement([0, 1])
+    ], $dates);
+});
+
+// 文章标签
+$factory->define(PublishingTag::class, function (Generator $faker) use ($dates) {
+    return array_merge([
+        'name' => $faker->unique()->word
+    ], $dates);
+});
+
+// 文章和标签之间的关联关系
+$factory->define(PublishingArticleTag::class, function (Generator $faker) use ($dates) {
+    $articleIds = PublishingArticle::lists('id')->toArray();
+    $tagIds = PublishingTag::lists('id')->toArray();
+    return array_merge([
+        'article_id' => $faker->randomElement($articleIds),
+        'tag_id' => $faker->randomElement($tagIds),
     ], $dates);
 });
 
@@ -79,21 +98,19 @@ $factory->define(ContributeArticle::class, function (Generator $faker) use ($dat
     ], $dates);
 });
 
-// 标签
-$factory->define(Tag::class, function (Generator $faker) use ($dates) {
+// 投稿标签
+$factory->define(ContributeTag::class, function (Generator $faker) use ($dates) {
     return array_merge([
-        'name' => $faker->unique()->word
+        'name' => $faker->unique()->firstName
     ], $dates);
 });
 
-// 文章和标签之间的关联关系
-$factory->define(ArticleTag::class, function (Generator $faker) use ($dates) {
-    $articleIds = Article::lists('id')->toArray();
-    $ContributeArticleIds = ContributeArticle::lists('id')->toArray();
-    $tagIds = Tag::lists('id')->toArray();
+// 投稿和标签之间的关联关系
+$factory->define(ContributeArticleTag::class, function (Generator $faker) use ($dates) {
+    $articleIds = ContributeArticle::lists('id')->toArray();
+    $tagIds = ContributeTag::lists('id')->toArray();
     return array_merge([
         'article_id' => $faker->randomElement($articleIds),
-        'contribute_article_id' => $faker->randomElement($ContributeArticleIds),
         'tag_id' => $faker->randomElement($tagIds),
     ], $dates);
 });
