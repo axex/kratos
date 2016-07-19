@@ -1,13 +1,11 @@
 <?php
 namespace App\Repositories;
 
-
 use App\Models\Issue;
 
 class IssueRepository
 {
     protected $issue;
-
     /**
      * IssueRepository constructor.
      * @param Issue $issue
@@ -17,5 +15,14 @@ class IssueRepository
         $this->issue = $issue;
     }
 
+    public function allIssues()
+    {
+        return $this->issue->latest('issue')->published()->get();
+    }
+
+    public function articles($issue)
+    {
+        return $this->issue->whereIssue($issue)->published()->first()->articles->groupBy('category_id');
+    }
 
 }

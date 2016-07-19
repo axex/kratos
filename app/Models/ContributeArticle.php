@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class ContributeArticle extends Model
+class ContributeArticle extends BaseModel
 {
     protected $table = 'contribute_articles';
     protected $guarded = [];

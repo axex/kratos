@@ -29,8 +29,8 @@
         <div class="issues container">
             <h3 class="title">最新发布的周刊</h3>
             <ol class="issue-list">
-                @foreach($latestIssues as $latestIssue)
-                    <li><span class='date'>{{ $latestIssue->created_at->toDateString() }}</span><a href='{{ route('issue', $latestIssue->issue) }}'>Kratos第{{ $latestIssue->issue }}期</a></li>
+                @foreach($issues as $issue)
+                    <li><span class='date'>{{ $issue->created_at->toDateString() }}</span><a href='{{ route('issue', $issue->issue) }}'>Kratos第{{ $issue->issue }}期</a></li>
                 @endforeach
             </ol>
         </div>

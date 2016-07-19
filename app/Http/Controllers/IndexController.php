@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Issue;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Repositories\IssueRepository;
 
 class IndexController extends Controller
 {
-    public function index()
+    public function index(IssueRepository $issueRepository)
     {
-        $latestIssues = Issue::latest('issue')->published()->get();
-        return view('frontend.index', compact('latestIssues'));
+        $issues = $issueRepository->allIssues();
+        return view('frontend.index', compact('issues'));
     }
 }

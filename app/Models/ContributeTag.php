@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class ContributeTag extends Model
+class ContributeTag extends BaseModel
 {
     protected $table = 'contribute_tags';
 
