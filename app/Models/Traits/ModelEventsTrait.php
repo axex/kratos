@@ -6,32 +6,48 @@ use Carbon\Carbon;
 
 trait ModelEventsTrait
 {
+
     /**
      * 判断文章是否审核通过
      *
-     * @param $query
+     * @param Builder $query
      * @param $type
-     * @return mixed
+     * @return $this
      */
     public function scopeIsCheck(Builder $query, $type)
     {
         return $query->where('is_check', $type);
     }
 
+    /**
+     * 发表时间
+     *
+     * @param Builder $query
+     */
     public function scopePublished(Builder $query)
     {
         $query->where('published_at', '<=', Carbon::now());
     }
 
-    // 推荐分类
+    /**
+     * 推荐分类
+     *
+     * @param Builder $query
+     * @return $this
+     */
     public function scopeRecommend(Builder $query)
     {
         return $query->where('slug', 'recommend');
     }
 
-    // 其他分类
-    public function scopeOther(Builder $query)
+    /**
+     * 其他分类
+     *
+     * @param Builder $query
+     * @return $this
+     */
+    public function scopeDefault(Builder $query)
     {
-        return $query->where('slug', 'other');
+        return $query->where('slug', 'default');
     }
 }

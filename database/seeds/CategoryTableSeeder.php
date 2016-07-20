@@ -21,7 +21,7 @@ class CategoryTableSeeder extends Seeder
 
         Category::create([
             'name' => '其他',
-            'slug' => 'other'
+            'slug' => 'default'
         ]);
     }
 }

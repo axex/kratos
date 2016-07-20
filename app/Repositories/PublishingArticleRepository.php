@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\PublishingArticle;
 
-class ArticleRepository
+class PublishingArticleRepository
 {
     protected $article;
 
@@ -27,15 +27,5 @@ class ArticleRepository
             $k != (count($kwords) - 1) ? $sql .= ' or ' : '';
         }
         return $this->article->whereRaw($sql)->paginate($num);
-    }
-
-    public function checkUrl($url)
-    {
-        return $this->article->whereUrl($url)->first();
-    }
-
-    public function create()
-    {
-
     }
 }
