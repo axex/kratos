@@ -12,6 +12,6 @@ class TagTableSeeder extends Seeder
     public function run()
     {
         $tags = factory(\App\Tag::class)->times(100)->make();
-        \App\Tag::insert($tags);
+        \App\Tag::insert($tags->toArray());
     }
 }
