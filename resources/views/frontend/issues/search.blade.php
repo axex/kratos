@@ -18,7 +18,7 @@
     <main class="container" id="main">
         <section id="content">
             <form id="st-search-form">
-                <input type="text" name="kword" id="st-search-input"/>
+                <input type="text" name="q" id="st-search-input"/>
                 <input type="submit" value="搜索" id="st-search-btn">
             </form>
             <div id="st-results-container">
@@ -35,7 +35,7 @@
                 @endforeach
                 @endif
             </div>
-            {!! $articles->appends(['kword' => Request::get('kword')])->render() !!}
+            {!! $articles->appends(['q' => Request::get('q')])->render() !!}
         </section>
         <aside id="aside">
             <h2>最新发布</h2>

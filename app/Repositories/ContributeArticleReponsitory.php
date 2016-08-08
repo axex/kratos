@@ -35,4 +35,22 @@ class ContributeArticleReponsitory
     {
         return $this->tag->updateOrCreate($attributes);
     }
+
+    protected function getTagIds($tags)
+    {
+        $existingTags = $this->tag->whereIn('name', $tags)->get();
+        $newTags = array_diff($tags, $existingTags->lists('name')->all());
+        $newIds = $this->multiInsert($newTags);
+        return array_merge($existingTags->lists('id')->all(), $newIds);
+    }
+
+    protected function multiInsert(array $tags)
+    {
+        $tagsId = [];
+        foreach ($tags as $name) {
+            $tag = $this->tag->firstOrCreate(['name' => $name]);
+            $tagsId[] = $tag->id;
+        }
+        return $tagsId;
+    }
 }

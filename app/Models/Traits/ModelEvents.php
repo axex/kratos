@@ -4,7 +4,7 @@ namespace App\Models\Traits;
 use Illuminate\Database\Eloquent\Builder;
 use Carbon\Carbon;
 
-trait ModelEventsTrait
+trait ModelEvents
 {
 
     /**

@@ -24,8 +24,8 @@
             <div class="box-tools">
                 <form action="{{ route('dashboard.issue.index') }}" method="get">
                     <div class="input-group">
-                        <input type="text" class="form-control input-sm pull-right" name="kword"
-                               value="{{ Input::get('kword') }}" style="width: 150px;" placeholder="搜索期数">
+                        <input type="text" class="form-control input-sm pull-right" name="q"
+                               value="{{ Input::get('q') }}" style="width: 150px;" placeholder="搜索期数">
                         <div class="input-group-btn">
                             <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
                         </div>
@@ -77,7 +77,7 @@
             </table>
         </div><!-- /.box-body -->
         <div class="box-footer clearfix">
-            {!! $issues->appends(['kword' => Input::get('kword')])->render() !!}
+            {!! $issues->appends(['q' => Input::get('q')])->render() !!}
         </div>
 
         <!--隐藏型删除表单-->

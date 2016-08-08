@@ -46,7 +46,7 @@
             <h2>搜索《Kratos》</h2>
             <div class="subscribe">
                 <form action="/search" method="get">
-                    <input type="text" value="" name="kword" class="required email" placeholder="请输入查询词">
+                    <input type="text" value="" name="q" class="required email" placeholder="请输入查询词">
                     <div class="action">
                         <input type="submit" value="搜索一下" class="button">
                     </div>

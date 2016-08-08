@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\PublishingArticle;
+use Illuminate\Support\Facades\Request;
 
 class PublishingArticleRepository
 {
@@ -19,13 +20,9 @@ class PublishingArticleRepository
 
     public function search($num = 15)
     {
-        $kwords = \Request::get('kword', '');
-        $kwords = explode(' ', $kwords);
-        $sql = '';
-        foreach ($kwords as $k => $kword) {
-            $sql .= "title like '%" . $kword . "%'";
-            $k != (count($kwords) - 1) ? $sql .= ' or ' : '';
-        }
-        return $this->article->whereRaw($sql)->paginate($num);
+
+
+        $q = e(Request::get('q'));
+        return $this->article->where('title', 'like', $q . '%')->paginate($num);
     }
 }

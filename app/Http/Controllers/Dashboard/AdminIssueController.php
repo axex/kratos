@@ -25,9 +25,9 @@ class AdminIssueController extends Controller
      */
     public function index()
     {
-        if (\Input::get('kword')) {
-            $kword = \Input::get('kword', '');
-            $whereStr = "issue like '%" . $kword . "%'";
+        if (\Input::get('q')) {
+            $q = \Input::get('q', '');
+            $whereStr = "issue like '%" . $q . "%'";
             $issues = Issue::whereRaw($whereStr)->paginate(\Cache::get('page_size', 10));
         } else {
             $issues = Issue::latest('issue')->paginate(\Cache::get('page_size', 10));

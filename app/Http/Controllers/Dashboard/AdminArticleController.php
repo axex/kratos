@@ -69,9 +69,9 @@ class AdminArticleController extends Controller
     public function index()
     {
 
-        if (\Input::get('kword')) {
-            $kword = \Input::get('kword', '');
-            $whereStr = "title like '%" . e($kword) . "%'";
+        if (\Input::get('q')) {
+            $q = \Input::get('q', '');
+            $whereStr = "title like '%" . e($q) . "%'";
             $articles = Article::whereRaw($whereStr)->isCheck($this->isCheck)->paginate(\Cache::get('page_size', 10));
         } else {
             $articles = Article::isCheck($this->isCheck)->latest()->paginate(\Cache::get('page_size', 10));

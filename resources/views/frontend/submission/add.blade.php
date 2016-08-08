@@ -27,8 +27,7 @@
             <input id="url" type="text" name="url" value="{{ Input::get('url') ? Input::get('url') : old('url') }}" required maxlength="256"
                    placeholder="256字以内">
             @if(Session::has('repeatUrl'))
-                <div class="err-msg">这篇文章已经被别人抢先一步提交啦！<a href="/issue{{ Session('repeatUrl') }}"
-                                                         target="_blank">查看&raquo;</a></div>
+                <div class="err-msg">{{ session('repeatUrl') }}</div>
             @endif
         </div>
         <div class="pure-control-group">
