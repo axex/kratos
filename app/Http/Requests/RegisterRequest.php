@@ -25,7 +25,7 @@ class RegisterRequest extends Request
     public function rules()
     {
         $rules = [
-            'username' => 'required_with:username|alpha_dash|between:3,255|unique:users',
+            'username' => 'required_with:username|alpha_dash|between:3,16|unique:users',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|confirmed|between:6,16',
         ];

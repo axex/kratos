@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use App\Models\ContributeArticle;
 use App\Models\ContributeTag;
+use Illuminate\Database\Eloquent\Model;
 
 class ContributeArticleReponsitory
 {
@@ -21,21 +22,49 @@ class ContributeArticleReponsitory
         $this->tag = $tag;
     }
 
+    /**
+     * 检查投稿 url 是否已经提交过
+     *
+     * @param $url
+     * @return mixed
+     */
     public function checkUrl($url)
     {
         return $this->article->whereUrl($url)->first();
     }
 
+
+    /**
+     * 新建投稿文章
+     *
+     * @param array $attributes
+     * @return static
+     */
     public function create(array $attributes = [])
     {
         return $this->article->create($attributes);
     }
 
-    public function updateOrCreateTags(array $attributes = [])
+
+    /**
+     * 更新标签
+     *
+     * @param array $tags
+     * @param $article
+     */
+    public function updateOrCreateTags(array $tags = [], $article)
     {
-        return $this->tag->updateOrCreate($attributes);
+        $tagIds = $this->getTagIds($tags);
+        $article->tags()->attach($tagIds);
     }
 
+
+    /**
+     * 获取标签 id
+     *
+     * @param $tags
+     * @return array
+     */
     protected function getTagIds($tags)
     {
         $existingTags = $this->tag->whereIn('name', $tags)->get();
@@ -44,13 +73,20 @@ class ContributeArticleReponsitory
         return array_merge($existingTags->lists('id')->all(), $newIds);
     }
 
+
+    /**
+     * 批量插入标签
+     *
+     * @param array $tags
+     * @return array
+     */
     protected function multiInsert(array $tags)
     {
-        $tagsId = [];
+        $tagIds = [];
         foreach ($tags as $name) {
             $tag = $this->tag->firstOrCreate(['name' => $name]);
-            $tagsId[] = $tag->id;
+            $tagIds[] = $tag->id;
         }
-        return $tagsId;
+        return $tagIds;
     }
 }

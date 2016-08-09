@@ -4,8 +4,8 @@
 
 @section('templateBody')
 <form action="/subscribe/profile" method="POST" id="subprefs-form">
-    <p class="error">{{ Session('repeatEmail') }}</p>
-    <p class="error">{{ Session('errorText') }}</p>
+    <p class="error">{{ session('repeatEmail') }}</p>
+    <p class="error">{{ $errors->first() }}</p>
     {{ csrf_field() }}
     <input type="hidden" name="confirmCode" value="{{ $subscribeUser->confirm_code }}">
     <label for="MERGE0">Email地址 <span class="req asterisk">*</span></label>

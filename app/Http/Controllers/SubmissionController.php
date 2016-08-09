@@ -15,10 +15,15 @@ class SubmissionController extends Controller
         return view('frontend.submission.add');
     }
 
+    /**
+     * 投稿页
+     *
+     * @param SubmissionRequest $request
+     * @param ContributeArticleReponsitory $articleRepository
+     * @return $this|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function store(SubmissionRequest $request, ContributeArticleReponsitory $articleRepository)
     {
-        $explodeTags = explode(',', str_replace('，', ',', $request->get('tags')));
-        $articleRepository->getTagIds($explodeTags);
         // url 已经被提交过
         $url = $articleRepository->checkUrl($request->get('url'));
         if ($url) {
@@ -28,10 +33,7 @@ class SubmissionController extends Controller
 
         // 中文逗号换成英文逗号并转为数组
         $explodeTags = explode(',', str_replace('，', ',', $request->get('tags')));
-        foreach ($explodeTags as $tag) {
-            $tags = $articleRepository->updateOrCreateTags(['name' => $tag]);
-            $article->tags()->attach($tags->id);
-        }
+        $articleRepository->updateOrCreateTags($explodeTags, $article);
 
         return view('frontend.submission.done');
     }

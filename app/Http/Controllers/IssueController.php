@@ -5,23 +5,22 @@ namespace App\Http\Controllers;
 use App\Repositories\PublishingArticleRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\IssueRepository;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class IssueController extends Controller
 {
+    /**
+     * @param IssueRepository $issueRepository
+     * @param CategoryRepository $categoryRepository
+     * @param string $issue
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(
         IssueRepository $issueRepository,
         CategoryRepository $categoryRepository,
         $issue
     ) {
-        /**
-         * 查询构建器上的方法可以在 vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php 里查询
-         * 对数据库操作的方法可以在 vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php 里查询
-         * Carbon 相关的方法可以在 vendor/nesbot/carbon/src/Carbon/Carbon.php 里查询
-         */
-
         $issueArticles = $issueRepository->articles($issue);
         $recommendedCategoryId = $categoryRepository->recommendedCategoryIdWithCache();
         $defaultCategoryId = $categoryRepository->defaultCategoryIdWithCache();
@@ -48,6 +47,7 @@ class IssueController extends Controller
 
 
     /**
+     * 搜索页
      *
      * @link http://wenda.golaravel.com/question/1094
      * @param PublishingArticleRepository $articleRepository

@@ -41,7 +41,8 @@ Route::group(['prefix' => 'subscribe'], function () {
 });
 
 # 取消订阅
-Route::any('unsubscribe/{confirm_code}', ['as' => 'unsubscribe', 'uses' => 'SubscribeController@unsubscribe']);
+Route::get('unsubscribe/{confirm_code}', ['as' => 'unsubscribe', 'uses' => 'SubscribeController@unsubscribe']);
+Route::delete('unsubscribe/{confirm_code}', 'SubscribeController@delete');
 
 # 期数详情页
 Route::get('issue{issue}', ['as' => 'issue', 'uses' => 'IssueController@index']);
