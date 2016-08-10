@@ -20,8 +20,6 @@ class PublishingArticleRepository
 
     public function search($num = 15)
     {
-
-
         $q = e(Request::get('q'));
         return $this->article->where('title', 'like', $q . '%')->paginate($num);
     }

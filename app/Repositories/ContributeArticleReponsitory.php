@@ -40,7 +40,7 @@ class ContributeArticleReponsitory
      * @param array $attributes
      * @return static
      */
-    public function create(array $attributes = [])
+    public function create(array $attributes)
     {
         return $this->article->create($attributes);
     }

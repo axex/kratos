@@ -96,7 +96,7 @@ class AuthorityRepository
      * @param array $attributes
      * @return mixed
      */
-    public function update($user, array $attributes = [])
+    public function update($user, array $attributes)
     {
         return $user->update($attributes);
     }

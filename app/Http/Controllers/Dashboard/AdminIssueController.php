@@ -3,34 +3,37 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Requests\Dashboard\IssueRequest;
-use App\Models\Issue;
+use App\Repositories\Dashboard\IssueRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
 use App\Http\Controllers\Controller;
 
 class AdminIssueController extends Controller
 {
+    protected $issueRepository;
+
     /**
      * AdminIssueController constructor.
+     * @param IssueRepository $issueRepository
      */
-    public function __construct()
+    public function __construct(IssueRepository $issueRepository)
     {
         $this->middleware('deny403', ['except' => 'index']);
+        $this->issueRepository = $issueRepository;
     }
 
 
     /**
+     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        if (\Input::get('q')) {
-            $q = \Input::get('q', '');
-            $whereStr = "issue like '%" . $q . "%'";
-            $issues = Issue::whereRaw($whereStr)->paginate(\Cache::get('page_size', 10));
+        $q = $request->get('q');
+        if ($q) {
+            $issues = $this->issueRepository->search($q);
         } else {
-            $issues = Issue::latest('issue')->paginate(\Cache::get('page_size', 10));
+            $issues = $this->issueRepository->all();
         }
         return view('dashboard.issue.index', compact('issues'));
     }
@@ -55,10 +58,12 @@ class AdminIssueController extends Controller
         if (! $publishedAt) {
             $publishedAt = Carbon::now();
         }
-        $status = Issue::create([
+
+        $status = $this->issueRepository->create([
             'issue'         => $request->get('issue'),
             'published_at'  => $publishedAt
         ]);
+
         if ($status) {
             return redirect()->route('dashboard.issue.index')->with('message', trans('validation.notice.create_issue_success'));
         }
@@ -82,28 +87,30 @@ class AdminIssueController extends Controller
      */
     public function edit($id)
     {
-        $issue = Issue::findOrFail($id);
+        $issue = $this->issueRepository->findOrFail($id);
         return view('dashboard.issue.edit', compact('issue'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  Dashboard\IssueRequest $request
-     * @param  int  $id
+     * @param  IssueRequest $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Dashboard\IssueRequest $request, $id)
+    public function update(IssueRequest $request, $id)
     {
-        $issue = Issue::findOrFail($id);
+        $issue = $this->issueRepository->findOrFail($id);
         $publishedAt = $request->get('published_at');
         if (! $publishedAt) {
             $publishedAt = $issue->published_at;
         }
-        $status = $issue->update([
-            'issue' => $request->get('issue'),
-            'published_at' => $publishedAt
+
+        $status = $this->issueRepository->update($issue, [
+            'issue'         => $request->get('issue'),
+            'published_at'  => $publishedAt
         ]);
+
         if ($status) {
             return redirect()->route('dashboard.issue.index')->with('message', trans('validation.notice.update_issue_success'));
         }

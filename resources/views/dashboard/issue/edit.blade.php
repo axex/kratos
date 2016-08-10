@@ -23,7 +23,7 @@
     @include('widgets.back-content-alert')
 
     <h2 class="page-header">修改期数</h2>
-    <form method="post" action=" {{ route('dashboard.issue.update', $issue->id) }}" accept-charset="utf-8">
+    <form method="post" action="{{ route('dashboard.issue.update', $issue->id) }}" accept-charset="utf-8">
         {{ method_field('put') }}
         {{ csrf_field() }}
         <div class="nav-tabs-custom">

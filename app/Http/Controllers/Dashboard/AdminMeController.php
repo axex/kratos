@@ -3,27 +3,46 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Events\UserUpdate;
+use App\Models\User;
+use App\Repositories\Dashboard\AuthorityRepository;
 use Illuminate\Http\Request;
-
-use App\Http\Requests\Dashboard;
+use App\Http\Requests\Dashboard\MeRequest;
+use App\Http\Requests\Dashboard\AvatarRequest;
 use App\Http\Controllers\Controller;
 
 class AdminMeController extends Controller
 {
+    protected $authorityRepository;
+
+    /**
+     * AdminMeController constructor.
+     * @param AuthorityRepository $authorityRepository
+     */
+    public function __construct(AuthorityRepository $authorityRepository)
+    {
+        $this->authorityRepository = $authorityRepository;
+    }
+
     public function me()
     {
         return view('dashboard.me.index');
     }
 
-    public function meProfile(Dashboard\MeRequest $request)
+    /**
+     * 修改个人资料
+     *
+     * @param MeRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function meProfile(MeRequest $request)
     {
-        $user = \Auth::user();
-        $user->email = e($request->get('email'));
-        $user->realname = e($request->get('realname'));
+        $user = $this->authorityRepository->user();
         if ($request->has('password')) {
-            $user->password = $request->get('password');
+            $attributes = $request->all();
+        } else {
+            $attributes = $request->except('password');
         }
-        $user->save();
+        $this->authorityRepository->update($user, $attributes);
         event(new UserUpdate($user));
         return redirect(route('dashboard.me'))->with('message', trans('validation.notice.update_profile_success'));
     }
@@ -40,24 +59,25 @@ class AdminMeController extends Controller
     public function avatarUpload(Request $request)
     {
         $file = $request->file('avatar');
-        $avatarRequest = new Dashboard\AvatarRequest();
+        $avatarRequest = new AvatarRequest();
         $validator = \Validator::make($request->only('avatar'), $avatarRequest->rules());
         if ($validator->fails()) {
             return \Response::json([
                 'success' => false,
-                'errors' => $validator->getMessageBag()->toArray()
+                'errors' => $validator->messages()
             ]);
         }
-        $destination = 'avatar/' . \Auth::user()->username . '/';   // 文件最终存放目录
+        $user = $this->authorityRepository->user();
+        $destination = 'avatar/' . $user->username . '/';   // 文件最终存放目录
 
         file_exists($destination) ? '' : mkdir($destination, 0777);
         $clientName = $file->getClientOriginalName();   // 原文件名
         $extension = $file->getClientOriginalExtension();   // 文件扩展名
         $newName = md5(date('ymd') . $clientName) . '.' . $extension;
         $avatarPath = '/' . $destination . $newName;
-        $oldAvatar = substr(\Auth::user()->avatar, 1); // 旧头像路径, 把路径最前面的 / 删掉
+        $oldAvatar = substr($user->avatar, 1); // 旧头像路径, 把路径最前面的 / 删掉
         if ($file->move($destination, $newName)) {
-            \Auth::user()->update(['avatar' => $avatarPath]);
+            $this->authorityRepository->update($user, ['avatar' => $avatarPath]);
             file_exists($oldAvatar) ? unlink($oldAvatar) : '';
             return \Response::json(
                 [

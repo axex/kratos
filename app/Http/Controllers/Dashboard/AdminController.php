@@ -2,24 +2,46 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Models\Article;
-use App\Models\Subscribe;
+use App\Repositories\Dashboard\ContributeArticleRepository;
+use App\Repositories\Dashboard\PublishingArticleRepository;
+use App\Repositories\Dashboard\SubscribeRepository;
 use Carbon\Carbon;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
+    protected $subscribeRepository;
+    protected $publishingArticleRepository;
+    protected $contributeArticleRepository;
+
+    /**
+     * AdminController constructor.
+     * @param SubscribeRepository $subscribeRepository
+     * @param PublishingArticleRepository $publishingArticleRepository
+     * @param ContributeArticleRepository $contributeArticleRepository
+     */
+    public function __construct(
+        SubscribeRepository $subscribeRepository,
+        PublishingArticleRepository $publishingArticleRepository,
+        ContributeArticleRepository $contributeArticleRepository
+    ) {
+        $this->subscribeRepository = $subscribeRepository;
+        $this->publishingArticleRepository = $publishingArticleRepository;
+        $this->contributeArticleRepository = $contributeArticleRepository;
+    }
+
+
     public function console()
     {
         $carbon = new Carbon();
         $startOfWeek = $carbon->startOfWeek()->toDateTimeString();
         $endOfWeek = $carbon->endOfWeek()->toDateTimeString();
-        $subscribes = Subscribe::where('is_confirmed', 1)->whereBetween('created_at', [$startOfWeek, $endOfWeek])->count();
-        $articles = Article::isCheck(1)->whereBetween('created_at', [$startOfWeek, $endOfWeek])->count();
-        $submissions = Article::isCheck(0)->whereBetween('created_at', [$startOfWeek, $endOfWeek])->count();
-        return view('dashboard.console', compact('subscribes', 'articles', 'submissions'));
+        $weekly = [$startOfWeek, $endOfWeek];
+        $subscribes = $this->subscribeRepository->count($weekly);
+        $publishingArticles = $this->publishingArticleRepository->count($weekly);
+        $contributeArticles = $this->contributeArticleRepository->count($weekly);
+        return view('dashboard.console', compact('subscribes', 'publishingArticles', 'contributeArticles'));
     }
 
 

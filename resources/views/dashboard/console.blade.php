@@ -32,7 +32,7 @@
             <!-- small box -->
             <div class="small-box bg-green">
                 <div class="inner">
-                    <h3>{{ $articles }}<sup style="font-size: 20px">篇</sup></h3>
+                    <h3>{{ $publishingArticles }}<sup style="font-size: 20px">篇</sup></h3>
 
                     <p>本周新增内容(文章)</p>
                 </div>
@@ -47,7 +47,7 @@
             <!-- small box -->
             <div class="small-box bg-yellow">
                 <div class="inner">
-                    <h3>{{ $submissions }}<sup style="font-size: 20px">篇</sup></h3>
+                    <h3>{{ $contributeArticles }}<sup style="font-size: 20px">篇</sup></h3>
                     <p>本周新增投稿</p>
                 </div>
                 <div class="icon">

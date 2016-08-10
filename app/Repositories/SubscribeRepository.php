@@ -27,7 +27,7 @@ class SubscribeRepository
      * @param array $attributes
      * @return static
      */
-    public function create(array $attributes = [])
+    public function create(array $attributes)
     {
         return $this->subscribe->create($attributes);
     }
@@ -40,7 +40,7 @@ class SubscribeRepository
      * @param array $attributes
      * @return bool|int
      */
-    public function update($subscribe, array $attributes = [])
+    public function update($subscribe, array $attributes)
     {
         return $subscribe->update($attributes);
     }
