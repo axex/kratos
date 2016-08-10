@@ -54,4 +54,10 @@ class User extends BaseModel implements AuthenticatableContract,
     {
         $this->attributes['password'] = bcrypt($password);
     }
+
+    public function setEmailAttribute($email)
+    {
+        $this->attributes['email'] = $email;
+        $this->attributes['reset_code'] = str_random(48);
+    }
 }

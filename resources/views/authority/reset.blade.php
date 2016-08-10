@@ -28,7 +28,7 @@
                     <input type="hidden" name="reset_code" value="{{ $resetCode }}">
                     <div class="form-group">
                         <label for="email">邮箱</label>
-                        <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}">
+                        <input type="email" id="email" name="email" disabled="disabled" class="form-control" value="{{ $email }}">
                     </div>
 
                     <div class="form-group">

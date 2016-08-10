@@ -45,6 +45,7 @@ class SubscribeController extends Controller
         $email = $request->get('email');
         $emailBody = 'frontend.subscribe.email';
         $confirmBody = 'frontend.subscribe.confirm';
+        $subject = trans('email.subject');
 
         // 检查邮箱是否存在
         $subscribeUser = $this->subscribeRepository->checkEmail($email);
@@ -52,13 +53,13 @@ class SubscribeController extends Controller
         // 新订阅
         if (! $subscribeUser) {
             $this->subscribeRepository->create(['email' => $email, 'confirm_code' => $this->confirmCode]);
-            $this->mail->send($emailBody, $this->confirmCode, $email);
+            $this->mail->send($emailBody, ['confirmCode' => $this->confirmCode, 'email' => $email], $email, $subject);
             return view($confirmBody);
         }
 
         // 订阅但邮箱没激活
         if ($subscribeUser->is_confirmed == 0) {
-            $this->mail->send($emailBody, $subscribeUser->confirm_code, $email);
+            $this->mail->send($emailBody, ['confirmCode' => $subscribeUser->confirm_code, 'email' => $email], $email, $subject);
             return view($confirmBody);
         }
 
@@ -92,7 +93,7 @@ class SubscribeController extends Controller
     public function resendEmail($confirmCode)
     {
         $subscribeUser = $this->subscribeRepository->checkUser($confirmCode);
-        $this->mail->send('frontend.subscribe.resend', $confirmCode, $subscribeUser->email, trans('email.updateProfile'));
+        $this->mail->send('frontend.subscribe.resend', ['confirmCode' => $confirmCode, 'email' => $subscribeUser->email], $subscribeUser->email, trans('email.updateProfile'));
         return view('frontend.subscribe.confirm');
     }
 

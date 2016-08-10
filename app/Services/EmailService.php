@@ -23,14 +23,14 @@ class EmailService
      * 发送邮件
      *
      * @param string $view
-     * @param string $confirmCode
+     * @param array $attributes
      * @param string $email
      * @param string $subject
      */
-    public function send($view, $confirmCode, $email, $subject = '')
+    public function send($view, array $attributes, $email, $subject = '')
     {
         $subject = $subject ? $subject : trans('email.subject');
-        $this->mail->queue($view, ['confirmCode' => $confirmCode, 'email' => $email], function ($message) use ($email, $subject) {
+        $this->mail->queue($view, $attributes, function ($message) use ($email, $subject) {
             $message->to($email)->subject($subject);
         });
     }

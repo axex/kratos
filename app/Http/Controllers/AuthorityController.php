@@ -9,6 +9,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\EmailRequest;
 use App\Repositories\AuthorityRepository;
+use App\Services\EmailService;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Http\Request;
@@ -16,14 +17,19 @@ use App\Http\Controllers\Controller;
 
 class AuthorityController extends Controller
 {
+
+    protected $authorityRepository;
+
     /**
      * AuthorityController constructor.
-     *
+     * @param AuthorityRepository $authorityRepository
      */
-    public function __construct()
+    public function __construct(AuthorityRepository $authorityRepository)
     {
         $this->middleware('guest', ['except' => 'logout']);
+        $this->authorityRepository = $authorityRepository;
     }
+
 
     /**
      * 注册页
@@ -40,17 +46,17 @@ class AuthorityController extends Controller
      * 验证注册
      *
      * @param RegisterRequest $request
-     * @param AuthorityRepository $authorityRepository
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postRegister(RegisterRequest $request, AuthorityRepository $authorityRepository)
+    public function postRegister(RegisterRequest $request)
     {
-        $user = $authorityRepository->create(
-            array_merge($request->all(), ['reset_code' => str_random(48)])
+        $user = $this->authorityRepository->create(
+            array_merge($request->all())
         );
-        $authorityRepository->login($user);
+        $this->authorityRepository->login($user);
         return redirect()->intended(route('dashboard.console'));
     }
+
 
     /**
      * 登录页
@@ -62,16 +68,16 @@ class AuthorityController extends Controller
         return view('authority.login');
     }
 
+
     /**
      * 验证登录
      *
      * @param LoginRequest $request
-     * @param AuthorityRepository $authorityRepository
      * @return $this|\Illuminate\Http\RedirectResponse
      */
-    public function postLogin(LoginRequest $request, AuthorityRepository $authorityRepository)
+    public function postLogin(LoginRequest $request)
     {
-        $user = $authorityRepository->attempt(
+        $user = $this->authorityRepository->attempt(
             $request->get('username'),
             $request->get('password'),
             $request->has('remember')
@@ -85,6 +91,7 @@ class AuthorityController extends Controller
         return back()->withInput()->withErrors(trans('auth.failed'));
     }
 
+
     /**
      * 退出
      *
@@ -93,9 +100,10 @@ class AuthorityController extends Controller
     public function logout()
     {
         event(new UserLogout(Auth::user()));   // 触发退出事件
-        Auth::logout();
+        $this->authorityRepository->logout();
         return redirect('/');
     }
+
 
     /**
      * 密码重置页面
@@ -107,39 +115,54 @@ class AuthorityController extends Controller
         return view('authority.password');
     }
 
+
     /**
-     * 密码重置
+     * 密码重置发送邮件
      *
      * @param EmailRequest $request
+     * @param EmailService $mail
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postEmail(EmailRequest $request)
+    public function postEmail(EmailRequest $request, EmailService $mail)
     {
         $email = $request->get('email');
-        $user = User::where('email', $email)->first();
+        $user = $this->authorityRepository->getUserWithEmail($email);
         if ($user) {
-            \Mail::send('authority.mail', ['reset_code' => $user->reset_code], function ($m) use ($email) {
-                $m->to($email)->subject(trans('passwords.subject'));
-            });
+            $mail->send('authority.mail', ['reset_code' => $user->reset_code], $email, trans('passwords.subject'));
             return back()->with('status', trans('passwords.sent'));
         }
         return back()->with('fail', trans('passwords.nouser'));
     }
 
+
+    /**
+     * 密码重置页面
+     *
+     * @param string $resetCode
+     * @return $this
+     */
     public function getReset($resetCode)
     {
-        if (! User::where('reset_code', $resetCode)->first()) {
+        $user = $this->authorityRepository->getUserWithResetCode($resetCode);
+        if (! $user) {
             throw new NotFoundHttpException;
         }
-        return view('authority.reset')->with('resetCode', $resetCode);
+        return view('authority.reset')->with(['resetCode' => $resetCode, 'email' => $user->email]);
     }
 
+
+    /**
+     * 密码重置
+     *
+     * @param RegisterRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function postReset(RegisterRequest $request)
     {
-        $user = User::where('reset_code', $request->get('reset_code'))->first();
-        if ($user->email === $request->get('email')) {
-            $user->update([
-               'password' => $request->get('password'),
+        $user = $this->authorityRepository->getUserWithResetCode($request->get('reset_code'));
+        if ($user) {
+            $this->authorityRepository->update($user, [
+                'password' => $request->get('password'),
                 'reset_code' => str_random(48)
             ]);
             return redirect()->route('login')->with('status', trans('passwords.reset'));
