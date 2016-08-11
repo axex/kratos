@@ -2,27 +2,38 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Models\Article;
-use App\Models\Category;
-use App\Models\Issue;
-use App\Models\Tag;
+use App\Repositories\Dashboard\CatogoryRepository;
+use App\Repositories\Dashboard\IssueRepository;
+use App\Repositories\Dashboard\PublishingArticleRepository;
 use Illuminate\Http\Request;
-
-use App\Http\Requests\Dashboard;
+use App\Http\Requests\Dashboard\ArticleRequest;
 use App\Http\Controllers\Controller;
 
 class AdminArticleController extends Controller
 {
     protected $indexView;
     protected $editView;
-    protected $isCheck;
+    protected $articleRepository;
+    protected $issueRepository;
+    protected $categoryRepository;
 
-    public function __construct()
-    {
+    /**
+     * AdminArticleController constructor.
+     * @param PublishingArticleRepository $articleRepository
+     * @param CatogoryRepository $categoryRepository
+     * @param IssueRepository $issueRepository
+     */
+    public function __construct(
+        PublishingArticleRepository $articleRepository,
+        CatogoryRepository $categoryRepository,
+        IssueRepository $issueRepository
+    ) {
         $this->middleware('deny403', ['except' => 'index']);
         $this->indexView = 'dashboard.article.index';
         $this->editView = 'dashboard.article.edit';
-        $this->isCheck = 1;
+        $this->articleRepository = $articleRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->issueRepository = $issueRepository;
     }
 
     /**
@@ -63,18 +74,16 @@ class AdminArticleController extends Controller
     /**
      * 传入是否审核参数, 自己添加的文章都是审核通过, 投稿的文章是未审核
      *
-     * @param int $isCheck
+     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-
-        if (\Input::get('q')) {
-            $q = \Input::get('q', '');
-            $whereStr = "title like '%" . e($q) . "%'";
-            $articles = Article::whereRaw($whereStr)->isCheck($this->isCheck)->paginate(\Cache::get('page_size', 10));
+        $q = $request->get('q');
+        if ($q) {
+            $articles = $this->articleRepository->search($q);
         } else {
-            $articles = Article::isCheck($this->isCheck)->latest()->paginate(\Cache::get('page_size', 10));
+            $articles = $this->articleRepository->all();
         }
         return view($this->indexView, compact('articles'));
     }
@@ -84,16 +93,16 @@ class AdminArticleController extends Controller
      */
     public function create()
     {
-        $categories = Category::latest()->get();
-        $issues = Issue::latest('issue')->get();
+        $categories = $this->categoryRepository->all();
+        $issues = $this->issueRepository->all();
         return view('dashboard.article.create', compact('categories', 'issues'));
     }
 
     /**
-     * @param Dashboard\ArticleRequest $request
+     * @param ArticleRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Dashboard\ArticleRequest $request)
+    public function store(ArticleRequest $request)
     {
         $article = new Article();
         $status = $this->createOrUpdate($request, $article);

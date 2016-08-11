@@ -25,7 +25,7 @@ class IssueRequest extends Request
     public function rules()
     {
         $rules = [
-            'issue' => 'required|numeric|unique:issues',
+            'issue' => 'required|numeric|unique:issues,issue',
             'published_at' => 'date',
         ];
         if ($this->segment(3)) {

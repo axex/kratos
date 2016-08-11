@@ -21,8 +21,6 @@
      */
     var URL = window.UEDITOR_HOME_URL || getUEBasePath();
 
-    var origin = getOrigin();
-
     /**
      * 配置项主体。注意，此处所有涉及到路径的配置别遗漏URL变量。
      */
@@ -32,7 +30,7 @@
         UEDITOR_HOME_URL: URL
 
         // 服务器统一请求接口路径
-        , serverUrl: origin+"/ueditor/server" //default upload route,you can change to any value your need in this file,or outside this file
+        , serverUrl: URL + "php/controller.php"
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的从新定义
         , toolbars: [[
@@ -199,7 +197,7 @@
 
         //paragraph
         //段落格式 值留空时支持多语言自动识别，若配置，则以配置值为准
-        //,'paragraph':{'p':'', 'h1':'', 'h2':'', 'h3':'', 'h4':'', 'h5':'', 'h6':''0}
+        //,'paragraph':{'p':'', 'h1':'', 'h2':'', 'h3':'', 'h4':'', 'h5':'', 'h6':''}
 
         //rowspacingtop
         //段间距 值和显示的名字相同
@@ -408,16 +406,8 @@
 
     }
 
-    function getOrigin(){
-        //var origin;
-        if (typeof location.origin === 'undefined')
-            location.origin = location.protocol + '//' + location.host;
-        return location.origin;
-    }
-
     window.UE = {
-        getUEBasePath: getUEBasePath,
-        getOrigin: getOrigin
+        getUEBasePath: getUEBasePath
     };
 
 })();

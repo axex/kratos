@@ -70,8 +70,8 @@
                     </div>
                     <div class="form-group">
                         <label>简介 <small class="text-red">*</small></label>
-                        <textarea id="ueditor" name="desc">{{ old('desc') }}</textarea>
-                        @include('ueditor.ueditor'){{-- 引入 ueditor 编辑器相关JS依赖 --}}
+                        <textarea id="container" name="desc">{{ old('desc') }}</textarea>
+                        @include('vendor.ueditor.assets'){{-- 引入 ueditor 编辑器相关JS依赖 --}}
                     </div>
                 </div><!-- /.tab-pane -->
 

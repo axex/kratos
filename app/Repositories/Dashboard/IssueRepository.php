@@ -18,11 +18,24 @@ class IssueRepository
 
     public function all()
     {
+        $issues = $this->issue->latest('issue')->get();
+        return $issues;
+    }
+
+    /**
+     * 分页查找期数
+     *
+     * @return mixed
+     */
+    public function paginate()
+    {
         $issues = $this->issue->latest('issue')->paginate(\Cache::get('page_size', 10));
         return $issues;
     }
 
     /**
+     * 搜索期数
+     *
      * @param string|int $q
      * @return mixed
      */
@@ -45,7 +58,7 @@ class IssueRepository
     }
 
     /**
-     * 编辑期数
+     * 查找指定期数
      *
      * @param int $id
      * @return mixed
@@ -56,8 +69,32 @@ class IssueRepository
         return $issue;
     }
 
+    /**
+     * 更新期数
+     *
+     * @param $issue
+     * @param array $attributes
+     * @return mixed
+     */
     public function update($issue, array $attributes)
     {
         return $issue->update($attributes);
+    }
+
+    /**
+     * 删除期数
+     *
+     * @param $id
+     * @return bool
+     */
+    public function delete($id)
+    {
+        $issue = $this->findOrFail($id);
+        return $issue->delete();
+    }
+
+    public function batchDelete($ids)
+    {
+        return $this->issue->whereIn('id', $ids)->delete();
     }
 }

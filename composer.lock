@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "51faa3c301370ddf9d58fbf7aebee61a",
-    "content-hash": "dae9a2330fab3231b48b3945b4760b3b",
+    "hash": "318c2725470fe7be822c6f5eae377fd9",
+    "content-hash": "fd3691ae4df1660b426a07cad43db8b1",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -227,7 +227,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/argb/laravel-ueditor/de6e12d80cc21cce12fb947cdcf4d7b935cae9a2.zip",
+                "url": "https://packagist.phpcomposer.com/files/argb/laravel-ueditor/de6e12d80cc21cce12fb947cdcf4d7b935cae9a2.zip",
                 "reference": "de6e12d80cc21cce12fb947cdcf4d7b935cae9a2",
                 "shasum": ""
             },
@@ -911,6 +911,42 @@
             "time": "2016-04-19 13:41:41"
         },
         {
+            "name": "overtrue/laravel-ueditor",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overtrue/laravel-ueditor.git",
+                "reference": "023a7ccc2e253574b72674c6d55591e14774ab08"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/overtrue/laravel-ueditor/023a7ccc2e253574b72674c6d55591e14774ab08.zip",
+                "reference": "023a7ccc2e253574b72674c6d55591e14774ab08",
+                "shasum": ""
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "^1.10"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Overtrue\\LaravelUEditor\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "overtrue",
+                    "email": "anzhengchao@gmail.com"
+                }
+            ],
+            "description": "UEditor integration for Laravel.",
+            "time": "2015-11-18 10:23:30"
+        },
+        {
             "name": "paragonie/random_compat",
             "version": "v1.4.1",
             "source": {
@@ -1464,16 +1500,16 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v2.7.15",
+            "version": "v2.7.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "7f8893d016a4deddf653a9c327fb426aae4e05b3"
+                "reference": "864a73cc1b5f7a597ce8f74ae31851ffc83d7353"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/symfony/finder/7f8893d016a4deddf653a9c327fb426aae4e05b3.zip",
-                "reference": "7f8893d016a4deddf653a9c327fb426aae4e05b3",
+                "url": "https://packagist.phpcomposer.com/files/symfony/finder/864a73cc1b5f7a597ce8f74ae31851ffc83d7353.zip",
+                "reference": "864a73cc1b5f7a597ce8f74ae31851ffc83d7353",
                 "shasum": ""
             },
             "require": {
@@ -1509,7 +1545,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2016-06-28 06:24:06"
+            "time": "2016-07-26 04:40:54"
         },
         {
             "name": "symfony/http-foundation",
@@ -2941,16 +2977,16 @@
         },
         {
             "name": "illuminate/config",
-            "version": "v5.1.31",
+            "version": "v5.1.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/config.git",
-                "reference": "de6c1cc0f2745645dec3f8bab0e43a3aa141d12d"
+                "reference": "b0bb52f9004a09920cf235b3ed1481355360b70f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/illuminate/config/de6c1cc0f2745645dec3f8bab0e43a3aa141d12d.zip",
-                "reference": "de6c1cc0f2745645dec3f8bab0e43a3aa141d12d",
+                "url": "https://packagist.phpcomposer.com/files/illuminate/config/b0bb52f9004a09920cf235b3ed1481355360b70f.zip",
+                "reference": "b0bb52f9004a09920cf235b3ed1481355360b70f",
                 "shasum": ""
             },
             "require": {
@@ -3037,16 +3073,16 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v5.1.31",
+            "version": "v5.1.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "e2b71fdbeeb3438748dca5f497e205888788a883"
+                "reference": "6e828a355b7a467232efad3dbe76df17463178e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/illuminate/contracts/e2b71fdbeeb3438748dca5f497e205888788a883.zip",
-                "reference": "e2b71fdbeeb3438748dca5f497e205888788a883",
+                "url": "https://packagist.phpcomposer.com/files/illuminate/contracts/6e828a355b7a467232efad3dbe76df17463178e3.zip",
+                "reference": "6e828a355b7a467232efad3dbe76df17463178e3",
                 "shasum": ""
             },
             "require": {
@@ -3079,16 +3115,16 @@
         },
         {
             "name": "illuminate/filesystem",
-            "version": "v5.1.31",
+            "version": "v5.1.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/filesystem.git",
-                "reference": "9371a2893ef759b585f27d7c3bf8e2b54268ec46"
+                "reference": "f109f5fb12eef0211cdaff226bef51e18ec8c147"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/illuminate/filesystem/9371a2893ef759b585f27d7c3bf8e2b54268ec46.zip",
-                "reference": "9371a2893ef759b585f27d7c3bf8e2b54268ec46",
+                "url": "https://packagist.phpcomposer.com/files/illuminate/filesystem/f109f5fb12eef0211cdaff226bef51e18ec8c147.zip",
+                "reference": "f109f5fb12eef0211cdaff226bef51e18ec8c147",
                 "shasum": ""
             },
             "require": {
@@ -3125,20 +3161,20 @@
             ],
             "description": "The Illuminate Filesystem package.",
             "homepage": "http://laravel.com",
-            "time": "2016-02-16 14:02:58"
+            "time": "2016-05-28 21:16:16"
         },
         {
             "name": "illuminate/support",
-            "version": "v5.1.31",
+            "version": "v5.1.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "96e4fa331ed8bad83314a6bdb26a998970a0d8c2"
+                "reference": "510163046dc50a467621448d6905f0c819ee8b4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/illuminate/support/96e4fa331ed8bad83314a6bdb26a998970a0d8c2.zip",
-                "reference": "96e4fa331ed8bad83314a6bdb26a998970a0d8c2",
+                "url": "https://packagist.phpcomposer.com/files/illuminate/support/510163046dc50a467621448d6905f0c819ee8b4a.zip",
+                "reference": "510163046dc50a467621448d6905f0c819ee8b4a",
                 "shasum": ""
             },
             "require": {
@@ -3146,11 +3182,11 @@
                 "doctrine/inflector": "~1.0",
                 "ext-mbstring": "*",
                 "illuminate/contracts": "5.1.*",
+                "paragonie/random_compat": "~1.4",
                 "php": ">=5.5.9"
             },
             "suggest": {
                 "jeremeamia/superclosure": "Required to be able to serialize closures (~2.0).",
-                "paragonie/random_compat": "Provides a compatible interface like PHP7's random_bytes() in PHP 5 projects (~1.1).",
                 "symfony/var-dumper": "Improves the dd function (2.7.*)."
             },
             "type": "library",
@@ -3179,7 +3215,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "http://laravel.com",
-            "time": "2016-02-15 19:41:59"
+            "time": "2016-06-11 16:44:59"
         },
         {
             "name": "maximebf/debugbar",
