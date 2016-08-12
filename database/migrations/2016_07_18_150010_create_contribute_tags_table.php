@@ -15,7 +15,9 @@ class CreateContributeTagsTable extends Migration
         Schema::create('contribute_tags', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent = true;
+            // 等同 $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

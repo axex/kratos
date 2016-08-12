@@ -47,10 +47,10 @@ class ContributeArticleReponsitory
 
 
     /**
-     * 更新标签
+     * 更新或新建标签
      *
      * @param array $tags
-     * @param $article
+     * @param ContributeArticle $article
      */
     public function updateOrCreateTags(array $tags = [], $article)
     {
@@ -82,11 +82,14 @@ class ContributeArticleReponsitory
      */
     protected function multiInsert(array $tags)
     {
-        $tagIds = [];
+        $tagItems = [];
         foreach ($tags as $name) {
-            $tag = $this->tag->firstOrCreate(['name' => $name]);
-            $tagIds[] = $tag->id;
+            $tagItems[] = ['name' => $name];
         }
+        $this->tag->insert($tagItems);
+
+        $tagIds = $this->tag->whereIn('name', $tags)->get()->lists('id')->all();
+        
         return $tagIds;
     }
 }

@@ -35,10 +35,35 @@ class PublishingArticleRepository
         return $articles;
     }
 
+    /**
+     * 搜索文章
+     *
+     * @param $q
+     * @return mixed
+     */
     public function search($q)
     {
         $articles = $this->article->where('title', 'like', $q . '%')->isCheck($this->isCheck)->paginate(\Cache::get('page_size', 10));
         return $articles;
     }
+
+    /**
+     * 新建文章
+     *
+     * @param array $attributes
+     * @return static
+     */
+    public function create(array $attributes = [])
+    {
+        $article = $this->article->create($attributes);
+        return $article;
+    }
+
+    public function findOrFail($id)
+    {
+        $article = $this->article->findOrFail($id);
+        return $article;
+    }
+
 
 }

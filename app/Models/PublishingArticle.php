@@ -5,7 +5,7 @@ namespace App\Models;
 class PublishingArticle extends BaseModel
 {
     protected $table = 'publishing_articles';
-    protected $guarded = [];
+    protected $guarded = ['tag'];
 
     public function category()
     {

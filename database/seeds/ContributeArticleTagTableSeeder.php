@@ -12,7 +12,7 @@ class ContributeArticleTagTableSeeder extends Seeder
      */
     public function run()
     {
-        $articleTag = factory(ContributeArticleTag::class)->times(100)->make();
+        $articleTag = factory(ContributeArticleTag::class)->times(20)->make();
         ContributeArticleTag::insert($articleTag->toArray());
     }
 }
