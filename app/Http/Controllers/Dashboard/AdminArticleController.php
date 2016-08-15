@@ -16,20 +16,17 @@ class AdminArticleController extends Controller
     protected $indexView;
     protected $editView;
     protected $articleRepository;
-    protected $tagRepository;
     protected $issueRepository;
     protected $categoryRepository;
 
     /**
      * AdminArticleController constructor.
      * @param PublishingArticleRepository $articleRepository
-     * @param PublishingTagRepository $tagRepository
      * @param CatogoryRepository $categoryRepository
      * @param IssueRepository $issueRepository
      */
     public function __construct(
         PublishingArticleRepository $articleRepository,
-        PublishingTagRepository $tagRepository,
         CatogoryRepository $categoryRepository,
         IssueRepository $issueRepository
     ) {
@@ -39,7 +36,6 @@ class AdminArticleController extends Controller
         $this->articleRepository = $articleRepository;
         $this->categoryRepository = $categoryRepository;
         $this->issueRepository = $issueRepository;
-        $this->tagRepository = $tagRepository;
     }
 
     /**
@@ -77,9 +73,8 @@ class AdminArticleController extends Controller
         return redirect(route($this->indexView))->with('message', trans('validation.notice.publish_success'));
     }
 
+
     /**
-     * 传入是否审核参数, 自己添加的文章都是审核通过, 投稿的文章是未审核
-     *
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
