@@ -38,7 +38,7 @@
                     </div>
                     <div class="form-group">
                         <label>关键词</label>
-                        <input type="text" class="form-control" name="tag" value="{{ old('tag') }}" placeholder="(多个请用','隔开)">
+                        <input type="text" class="form-control" name="tags" value="{{ old('tags') }}" placeholder="(多个请用','隔开)">
                     </div>
                     <div class="form-group">
                         <label>推荐者</label>

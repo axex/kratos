@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Dashboard;
 
-use App\Http\Requests\Request;
+use App\Http\Requests\BaseRequest;
 
-class MeRequest extends Request
+class MeRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.

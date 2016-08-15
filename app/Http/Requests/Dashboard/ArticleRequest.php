@@ -34,22 +34,18 @@ class ArticleRequest extends BaseRequest
         ];
     }
 
+
     /**
      * 重写 all 方法
      *
-     * @return array|\Closure
+     * @return array
      */
     public function all()
     {
-        $request = $this->formatRequest();
-        // 中文逗号改为英文 && 去除字符首尾的逗号
-        $request['tag'] = trim(str_replace('，', ',', $request['tag']), ',');
-        $func = function ($value) {
-            return strip_tags($value);
-        };
-        $request = array_map($func, $request);
+        $request = parent::all();
 
-        // 替换掉原 request 里面的数据, 不然会出现 $request->all() 是处理过的数据, $request->get('xx') 是未处理的数据
+        $request['tag'] = trim(str_replace('，', ',', $request['tag']), ',');
+
         $this->replace($request);
 
         return $request;
