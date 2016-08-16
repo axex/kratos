@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EmailRequest;
 use App\Repositories\SubscribeRepository;
-use App\Services\EmailService;
+use App\Services\Mail\MailService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -24,9 +24,9 @@ class SubscribeController extends Controller
      * SubscribeController constructor.
      *
      * @param SubscribeRepository $subscribeRepository
-     * @param EmailService $mail
+     * @param MailService $mail
      */
-    public function __construct(SubscribeRepository $subscribeRepository, EmailService $mail)
+    public function __construct(SubscribeRepository $subscribeRepository, MailService $mail)
     {
         $this->confirmCode = str_random(48);
         $this->subscribeRepository = $subscribeRepository;

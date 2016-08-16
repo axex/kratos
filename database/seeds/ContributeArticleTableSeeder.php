@@ -12,7 +12,7 @@ class ContributeArticleTableSeeder extends Seeder
      */
     public function run()
     {
-        $contributeArticles = factory(ContributeArticle::class)->times(100)->make();
+        $contributeArticles = factory(ContributeArticle::class)->times(50)->make();
         ContributeArticle::insert($contributeArticles->toArray());
     }
 }

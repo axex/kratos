@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SubmissionRequest;
 use App\Repositories\ContributeArticleReponsitory;
+use App\Services\Tag\TagService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Lang;
@@ -29,11 +30,11 @@ class SubmissionController extends Controller
         if ($url) {
             return back()->with('repeatUrl', Lang::get('validation.custom.url.repeat'))->withInput();
         }
-        $article = $articleRepository->create($request->except('tags'));
+        $article = $articleRepository->create($request->all());
 
         // 中文逗号换成英文逗号并转为数组
-        $explodeTags = explode(',', str_replace('，', ',', $request->get('tags')));
-        $articleRepository->updateOrCreateTags($explodeTags, $article);
+        $explodeTags = explode(',', $request->get('tags'));
+        app(TagService::class)->updateOrCreate($article, $explodeTags);
 
         return view('frontend.submission.done');
     }

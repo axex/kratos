@@ -44,7 +44,7 @@ class ArticleRequest extends BaseRequest
     {
         $request = parent::all();
 
-        $request['tag'] = trim(str_replace('，', ',', $request['tag']), ',');
+        $request['tags'] = trim(str_replace('，', ',', $request['tags']), ',');
 
         $this->replace($request);
 

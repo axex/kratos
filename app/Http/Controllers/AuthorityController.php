@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Events\UserLogin;
 use App\Events\UserLogout;
-use App\Models\User;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\EmailRequest;
 use App\Repositories\AuthorityRepository;
-use App\Services\EmailService;
+use App\Services\Mail\MailService;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Http\Request;
@@ -120,10 +119,10 @@ class AuthorityController extends Controller
      * 密码重置发送邮件
      *
      * @param EmailRequest $request
-     * @param EmailService $mail
+     * @param MailService $mail
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postEmail(EmailRequest $request, EmailService $mail)
+    public function postEmail(EmailRequest $request, MailService $mail)
     {
         $email = $request->get('email');
         $user = $this->authorityRepository->getUserWithEmail($email);

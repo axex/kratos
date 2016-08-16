@@ -2,23 +2,20 @@
 namespace App\Repositories\Dashboard;
 
 use App\Models\PublishingArticle;
-use App\Models\PublishingTag;
+use App\Models\Tag;
 
 class PublishingArticleRepository
 {
     protected $article;
-    protected $tag;
     protected $isCheck = 1;
 
     /**
      * PublishingArticleRepository constructor.
      * @param PublishingArticle $article
-     * @param PublishingTag $tag
      */
-    public function __construct(PublishingArticle $article, PublishingTag $tag)
+    public function __construct(PublishingArticle $article)
     {
         $this->article = $article;
-        $this->tag = $tag;
     }
 
     public function all()
@@ -68,52 +65,4 @@ class PublishingArticleRepository
         $article = $this->article->findOrFail($id);
         return $article;
     }
-
-    /**
-     * 更新或新建标签
-     *
-     * @param array $tags
-     * @param PublishingArticle $article
-     */
-    public function updateOrCreateTags(array $tags = [], $article)
-    {
-        $tagIds = $this->getTagIds($tags);
-        $article->tags()->attach($tagIds);
-    }
-
-
-    /**
-     * 获取标签 id
-     *
-     * @param $tags
-     * @return array
-     */
-    protected function getTagIds($tags)
-    {
-        $existingTags = $this->tag->whereIn('name', $tags)->get();
-        $newTags = array_diff($tags, $existingTags->lists('name')->all());
-        $newIds = $this->multiInsert($newTags);
-        return array_merge($existingTags->lists('id')->all(), $newIds);
-    }
-
-
-    /**
-     * 批量插入标签
-     *
-     * @param array $tags
-     * @return array
-     */
-    protected function multiInsert(array $tags)
-    {
-        $tagItems = [];
-        foreach ($tags as $name) {
-            $tagItems[] = ['name' => $name];
-        }
-        $this->tag->insert($tagItems);
-
-        $tagIds = $this->tag->whereIn('name', $tags)->get()->lists('id')->all();
-
-        return $tagIds;
-    }
-
 }

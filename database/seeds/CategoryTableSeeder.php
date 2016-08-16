@@ -12,8 +12,6 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        $categories = factory(Category::class)->times(10)->make();
-        Category::insert($categories->toArray());
         Category::create([
             'name' => '推荐',
             'slug' => 'recommend'
@@ -23,5 +21,7 @@ class CategoryTableSeeder extends Seeder
             'name' => '其他',
             'slug' => 'default'
         ]);
+        $categories = factory(Category::class)->times(10)->make();
+        Category::insert($categories->toArray());
     }
 }

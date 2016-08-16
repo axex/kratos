@@ -4,12 +4,10 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Issue;
 use App\Models\PublishingArticle;
-use App\Models\PublishingTag;
-use App\Models\PublishingArticleTag;
 use App\Models\ContributeArticle;
-use App\Models\ContributeTag;
-use App\Models\ContributeArticleTag;
 use App\Models\Subscribe;
+use App\Models\Tag;
+use App\Models\Taggable;
 use Faker\Generator;
 
 /*
@@ -70,23 +68,6 @@ $factory->define(PublishingArticle::class, function (Generator $faker) use ($dat
     ], $dates);
 });
 
-// 文章标签
-$factory->define(PublishingTag::class, function (Generator $faker) use ($dates) {
-    return array_merge([
-        'name' => $faker->unique()->word
-    ], $dates);
-});
-
-// 文章和标签之间的关联关系
-$factory->define(PublishingArticleTag::class, function (Generator $faker) use ($dates) {
-    $articleIds = PublishingArticle::lists('id')->toArray();
-    $tagIds = PublishingTag::lists('id')->toArray();
-    return array_merge([
-        'article_id' => $faker->randomElement($articleIds),
-        'tag_id' => $faker->randomElement($tagIds),
-    ], $dates);
-});
-
 // 投稿
 $factory->define(ContributeArticle::class, function (Generator $faker) use ($dates) {
     return array_merge([
@@ -98,21 +79,22 @@ $factory->define(ContributeArticle::class, function (Generator $faker) use ($dat
     ], $dates);
 });
 
-// 投稿标签
-$factory->define(ContributeTag::class, function (Generator $faker) use ($dates) {
+// 文章标签
+$factory->define(Tag::class, function (Generator $faker) use ($dates) {
     return array_merge([
-        'name' => $faker->unique()->firstName
+        'name' => $faker->unique()->word
     ], $dates);
 });
 
-// 投稿和标签之间的关联关系
-$factory->define(ContributeArticleTag::class, function (Generator $faker) use ($dates) {
-    $articleIds = ContributeArticle::lists('id')->toArray();
-    $tagIds = ContributeTag::lists('id')->toArray();
-    return array_merge([
-        'article_id' => $faker->randomElement($articleIds),
+// 文章和标签之间的关联关系
+$factory->define(Taggable::class, function (Generator $faker) use ($dates) {
+    $taggableIds = PublishingArticle::lists('id')->toArray();
+    $tagIds = Tag::lists('id')->toArray();
+    return [
         'tag_id' => $faker->randomElement($tagIds),
-    ], $dates);
+        'taggable_id' => $faker->randomElement($taggableIds),
+        'taggable_type' => $faker->randomElement([PublishingArticle::class, ContributeArticle::class])
+    ];
 });
 
 // 订阅用户

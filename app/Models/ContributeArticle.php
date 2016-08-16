@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
-class ContributeArticle extends BaseModel
-{
-    protected $table = 'contribute_articles';
-    protected $guarded = [];
+use App\Models\Traits\Taggable;
+use App\Services\Tag\TaggableInterface;
 
-    public function tags()
-    {
-        return $this->belongsToMany(ContributeTag::class, 'contribute_article_tag', 'article_id', 'tag_id')->withTimestamps();
-    }
+class ContributeArticle extends BaseModel implements TaggableInterface
+{
+    use Taggable;
+
+    protected $table = 'contribute_articles';
+
+    protected $guarded = ['tags'];
+
 }

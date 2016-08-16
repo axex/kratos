@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\PublishingArticleTag;
+use App\Models\Taggable;
 
-class PublishingArticleTagTableSeeder extends Seeder
+class TaggableTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,7 +13,7 @@ class PublishingArticleTagTableSeeder extends Seeder
     public function run()
     {
         // insert 是 Query Builder 里面的方法，不会自动维护 created_at 和 updated_at 这两个字段
-        $articleTag = factory(PublishingArticleTag::class)->times(20)->make();
-        PublishingArticleTag::insert($articleTag->toArray());
+        $taggables = factory(Taggable::class)->times(20)->make();
+        Taggable::insert($taggables->toArray());
     }
 }

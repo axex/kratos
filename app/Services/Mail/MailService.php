@@ -1,15 +1,15 @@
 <?php
-namespace App\Services;
+namespace App\Services\Mail;
 
 use Illuminate\Mail\Mailer;
 
-class EmailService
+class MailService
 {
     protected $mail;
 
 
     /**
-     * EmailService constructor.
+     * MailService constructor.
      *
      * @param Mailer $mail
      */

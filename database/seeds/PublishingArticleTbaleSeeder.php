@@ -12,7 +12,7 @@ class PublishingArticleTbaleSeeder extends Seeder
      */
     public function run()
     {
-        $articles = factory(PublishingArticle::class)->times(100)->make();
+        $articles = factory(PublishingArticle::class)->times(50)->make();
         PublishingArticle::insert($articles->toArray());
     }
 }

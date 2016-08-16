@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Models\PublishingTag;
 use App\Repositories\Dashboard\CatogoryRepository;
 use App\Repositories\Dashboard\IssueRepository;
 use App\Repositories\Dashboard\PublishingArticleRepository;
 use App\Repositories\Dashboard\PublishingTagRepository;
+use App\Services\Tag\TagService;
 use Illuminate\Http\Request;
 use App\Http\Requests\Dashboard\ArticleRequest;
 use App\Http\Controllers\Controller;
@@ -110,17 +110,9 @@ class AdminArticleController extends Controller
             return back()->with('fail', trans('validation.notice.database_error'));
         }
 
-        $tagItems = $request->get('tag');
-        $tagItems = explode(',', $tagItems);
-        foreach ($tagItems as $key => $tag) {
-            $tags[$key] = $this->tagRepository->firstOrCreate([   // firstOrCreate 在数据库中查找记录, 找到就返回记录, 没有就新建一个
-                'name' => $tag
-            ]);
-        }
-        $tagIds = collect($tags)->map(function ($item) {
-            return $item->id;
-        });
-        $article->tags()->attach($tagIds->toArray());   // 插入文章和标签的关联关系到中间表
+        $explodeTags = explode(',', $request->get('tags'));
+        app(TagService::class)->updateOrCreate($article, $explodeTags);
+
         return redirect(route($this->indexView))->with('message', trans('validation.notice.publish_success'));
     }
 

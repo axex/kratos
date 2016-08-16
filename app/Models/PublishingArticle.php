@@ -2,10 +2,16 @@
 
 namespace App\Models;
 
-class PublishingArticle extends BaseModel
+use App\Models\Traits\Taggable;
+use App\Services\Tag\TaggableInterface;
+
+class PublishingArticle extends BaseModel implements TaggableInterface
 {
+    use Taggable;
+
     protected $table = 'publishing_articles';
-    protected $guarded = ['tag'];
+
+    protected $guarded = ['tags'];
 
     public function category()
     {
@@ -17,11 +23,4 @@ class PublishingArticle extends BaseModel
     {
         return $this->belongsTo(Issue::class);
     }
-    
-    public function tags()
-    {
-        // withTimestamps() 用来同步时间, 不然在 article_tag 表里面时间的空的
-        return $this->belongsToMany(PublishingTag::class, 'publishing_article_tag', 'article_id', 'tag_id')->withTimestamps();
-    }
-
 }
