@@ -14,7 +14,7 @@ class CreatePublishingArticlesTable extends Migration
     {
         Schema::create('publishing_articles', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('issue_id')->comment('期数');
+            $table->unsignedInteger('issue')->comment('期数');
             $table->unsignedInteger('category_id')->comment('栏目id');
             $table->string('title')->comment('文章标题');
             $table->string('desc')->nullable();
@@ -24,7 +24,7 @@ class CreatePublishingArticlesTable extends Migration
             $table->boolean('is_check')->default(1)->comment('是否审核');
             $table->index('title');
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('issue_id')->references('id')->on('issues')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('issue')->references('issue')->on('issues')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

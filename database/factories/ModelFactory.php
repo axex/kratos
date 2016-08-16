@@ -55,10 +55,10 @@ $factory->define(Issue::class, function (Generator $faker) use ($dates) {
 
 // 文章
 $factory->define(PublishingArticle::class, function (Generator $faker) use ($dates) {
-    $issueIds = Issue::lists('id')->toArray();
+    $issues = Issue::lists('issue')->toArray();
     $categoryIds = Category::lists('id')->toArray();
     return array_merge([
-        'issue_id' => $faker->randomElement($issueIds),
+        'issue' => $faker->randomElement($issues),
         'category_id' => $faker->randomElement($categoryIds),
         'title' => $faker->sentence(),
         'desc' => $faker->paragraph,
