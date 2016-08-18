@@ -28,9 +28,9 @@
                 @foreach($articles as $article)
                     <div class="st-result">
                         <h3>
-                            <a href="/issue{{ $article->issue->issue }}">{{ $article->title }}</a>
+                            <a href="/issue{{ $article->issue }}">{{ $article->title }}</a>
                         </h3>
-                        <div><span>Kratos第{{ $article->issue->issue }}期</span></div>
+                        <div><span>Kratos第{{ $article->issue }}期</span></div>
                     </div>
                 @endforeach
                 @endif

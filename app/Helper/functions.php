@@ -35,33 +35,6 @@ if (! function_exists('currentNav')) {
     }
 }
 
-if (! function_exists('formatArticle')) {
-
-    /**
-     * 格式化文章
-     *
-     * @param $request
-     * @param $article
-     * @return mixed
-     */
-    function formatArticle($request, $article)
-    {
-        $article->title = e($request->get('title'));
-        $article->url = trim(e($request->get('url')));
-        $article->presenter = trim(e($request->get('presenter')));
-        $article->issue_id = e($request->get('issue_id'));
-        $article->category_id = e($request->get('category_id'));
-        $article->is_recomm = e($request->get('is_recomm'));
-        $article->desc = strip_tags($request->get('desc'));
-
-        if ($request->exists('is_check')) {
-            $article->is_check = e($request->get('is_check'));
-        }
-        return $article;
-    }
-}
-
-
 if (! function_exists('writeToSystemLog')) {
 
     /**

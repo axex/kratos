@@ -12,6 +12,6 @@ class Issue extends BaseModel
 
     public function articles()
     {
-        return $this->hasMany(PublishingArticle::class);
+        return $this->hasMany(PublishingArticle::class, 'issue', 'issue');
     }
 }

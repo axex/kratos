@@ -7,6 +7,7 @@ use App\Repositories\CategoryRepository;
 use App\Repositories\IssueRepository;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class IssueController extends Controller
 {
@@ -50,12 +51,20 @@ class IssueController extends Controller
      * 搜索页
      *
      * @link http://wenda.golaravel.com/question/1094
+     * @param Request $request
      * @param PublishingArticleRepository $articleRepository
      * @param IssueRepository $issueRepository
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function search(PublishingArticleRepository $articleRepository, IssueRepository $issueRepository)
-    {
+    public function search(
+        Request $request,
+        PublishingArticleRepository $articleRepository,
+        IssueRepository $issueRepository
+    ) {
+        if (! $request->get('q')) {
+            return back();
+        }
+
         $articles = $articleRepository->search();
         $latestIssues = $issueRepository->getIssues();
 

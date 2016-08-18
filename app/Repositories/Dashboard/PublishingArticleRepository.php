@@ -20,7 +20,7 @@ class PublishingArticleRepository
 
     public function all()
     {
-        $articles = $this->article->isCheck($this->isCheck)->latest()->paginate(\Cache::get('page_size', 10));
+        $articles = $this->article->with('category')->isCheck($this->isCheck)->latest()->paginate(\Cache::get('page_size', 10));
         return $articles;
     }
 
@@ -60,9 +60,15 @@ class PublishingArticleRepository
         return $article;
     }
 
+    /**
+     * 查找指定文章
+     *
+     * @param int $id
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model
+     */
     public function findOrFail($id)
     {
-        $article = $this->article->findOrFail($id);
+        $article = $this->article->with(['tags', 'category'])->findOrFail($id);
         return $article;
     }
 }

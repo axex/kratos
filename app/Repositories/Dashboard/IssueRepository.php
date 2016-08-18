@@ -18,7 +18,7 @@ class IssueRepository
 
     public function all()
     {
-        $issues = $this->issue->latest('issue')->get();
+        $issues = $this->issue->latestByIssue()->get();
         return $issues;
     }
 
@@ -29,7 +29,7 @@ class IssueRepository
      */
     public function paginate()
     {
-        $issues = $this->issue->latest('issue')->paginate(\Cache::get('page_size', 10));
+        $issues = $this->issue->with('articles')->latestByIssue()->paginate(\Cache::get('page_size', 10));
         return $issues;
     }
 
@@ -67,6 +67,18 @@ class IssueRepository
     {
         $issue = $this->issue->findOrFail($id);
         return $issue;
+    }
+
+    /**
+     * 过滤指定期数
+     *
+     * @param int $issue
+     * @return mixed
+     */
+    public function filter($issue)
+    {
+        $issues = $this->issue->where('issue', '<>', $issue)->latestByIssue()->get();
+        return $issues;
     }
 
     /**

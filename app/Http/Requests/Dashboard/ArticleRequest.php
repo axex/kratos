@@ -25,7 +25,7 @@ class ArticleRequest extends BaseRequest
     {
         return [
             'title'         =>  'required|max:80',
-            'issue_id'      =>  'required|exists:issues,id',
+            'issue'      =>  'required|exists:issues,issue',
             'category_id'   =>  'required|exists:categories,id',
             'desc'          =>  'required|min:20',
             'url'           =>  'required|url',

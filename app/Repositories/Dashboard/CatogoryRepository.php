@@ -21,4 +21,16 @@ class CatogoryRepository
         $categories = $this->category->latest()->get();
         return $categories;
     }
+
+    /**
+     * 过滤指定目录
+     *
+     * @param int $id
+     * @return mixed
+     */
+    public function filter($id)
+    {
+        $categories = $this->category->where('id', '<>', $id)->latest()->get();
+        return $categories;
+    }
 }

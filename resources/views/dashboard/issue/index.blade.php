@@ -65,7 +65,7 @@
                         <td>
                             <a href="{{ route('dashboard.issue.edit', $issue->id) }}"><i class="fa fa-fw fa-pencil" title="修改"></i></a>
                             <a href="javascript:void(0);"><i class="fa fa-fw fa-link" title="预览"></i></a>
-                            <a href="javascript:void(0);"><i class="fa fa-fw fa-minus-circle delete_item" title="删除" data-toggle="modal" data-show-count="{{ count( $issue->articles()->get() ) }}" data-id="{{ $issue->id }}"></i></a>
+                            <a href="javascript:void(0);"><i class="fa fa-fw fa-minus-circle delete_item" title="删除" data-toggle="modal" data-show-count="{{ count( $issue->articles ) }}" data-id="{{ $issue->id }}"></i></a>
                         </td>
                         <td class="text-muted">{{ $issue->issue }}</td>
                         <td class="text-black">{{ count($issue->articles) }}</td>

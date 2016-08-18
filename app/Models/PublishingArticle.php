@@ -21,6 +21,6 @@ class PublishingArticle extends BaseModel implements TaggableInterface
 
     public function issue()
     {
-        return $this->belongsTo(Issue::class);
+        return $this->belongsTo(Issue::class, 'issue', 'issue');
     }
 }

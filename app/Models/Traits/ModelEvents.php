@@ -50,4 +50,15 @@ trait ModelEvents
     {
         return $query->where('slug', 'default');
     }
+
+    /**
+     * 按期数降序排序
+     *
+     * @param Builder $query
+     * @return $this
+     */
+    public function scopeLatestByIssue(Builder $query)
+    {
+        return $query->latest('issue');
+    }
 }

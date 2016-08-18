@@ -134,27 +134,22 @@ class AdminArticleController extends Controller
     public function edit($id)
     {
         $article = $this->articleRepository->findOrFail($id);
+
         $tag = $article->tags->implode('name', ',');
-        $categories = Category::get()->filter(function ($item) use ($article) {
-            // 去掉当前的目录 id
-            if ($item->id !== $article->category->id) {
-                return $item;
-            }
-        });
-        $issues = Issue::latest('issue')->get()->filter(function ($item) use ($article) {
-            if ($item->id !== $article->issue->id) {
-                return $item;
-            }
-        });
+
+        $categories = $this->categoryRepository->filter($article->category->id);
+
+        $issues = $this->issueRepository->filter($article->issue);
+
         return view($this->editView, compact('article', 'tag', 'categories', 'issues'));
     }
 
     /**
-     * @param Dashboard\ArticleRequest $request
+     * @param ArticleRequest $request
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Dashboard\ArticleRequest $request, $id)
+    public function update(ArticleRequest $request, $id)
     {
         $article = Article::findOrFail($id);
         $status = $this->createOrUpdate($request, $article, $id);

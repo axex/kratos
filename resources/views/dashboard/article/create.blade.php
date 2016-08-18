@@ -49,9 +49,9 @@
                             <div class="col-md-2">
                                 <label>期数 <small class="text-red">*</small></label>
                                 <div class="input-group">
-                                    <select data-placeholder="选择期数..." class="chosen-select" style="min-width:200px;" name="issue_id">
+                                    <select data-placeholder="选择期数..." class="chosen-select" style="min-width:200px;" name="issue">
                                         @foreach($issues as $issue)
-                                            <option value="{{ $issue->id }}">第 {{ $issue->issue }} 期</option>
+                                            <option value="{{ $issue->issue }}">第 {{ $issue->issue }} 期</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -87,7 +87,7 @@
                             <a href="javascript:void(0);"><i class="fa fa-fw fa-minus-circle delete_item" title="删除" data-id="{{ $article->id }}"></i></a>
                         </td>
                         <td class="text-muted">{{ str_limit($article->title, 50) }}</td>
-                        <td class="text-green">{{ $article->issue->issue }}</td>
+                        <td class="text-green">{{ $article->issue }}</td>
                         <td class="text-black">{{ $article->presenter }}</td>
                         <td class="text-red">{{ $article->category->name }}</td>
                         <td>{{ $article->updated_at }}</td>
