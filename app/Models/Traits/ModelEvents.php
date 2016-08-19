@@ -6,19 +6,6 @@ use Carbon\Carbon;
 
 trait ModelEvents
 {
-
-    /**
-     * 判断文章是否审核通过
-     *
-     * @param Builder $query
-     * @param $type
-     * @return $this
-     */
-    public function scopeIsCheck(Builder $query, $type)
-    {
-        return $query->where('is_check', $type);
-    }
-
     /**
      * 发表时间
      *

@@ -73,29 +73,6 @@
 
                     </div>
                     <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label>审核通过</label>
-                                <div class="input-group">
-                                    <input type="radio" name="is_check" value="0" checked>
-                                    <label class="choice" for="radiogroup">否</label>
-                                    <input type="radio" name="is_check" value="1">
-                                    <label class="choice" for="radiogroup">是</label>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <label>是否推荐</label>
-                                <div class="input-group">
-                                    <input type="radio" name="is_recomm" value="0" checked>
-                                    <label class="choice" for="radiogroup">否</label>
-                                    <input type="radio" name="is_recomm" value="1">
-                                    <label class="choice" for="radiogroup">是</label>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="form-group">
                         <label>简介 <small class="text-red">*</small></label>
                         <textarea id="ueditor" name="desc">{{ $article->desc }}</textarea>
                         @include('ueditor.ueditor'){{-- 引入 ueditor 编辑器相关JS依赖 --}}

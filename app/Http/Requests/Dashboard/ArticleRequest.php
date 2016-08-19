@@ -28,9 +28,7 @@ class ArticleRequest extends BaseRequest
             'issue'      =>  'required|exists:issues,issue',
             'category_id'   =>  'required|exists:categories,id',
             'desc'          =>  'required|min:20',
-            'url'           =>  'required|url',
-            'is_recomm'     =>  'boolean',
-            'is_check'      =>  'boolean'
+            'url'           =>  'required|url'
         ];
     }
 

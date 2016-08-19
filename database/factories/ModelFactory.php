@@ -63,8 +63,7 @@ $factory->define(PublishingArticle::class, function (Generator $faker) use ($dat
         'title' => $faker->sentence(),
         'desc' => $faker->paragraph,
         'url' => $faker->url,
-        'presenter' => $faker->name,
-        'is_check' => $faker->randomElement([0, 1])
+        'presenter' => $faker->name
     ], $dates);
 });
 
@@ -74,8 +73,7 @@ $factory->define(ContributeArticle::class, function (Generator $faker) use ($dat
         'title' => $faker->sentence(),
         'desc' => $faker->paragraph,
         'url' => $faker->url,
-        'presenter' => $faker->name,
-        'is_check' => $faker->randomElement([0, 1])
+        'presenter' => $faker->name
     ], $dates);
 });
 

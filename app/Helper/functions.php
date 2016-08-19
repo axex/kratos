@@ -35,6 +35,23 @@ if (! function_exists('currentNav')) {
     }
 }
 
+if (! function_exists('tap')) {
+    /**
+     * 5.3 版本提供的方法, 链式调用时动态加入查询语句
+     * Call the given Closure with the given value then return the value.
+     *
+     * @param  mixed  $value
+     * @param  callable  $callback
+     * @return mixed
+     */
+    function tap($value, $callback)
+    {
+        $callback($value);
+
+        return $value;
+    }
+}
+
 if (! function_exists('writeToSystemLog')) {
 
     /**

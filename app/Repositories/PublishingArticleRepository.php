@@ -3,11 +3,12 @@
 namespace App\Repositories;
 
 use App\Models\PublishingArticle;
+use App\Repositories\Traits\ArticleManagerTrait;
 use Illuminate\Support\Facades\Request;
 
 class PublishingArticleRepository
 {
-    protected $article;
+    use ArticleManagerTrait;
 
     /**
      * ArticleRepository constructor.
@@ -16,11 +17,5 @@ class PublishingArticleRepository
     public function __construct(PublishingArticle $article)
     {
         $this->article = $article;
-    }
-
-    public function search($num = 15)
-    {
-        $q = e(Request::get('q'));
-        return $this->article->where('title', 'like', $q . '%')->paginate($num);
     }
 }

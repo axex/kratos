@@ -43,7 +43,7 @@
           </div>
           <div class="form-group">
             <label>关键词</label>
-            <input type="text" class="form-control" name="tag" value="{{ $tag }}" placeholder="(多个请用','隔开)">
+            <input type="text" class="form-control" name="tags" value="{{ $tags }}" placeholder="(多个请用','隔开)">
           </div>
           <div class="form-group">
             <label>推荐者</label>
@@ -72,22 +72,13 @@
                 <div class="input-group">
                   <select data-placeholder="选择文章分类..." class="chosen-select" style="min-width:200px;"
                           name="category_id">
-                    <option value="{{ $article->category->id }}">{{ $article->category->name }}</option>
+                    <option value="{{ $article->category_id }}">{{ $article->category->name }}</option>
                     @foreach ($categories as $category)
                       <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                   </select>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>是否推荐</label>
-            <div class="input-group">
-              <input type="radio" name="is_recomm" value="0" {{ empty($article->is_recomm) ? 'checked' : '' }}>
-              <label class="choice" for="radiogroup">否</label>
-              <input type="radio" name="is_recomm" value="1" {{ empty($article->is_recomm) ? '' : 'checked' }}>
-              <label class="choice" for="radiogroup">是</label>
             </div>
           </div>
           <div class="form-group">

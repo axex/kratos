@@ -18,7 +18,6 @@ class CreateContributeArticlesTable extends Migration
             $table->string('desc')->nullable();
             $table->string('url')->comment('原文链接');
             $table->string('presenter')->nullable()->comment('推荐者');
-            $table->boolean('is_check')->default(0)->comment('是否审核');
             $table->timestamps();
         });
     }

@@ -17,15 +17,15 @@ class TagService
     }
 
     /**
-     * 更新或新建标签
+     * 同步标签
      *
      * @param TaggableInterface $taggable
      * @param $tags
      */
-    public function updateOrCreate(TaggableInterface $taggable, $tags)
+    public function sync(TaggableInterface $taggable, $tags)
     {
         $tagIds = $this->getIds($tags);
-        $taggable->tags()->attach($tagIds);
+        $taggable->tags()->sync($tagIds);
     }
 
 
