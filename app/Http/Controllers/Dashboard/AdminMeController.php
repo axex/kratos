@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Events\UserUpdate;
-use App\Models\User;
-use App\Repositories\Dashboard\AuthorityRepository;
+use App\Repositories\AuthorityRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests\Dashboard\MeRequest;
 use App\Http\Requests\Dashboard\AvatarRequest;

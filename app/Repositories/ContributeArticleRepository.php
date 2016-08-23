@@ -1,21 +1,18 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\ContributeArticle;
 use App\Models\ContributeTag;
+use App\Repositories\Criteria\ArticleManager;
 use App\Repositories\Traits\ArticleManagerTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class ContributeArticleRepository
+class ContributeArticleRepository extends ArticleManager
 {
-    use ArticleManagerTrait;
 
-    /**
-     * ContributeArticleRepository constructor.
-     * @param ContributeArticle $article
-     */
-    public function __construct(ContributeArticle $article)
+    protected function model()
     {
-        $this->article = $article;
+        return ContributeArticle::class;
     }
 }

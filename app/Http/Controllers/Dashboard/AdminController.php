@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Repositories\Dashboard\ContributeArticleRepository;
-use App\Repositories\Dashboard\PublishingArticleRepository;
-use App\Repositories\Dashboard\SubscribeRepository;
+use App\Repositories\ContributeArticleRepository;
+use App\Repositories\PublishingArticleRepository;
+use App\Repositories\SubscribeRepository;
 use Carbon\Carbon;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class AdminController extends Controller

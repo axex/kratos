@@ -11,6 +11,6 @@ class ContributeArticle extends BaseModel implements TaggableInterface
 
     protected $table = 'contribute_articles';
 
-    protected $guarded = ['tags'];
+    protected $guarded = ['is_check', 'issue', 'category_id', 'tags'];
 
 }

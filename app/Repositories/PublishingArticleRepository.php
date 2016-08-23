@@ -3,19 +3,13 @@
 namespace App\Repositories;
 
 use App\Models\PublishingArticle;
-use App\Repositories\Traits\ArticleManagerTrait;
-use Illuminate\Support\Facades\Request;
+use App\Repositories\Criteria\ArticleManager;
 
-class PublishingArticleRepository
+class PublishingArticleRepository extends ArticleManager
 {
-    use ArticleManagerTrait;
-
-    /**
-     * ArticleRepository constructor.
-     * @param $article
-     */
-    public function __construct(PublishingArticle $article)
+    protected function model()
     {
-        $this->article = $article;
+        return PublishingArticle::class;
     }
+
 }

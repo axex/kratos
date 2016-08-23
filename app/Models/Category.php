@@ -12,6 +12,6 @@ class Category extends BaseModel
     public function articles()
     {
         // $category->articles 即可拿到该栏目下的所有文章
-        return $this->hasMany(Article::class);
+        return $this->hasMany(PublishingArticle::class);
     }
 }

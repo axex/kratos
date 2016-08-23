@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Models\Category;
-use Illuminate\Http\Request;
-
-use App\Http\Requests\Dashboard;
+use App\Repositories\CategoryRepository;
+use App\Http\Requests\Dashboard\CategoryRequest;
 use App\Http\Controllers\Controller;
 
 class AdminCategoryController extends Controller
 {
+    protected $categoryRepository;
+
     /**
      * AdminCategoryController constructor.
+     * @param CategoryRepository $categoryRepository
      */
-    public function __construct()
+    public function __construct(CategoryRepository $categoryRepository)
     {
         $this->middleware('deny403', ['except' => 'index']);
+        $this->categoryRepository = $categoryRepository;
     }
 
 
@@ -25,7 +27,7 @@ class AdminCategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::latest()->paginate(\Cache::get('page_size', 10));
+        $categories = $this->categoryRepository->paginate();
         return view('dashboard.category.index', compact('categories'));
     }
 
@@ -40,12 +42,12 @@ class AdminCategoryController extends Controller
     }
 
     /**
-     * @param Dashboard\CategoryRequest $request
+     * @param CategoryRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Dashboard\CategoryRequest $request)
+    public function store(CategoryRequest $request)
     {
-        $category = Category::create($request->all());
+        $category = $this->categoryRepository->create($request->all());
         if ($category) {
             return redirect()->route('dashboard.category.index')->with('message', trans('validation.notice.create_category_success'));
         }
@@ -70,20 +72,20 @@ class AdminCategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
+        $category = $this->categoryRepository->findOrFail($id);
         return view('dashboard.category.edit', compact('category'));
     }
 
     /**
      *
-     * @param  Dashboard\CategoryRequest $request
+     * @param  CategoryRequest $request
      * @param  int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Dashboard\CategoryRequest $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        $category = Category::findOrFail($id);
-        $status = $category->update($request->all());
+        $category = $this->categoryRepository->findOrFail($id);
+        $status = $this->categoryRepository->update($category, $request->all());
         if ($status) {
             return redirect()->route('dashboard.category.index')->with('message', trans('validation.notice.update_category_success'));
         }
@@ -97,8 +99,8 @@ class AdminCategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
+        $this->categoryRepository->delete($id);
+
         return redirect()->route('dashboard.category.index')->with('message', trans('validation.notice.delete_category_success'));
     }
 }

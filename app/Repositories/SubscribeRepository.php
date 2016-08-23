@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\Subscribe;
@@ -6,8 +7,8 @@ use App\Models\Subscribe;
 class SubscribeRepository
 {
     protected $subscribe;
-    protected $confirmCode;
 
+    protected $confirmCode;
 
     /**
      * SubscribeRepository constructor.
@@ -20,7 +21,6 @@ class SubscribeRepository
         $this->confirmCode = str_random(48);
     }
 
-
     /**
      * 新建订阅
      *
@@ -32,6 +32,17 @@ class SubscribeRepository
         return $this->subscribe->create($attributes);
     }
 
+    /**
+     * 订阅数
+     *
+     * @param array $values
+     * @return mixed
+     */
+    public function count(array $values)
+    {
+        $subscribes = $this->subscribe->where('is_confirmed', 1)->whereBetween('created_at', $values)->count();
+        return $subscribes;
+    }
 
     /**
      * 更新资料
@@ -44,7 +55,6 @@ class SubscribeRepository
     {
         return $subscribe->update($attributes);
     }
-
 
     /**
      * 确认订阅
@@ -64,7 +74,6 @@ class SubscribeRepository
         }
     }
 
-
     /**
      * 软删除订阅者
      *
@@ -77,7 +86,6 @@ class SubscribeRepository
         $subscribe->save();
         $subscribe->delete();
     }
-
 
     /**
      * 检查邮箱被软删除，未激活的情况
@@ -95,7 +103,6 @@ class SubscribeRepository
         }
         return $subscribeUser;
     }
-
 
     /**
      * 查找订阅者

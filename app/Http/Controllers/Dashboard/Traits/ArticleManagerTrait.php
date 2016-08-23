@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers\Dashboard\Traits;
 
-use App\Http\Requests\Dashboard\ArticleRequest;
 use App\Services\Tag\TagService;
 use Illuminate\Http\Request;
 
@@ -17,6 +16,10 @@ trait ArticleManagerTrait
 
     protected $categoryRepository;
 
+    protected $withCategory = false;
+
+    protected $filterIssueAndCategory = false;
+
     /**
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -27,35 +30,9 @@ trait ArticleManagerTrait
         if ($q) {
             $articles = $this->articleRepository->search($q);
         } else {
-            $articles = $this->articleRepository->all();
+            $articles = $this->articleRepository->all($this->withCategory);
         }
         return view($this->indexView, compact('articles'));
-    }
-
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function create()
-    {
-        $categories = $this->categoryRepository->all();
-        $issues = $this->issueRepository->all();
-        return view('dashboard.article.create', compact('categories', 'issues'));
-    }
-
-    /**
-     * @param ArticleRequest $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(ArticleRequest $request)
-    {
-        $article = $this->articleRepository->create($request->all());
-        if (! $article) {
-            return back()->with('fail', trans('validation.notice.database_error'));
-        }
-
-        $this->syncTags($article, $request->get('tags'));
-
-        return redirect(route($this->indexView))->with('message', trans('validation.notice.publish_success'));
     }
 
     /**
@@ -81,34 +58,21 @@ trait ArticleManagerTrait
 
         $tags = $article->tags->implode('name', ',');
 
-        // 排除掉当前目录和期数
-        $categories = $this->categoryRepository->filter($article->category_id);
+        $categories = $this->categoryRepository->all();
 
-        $issues = $this->issueRepository->filter($article->issue);
+        $issues = $this->issueRepository->all();
+        if ($this->filterIssueAndCategory) {
+            // 排除掉当前目录和期数
+            $categories = $categories->filter(function ($item) use ($article) {
+                return $article->category_id != $item->id;
+            });
 
-        return view($this->editView, compact('article', 'tags', 'categories', 'issues'));
-    }
-
-    /**
-     * 更新文章
-     *
-     * @param ArticleRequest $request
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(ArticleRequest $request, $id)
-    {
-        $article = $this->articleRepository->findOrFail($id);
-
-        $status = $article->update($request->all());
-
-        if (! $status) {
-            return back()->with('fail', trans('validation.notice.database_error'));
+            $issues = $issues->filter(function ($item) use ($article) {
+                return $article->issue != $item->issue;
+            });
         }
 
-        $this->syncTags($article, $request->get('tags'));
-
-        return redirect(route($this->indexView))->with('message', trans('validation.notice.update_article_success'));
+        return view($this->editView, compact('article', 'tags', 'categories', 'issues'));
     }
 
     /**

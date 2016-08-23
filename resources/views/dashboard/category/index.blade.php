@@ -43,7 +43,7 @@
                             <a href="javascript:void(0);"><i class="fa fa-fw fa-minus-circle delete_item" title="删除" data-toggle="modal" data-show-count="{{ count( $cat->articles ) }}" data-id="{{ $cat->id }}"></i></a>
                         </td>
                         <td class="text-green">{{ $cat->slug }}</td>
-                        <td class="text-red">{{ count( $cat->articles()->get() ) }}</td>
+                        <td class="text-red">{{ count( $cat->articles ) }}</td>
                     </tr>
                 @endforeach
 

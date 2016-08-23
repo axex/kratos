@@ -3,55 +3,76 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Events\AddUser;
-use App\Models\Role;
-use App\Models\User;
-use App\Http\Requests\Dashboard;
-use App\Http\Requests;
+use App\Http\Requests\Dashboard\UserRequest;
 use App\Http\Controllers\Controller;
+use App\Repositories\RoleRepository;
+use App\Repositories\UserRepository;
+use Illuminate\Http\Request;
 
 class AdminUserController extends Controller
 {
+    protected $userRepository;
+    /**
+     * @var RoleRepository
+     */
+    private $roleRepository;
 
     /**
+     * AdminUserController constructor.
+     * @param UserRepository $userRepository
+     * @param RoleRepository $roleRepository
+     */
+    public function __construct(UserRepository $userRepository, RoleRepository $roleRepository)
+    {
+        $this->userRepository = $userRepository;
+        $this->roleRepository = $roleRepository;
+    }
+
+    /**
+     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        if (\Input::get('s_name')) {
-            $users = User::where('username', 'like', '%' . e(\Input::get('s_name')) . '%')
-                    ->orWhere('realname', 'like', '%' . e(\Input::get('s_name')) . '%')
-                    ->paginate(\Cache::get('page_size', 10));
+        $name = $request->get('s_name');
+
+        if ($name) {
+            $users = $this->userRepository->search($name);
         } else {
-            $users = User::paginate(\Cache::get('page_size', 10));
+            $users = $this->userRepository->paginate();
         }
+
         return view('dashboard.user.index', compact('users'));
     }
 
     /**
+     * 新增用户
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-        $roles = Role::get();
+        $roles = $this->roleRepository->all();
         return view('dashboard.user.create', compact('roles'));
     }
 
     /**
-     * @param Dashboard\UserRequest $request
+     * @param UserRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Dashboard\UserRequest $request)
+    public function store(UserRequest $request)
     {
-        $user = new User();
-        $user->username = e($request->get('username'));
-        $user->realname = e($request->get('realname'));
-        $user->email = e($request->get('email'));
-        $user->password = $request->get('password');
-        if ($user->save()) {
+        $user = $this->userRepository->create($request->all());
+
+        if ($user) {
             $user->roles()->sync([$request->input('role')]);
+            $this->userRepository->sync($user, $request->get('role'));
+
             event(new AddUser($user)); // 触发事件
+
             return redirect()->route('dashboard.user.index')->with('message', trans('validation.notice.create_user_success'));
         }
+
         return back()->with('fail', trans('validation.notice.database_error'));
 
     }
@@ -73,19 +94,20 @@ class AdminUserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-        $roles = Role::get();
-        // 当前用户所属的用户组
-        $currentRole = $user->roles()->value('id');
-        return view('dashboard.user.edit', compact('user', 'roles', 'currentRole'));
+        $user = $this->userRepository->findOrFail($id);
+
+        $roles = $this->roleRepository->all();
+
+
+        return view('dashboard.user.edit', compact('user', 'roles'));
     }
 
     /**
-     * @param Dashboard\UserRequest $request
+     * @param UserRequest $request
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Dashboard\UserRequest $request, $id)
+    public function update(UserRequest $request, $id)
     {
         $user = User::findOrFail($id);
         if ($request->has('password')) {

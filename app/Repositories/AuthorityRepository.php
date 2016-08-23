@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\User;
@@ -17,7 +18,6 @@ class AuthorityRepository
         $this->user = $user;
     }
 
-
     /**
      * 注册用户
      *
@@ -29,7 +29,6 @@ class AuthorityRepository
         return $this->user->create($attributes);
     }
 
-
     /**
      * @param $user
      */
@@ -38,12 +37,15 @@ class AuthorityRepository
         Auth::login($user);
     }
 
-
     public function logout()
     {
         Auth::logout();
     }
 
+    public function user()
+    {
+        return Auth::user();
+    }
 
     /**
      * 验证登录
@@ -90,7 +92,7 @@ class AuthorityRepository
     }
 
     /**
-     * 重置密码
+     * 更新用户信息
      *
      * @param User $user
      * @param array $attributes

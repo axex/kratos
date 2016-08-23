@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Requests\Dashboard\IssueRequest;
-use App\Repositories\Dashboard\IssueRepository;
+use App\Repositories\IssueRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password', 60);
             $table->string('reset_code', 60)->nullable();
             $table->unsignedTinyInteger('is_lock')->default(0)->comment('是否锁定限制用户登录，1锁定,0正常');
+            $table->index('realname');
             $table->rememberToken();
             $table->timestamps();
         });

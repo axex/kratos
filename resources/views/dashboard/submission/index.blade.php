@@ -18,7 +18,7 @@
 
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title">文章列表</h3>
+            <h3 class="box-title">投稿列表</h3>
             <div class="box-tools">
                 <form action="{{ route('dashboard.submission.index') }}" method="get">
                     <div class="input-group">

@@ -11,7 +11,7 @@ class PublishingArticle extends BaseModel implements TaggableInterface
 
     protected $table = 'publishing_articles';
 
-    protected $guarded = ['tags'];
+    protected $guarded = ['is_check', 'tags'];
 
     public function category()
     {

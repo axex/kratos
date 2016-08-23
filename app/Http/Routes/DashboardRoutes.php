@@ -45,7 +45,10 @@ class DashboardRoutes
 
             # 投稿
             $router->delete('submission/delete', ['as' => $as . 'submission.delete', 'uses' => 'AdminSubmissionController@batchDelete']);
-            $router->resource('submission', 'AdminSubmissionController');
+            $router->get('submission', ['as' => $as . 'submission.index', 'uses' => 'AdminSubmissionController@index']);
+            $router->get('submission/{id}/edit', ['as' => $as . 'submission.edit', 'uses' => 'AdminSubmissionController@edit']);
+            $router->put('submission/{id}', ['as' => $as . 'submission.update', 'uses' => 'AdminSubmissionController@update']);
+            $router->delete('submission/{id}', ['as' => $as . 'submission.destroy', 'uses' => 'AdminSubmissionController@destroy']);
 
             # 分类
             $router->resource('category', 'AdminCategoryController');
