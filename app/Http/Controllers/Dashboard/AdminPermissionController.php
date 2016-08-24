@@ -2,14 +2,24 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Models\Permission;
+use App\Repositories\PermissionRepository;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class AdminPermissionController extends Controller
 {
+    protected $permissionRepository;
+
+    /**
+     * AdminPermissionController constructor.
+     * @param PermissionRepository $permissionRepository
+     */
+    public function __construct(PermissionRepository $permissionRepository)
+    {
+        $this->permissionRepository = $permissionRepository;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +27,8 @@ class AdminPermissionController extends Controller
      */
     public function index()
     {
-        $permissions = Permission::get();
+        $permissions = $this->permissionRepository->all();
+
         return view('dashboard.permission.index', compact('permissions'));
     }
 

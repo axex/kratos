@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Subscribe;
+use App\Repositories\SubscribeRepository;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -10,6 +11,18 @@ use App\Http\Controllers\Controller;
 
 class AdminSubscribeController extends Controller
 {
+    protected $subscribeRepository;
+
+    /**
+     * AdminSubscribeController constructor.
+     * @param SubscribeRepository $subscribeRepository
+     */
+    public function __construct(SubscribeRepository $subscribeRepository)
+    {
+        $this->subscribeRepository = $subscribeRepository;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +30,7 @@ class AdminSubscribeController extends Controller
      */
     public function index()
     {
-        $subscribes = Subscribe::latest()->paginate(\Cache::get('page_size', 10));
+        $subscribes = $this->subscribeRepository->paginate();
         return view('dashboard.subscribe.index', compact('subscribes'));
     }
 
@@ -84,8 +97,7 @@ class AdminSubscribeController extends Controller
      */
     public function destroy($id)
     {
-        $subscribe = Subscribe::findOrFail($id);
-        $subscribe->delete();
+        $this->subscribeRepository->destroy($id);
         return redirect()->route('dashboard.subscribe.index')->with('message', trans('validation.notice.delete_subscribe_success'));
     }
 

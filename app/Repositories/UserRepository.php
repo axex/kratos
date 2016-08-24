@@ -71,6 +71,30 @@ class UserRepository
     }
 
     /**
+     * 更新用户资料
+     *
+     * @param $user
+     * @param array $attributes
+     * @return mixed
+     */
+    public function update($user, array $attributes)
+    {
+        return $user->update($attributes);
+    }
+
+    /**
+     * 删除用户
+     *
+     * @param $id
+     * @return bool
+     */
+    public function delete($id)
+    {
+        $user = $this->findOrFail($id);
+        return $user->delete();
+    }
+
+    /**
      * 获取指定用户的用户组 id
      *
      * @param $user
@@ -85,11 +109,11 @@ class UserRepository
      * 同步用户组
      *
      * @param $user
-     * @param $id
+     * @param array $id
      */
-    public function sync($user, $id)
+    public function sync($user, array $id)
     {
-        $user->roles()->sync([$id]);
+        $user->roles()->sync($id);
     }
 
 }

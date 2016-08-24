@@ -65,11 +65,11 @@ class SubscribeRepository
      */
     public function confirm($confirmCode, $email)
     {
-        $subscribeUser = $this->subscribe->where(['confirm_code' => $confirmCode, 'email' => $email])->first();
-        if ($subscribeUser) {
-            $subscribeUser->is_confirmed = 1;
-            if ($subscribeUser->save()) {
-                return $subscribeUser;
+        $subscribe = $this->subscribe->where(['confirm_code' => $confirmCode, 'email' => $email])->first();
+        if ($subscribe) {
+            $subscribe->is_confirmed = 1;
+            if ($subscribe->save()) {
+                return $subscribe;
             }
         }
     }
@@ -96,12 +96,12 @@ class SubscribeRepository
      */
     public function checkEmail($email)
     {
-        $subscribeUser = $this->subscribe->where('email', $email)->withTrashed()->first();
+        $subscribe = $this->subscribe->where('email', $email)->withTrashed()->first();
         // 邮箱是否被软删除
-        if ($subscribeUser->trashed()) {
-            $subscribeUser->restore();
+        if ($subscribe->trashed()) {
+            $subscribe->restore();
         }
-        return $subscribeUser;
+        return $subscribe;
     }
 
     /**
@@ -112,7 +112,42 @@ class SubscribeRepository
      */
     public function checkUser($confirmCode)
     {
-        $subscribeUser = Subscribe::where('confirm_code', $confirmCode)->first();
-        return $subscribeUser;
+        $subscribe = $this->subscribe->where('confirm_code', $confirmCode)->first();
+        return $subscribe;
+    }
+
+    /**
+     * 订阅用户分页
+     *
+     * @return mixed
+     */
+    public function paginate()
+    {
+        $subscribes = $this->subscribe->latest()->paginate(\Cache::get('page_size', 10));
+        return $subscribes;
+    }
+
+    /**
+     * 查找指定订阅用户
+     *
+     * @param int $id
+     * @return mixed
+     */
+    public function findOrFail($id)
+    {
+        $subscribe = $this->subscribe->findOrFail($id);
+        return $subscribe;
+    }
+
+    /**
+     * 永久删除订阅用户
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function destroy($id)
+    {
+        $subscribe = $this->findOrFail($id);
+        return $subscribe->forceDelete();
     }
 }
