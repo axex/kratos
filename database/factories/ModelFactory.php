@@ -8,6 +8,7 @@ use App\Models\ContributeArticle;
 use App\Models\Subscribe;
 use App\Models\Tag;
 use App\Models\Taggable;
+use App\Models\SystemSetting;
 use Faker\Generator;
 
 /*
@@ -103,4 +104,18 @@ $factory->define(Subscribe::class, function (Generator $faker) use ($dates) {
         'confirm_code' => str_random(48),
         'is_confirmed' => $faker->randomElement([0, 1]),
     ], $dates);
+});
+
+// 系统配置
+$factory->define(SystemSetting::class, function (Generator $faker) {
+    return [
+      'website_title' => 'Kratos',
+      'website_keywords' => 'K',
+      'website_dsec' => '',
+      'website_icp' => '',
+      'page_size' => '10',
+      'system_version' => 'alpha_1.0',
+      'system_author' => 'Kratos',
+      'system_author_website' => 'Kratos',
+    ];
 });

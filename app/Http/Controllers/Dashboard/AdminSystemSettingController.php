@@ -2,14 +2,25 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Models\SystemSetting;
+use App\Repositories\SystemSettingRepository;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 
 class AdminSystemSettingController extends Controller
 {
+    protected $settingRepository;
+
+    /**
+     * AdminSystemSettingController constructor.
+     * @param SystemSettingRepository $settingRepository
+     */
+    public function __construct(SystemSettingRepository $settingRepository)
+    {
+        $this->settingRepository = $settingRepository;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -17,11 +28,13 @@ class AdminSystemSettingController extends Controller
      */
     public function index()
     {
-        $system = SystemSetting::get()->toArray();
-        foreach ($system as $s) {
-            $systemData[$s['name']] = $s['value'];
-        }
-        return view('dashboard.system_setting.index', compact('systemData'));
+        $a = $this->settingRepository->first()->toArray();
+
+        $system = Cache::rememberForever('systemSetting', function () {
+            return $this->settingRepository->get();
+        });
+
+        return view('dashboard.system_setting.index', compact('system'));
     }
 
 
@@ -29,21 +42,18 @@ class AdminSystemSettingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
-        $systemData = $request->input('systemData');
-        if ($systemData && is_array($systemData)) {
-            foreach ($systemData as $key => $value) {
-                $value = e($value);
-                SystemSetting::where('name', $key)->update(['value' => $value]);
-                \Cache::forever($key, $value);
-            }
+        $status = $this->settingRepository->update($request->all());
+
+        if ($status) {
+            Cache::forever('systemSetting', (object) $request->except('_token'));
+
             return redirect()->route('dashboard.system.setting')->with('message', trans('validation.notice.update_system_success'));
         }
+
         return back()->with('fail', trans('validation.notice.database_error'));
     }
-
 }

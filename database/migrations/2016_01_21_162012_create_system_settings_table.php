@@ -14,8 +14,14 @@ class CreateSystemSettingsTable extends Migration
     {
         Schema::create('system_settings', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->comment('配置选项名');
-            $table->string('value')->comment('配置选项值');
+            $table->string('website_title')->comment('网站标题');
+            $table->string('website_keywords')->comment('网站关键词');
+            $table->string('website_dsec')->comment('网站描述');
+            $table->string('website_icp')->comment('网站备案号');
+            $table->string('page_size')->comment('后台分页大小');
+            $table->string('system_version')->comment('系统版本号');
+            $table->string('system_author')->comment('系统开发者');
+            $table->string('system_author_website')->comment('系统开发者网站');
         });
     }
 
