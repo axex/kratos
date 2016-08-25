@@ -28,15 +28,12 @@ class AdminSystemSettingController extends Controller
      */
     public function index()
     {
-        $a = $this->settingRepository->first()->toArray();
-
         $system = Cache::rememberForever('systemSetting', function () {
-            return $this->settingRepository->get();
+            return (object) $this->settingRepository->first()->toArray();
         });
 
         return view('dashboard.system_setting.index', compact('system'));
     }
-
 
     /**
      * Update the specified resource in storage.

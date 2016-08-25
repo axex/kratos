@@ -20,14 +20,23 @@ if (! function_exists('currentNav')) {
     function currentNav($route = '')
     { // dashboard.system.setting
         $routeArray = explode('.', $route);
+
         // 后台的路由前缀都是 dashboard, 出现 dashboard/*/ 的链接是一级链接
-        if (is_array($routeArray) && count($routeArray) >= 2) {
+        if (is_array($routeArray) && count($routeArray) > 2) {
+
             // 二级链接
             // 如 kratos.com/dashboard/article  对应的路由别名是 dashboard.article.index, 所以碰到别名有 index 的要手动加上
-            $route1 = $routeArray[0] . '.' . $routeArray[1] . '.index';
+            if ($routeArray[2] == 'index') {
+                $route1 = $route;
+            } else {
+                // 三级链接
+                $route1 = preg_replace('/[^\.]*$/i', 'index', $route, 1);
+            }
+
             if (Route::getRoutes()->hasNamedRoute($route1)) {
                 return route($route1);
             }
+
             return route($route);
         }
         return route($route);
