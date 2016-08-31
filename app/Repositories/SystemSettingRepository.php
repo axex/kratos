@@ -30,7 +30,7 @@ class SystemSettingRepository
      */
     public function update(array $attributes)
     {
-        $setting = $this->get();
+        $setting = $this->first();
         return $setting->update($attributes);
     }
 }

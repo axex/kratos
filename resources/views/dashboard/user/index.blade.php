@@ -16,13 +16,13 @@
 
   @include('widgets.back-content-alert')
 
-  <a href="{{ route('dashboard.user.create') }}" class="btn btn-primary margin-bottom">新增管理员</a>
+  <a href="{{ route('dashboard.dashboard.user.create') }}" class="btn btn-primary margin-bottom">新增管理员</a>
 
   <div class="box box-primary">
     <div class="box-header with-border">
       <h3 class="box-title">管理员列表</h3>
       <div class="box-tools">
-        <form action="{{ route('dashboard.user.index') }}" method="get">
+        <form action="{{ route('dashboard.dashboard.user.index') }}" method="get">
           <div class="input-group">
             <input type="text" class="form-control input-sm pull-right" name="s_name" value="{{ Input::get('s_name') }}"
                    style="width: 180px;" placeholder="搜索用户登录名或真实姓名">
@@ -50,7 +50,7 @@
         @foreach ($users as $user)
           <tr>
             <td>
-              <a href="{{ route('dashboard.user.edit', $user->id) }}"><i class="fa fa-fw fa-pencil" title="修改"></i></a>
+              <a href="{{ route('dashboard.dashboard.user.edit', $user->id) }}"><i class="fa fa-fw fa-pencil" title="修改"></i></a>
               <a href="javascript:void(0);"><i class="fa fa-fw fa-minus-circle delete_item" title="删除"
                                                data-toggle="modal" data-id="{{ $user->id }}"></i></a>
             </td>
@@ -91,7 +91,7 @@
 @section('filledScript')
   <!--jQuery 提交表单，实现DELETE删除资源-->
   $('.delete_item').click(function(){
-  var action = '{{ route('dashboard.user.index') }}';
+  var action = '{{ route('dashboard.dashboard.user.index') }}';
   var id = $(this).data('id');
   var new_action = action + '/' + id;
   $('#hidden-delete-form').attr('action', new_action);

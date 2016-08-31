@@ -53,11 +53,16 @@ class AdminRoleController extends Controller
     public function store(RoleRequest $request)
     {
         $role = $this->roleRepository->create($request->all());
+        $permissions = [];
 
         if ($role) {
-            $this->roleRepository->sync($role, $request->get('permissions'));
+            if ($request->has('permissions')) {
+                $permissions = $request->get('permissions');
+            }
 
-            return redirect()->route('dashboard.role.index')->with('message', trans('validation.notice.create_role_success'));
+            $this->roleRepository->sync($role, $permissions);
+
+            return redirect()->route('dashboard.dashboard.role.index')->with('message', trans('validation.notice.create_role_success'));
         }
 
         return back()->with('fail', trans('validation.notice.database_error'));
@@ -109,7 +114,7 @@ class AdminRoleController extends Controller
 
             $this->roleRepository->sync($role, $permissions);
 
-            return redirect()->route('dashboard.role.index')->with('message', trans('validation.notice.update_role_success'));
+            return redirect()->route('dashboard.dashboard.role.index')->with('message', trans('validation.notice.update_role_success'));
         }
         return back()->with('fail', trans('validation.notice.database_error'));
     }
@@ -122,6 +127,6 @@ class AdminRoleController extends Controller
     {
         $this->roleRepository->delete($id);
 
-        return redirect()->route('dashboard.role.index')->with('message', trans('validation.notice.delete_role_success'));
+        return redirect()->route('dashboard.dashboard.role.index')->with('message', trans('validation.notice.delete_role_success'));
     }
 }

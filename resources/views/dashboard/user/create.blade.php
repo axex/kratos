@@ -8,7 +8,7 @@
   </h1>
   <ol class="breadcrumb">
     <li><a href="{{ route('dashboard.console') }}"><i class="fa fa-dashboard"></i> 主页</a></li>
-    <li><a href="{{ route('dashboard.user.index') }}">用户管理 - 管理员</a></li>
+    <li><a href="{{ route('dashboard.dashboard.user.index') }}">用户管理 - 管理员</a></li>
     <li class="active">新增管理员</li>
   </ol>
 @stop
@@ -18,7 +18,7 @@
   @include('widgets.back-content-alert')
 
   <h2 class="page-header">新增管理员</h2>
-  <form method="post" action="{{ route('dashboard.user.store') }}" accept-charset="utf-8">
+  <form method="post" action="{{ route('dashboard.dashboard.user.store') }}" accept-charset="utf-8">
     {{ csrf_field() }}
     <div class="nav-tabs-custom">
 

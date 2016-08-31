@@ -8,7 +8,7 @@
     </h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('dashboard.console') }}"><i class="fa fa-dashboard"></i> 主页</a></li>
-        <li><a href="{{ route('dashboard.category.index') }}">内容管理 - 分类</a></li>
+        <li><a href="{{ route('dashboard.dashboard.category.index') }}">内容管理 - 分类</a></li>
         <li class="active">修改分类</li>
     </ol>
 @stop
@@ -18,7 +18,7 @@
     @include('widgets.back-content-alert')
 
     <h2 class="page-header">修改分类</h2>
-    <form method="post" action="{{ route('dashboard.category.update', $category->id ) }}" accept-charset="utf-8">
+    <form method="post" action="{{ route('dashboard.dashboard.category.update', $category->id ) }}" accept-charset="utf-8">
         {{ method_field('put') }}
         {{ csrf_field() }}
 

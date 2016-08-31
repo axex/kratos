@@ -8,7 +8,7 @@
   </h1>
   <ol class="breadcrumb">
     <li><a href="{{ route('dashboard.console') }}"><i class="fa fa-dashboard"></i> 主页</a></li>
-    <li><a href="{{ route('dashboard.user.index') }}">用户管理 - 管理员</a></li>
+    <li><a href="{{ route('dashboard.dashboard.user.index') }}">用户管理 - 管理员</a></li>
     <li class="active">修改管理员</li>
   </ol>
 @stop
@@ -31,7 +31,7 @@
       </div>
     </div><!-- /.box-header -->
 
-    <form method="post" action="{{ route('dashboard.user.update', $user->id) }}" accept-charset="utf-8">
+    <form method="post" action="{{ route('dashboard.dashboard.user.update', $user->id) }}" accept-charset="utf-8">
       {{ method_field('put') }}
       {{ csrf_field() }}
       <div class="box-body">

@@ -46,10 +46,10 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('dashboard.issue.index') }}"><i class="fa fa-circle-o"></i> 期数</a></li>
-                    <li><a href="{{ route('dashboard.article.index') }}"><i class="fa fa-circle-o"></i> 文章</a></li>
+                    <li><a href="{{ route('dashboard.dashboard.issue.index') }}"><i class="fa fa-circle-o"></i> 期数</a></li>
+                    <li><a href="{{ route('dashboard.dashboard.article.index') }}"><i class="fa fa-circle-o"></i> 文章</a></li>
                     <li><a href="{{ route('dashboard.submission.index') }}"><i class="fa fa-circle-o"></i> 投稿</a></li>
-                    <li><a href="{{ route('dashboard.category.index') }}"><i class="fa fa-circle-o"></i> 分类</a></li>
+                    <li><a href="{{ route('dashboard.dashboard.category.index') }}"><i class="fa fa-circle-o"></i> 分类</a></li>
                 </ul>
             </li>
             <!--/.内容管理 treeview-->
@@ -82,10 +82,10 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('dashboard.user.index') }}"><i class="fa fa-circle-o"></i>后台用户</a></li>
-                    <li><a href="{{ route('dashboard.subscribe.index') }}"><i class="fa fa-circle-o"></i>订阅用户</a></li>
-                    <li><a href="{{ route('dashboard.role.index') }}"><i class="fa fa-circle-o"></i>角色</a></li>
-                    <li><a href="{{ route('dashboard.permission.index') }}"><i class="fa fa-circle-o"></i>权限</a></li>
+                    <li><a href="{{ route('dashboard.dashboard.user.index') }}"><i class="fa fa-circle-o"></i>后台用户</a></li>
+                    <li><a href="{{ route('dashboard.dashboard.subscribe.index') }}"><i class="fa fa-circle-o"></i>订阅用户</a></li>
+                    <li><a href="{{ route('dashboard.dashboard.role.index') }}"><i class="fa fa-circle-o"></i>角色</a></li>
+                    <li><a href="{{ route('dashboard.dashboard.permission.index') }}"><i class="fa fa-circle-o"></i>权限</a></li>
                 </ul>
             </li>
             <!--/.用户管理 treeview-->

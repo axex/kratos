@@ -26,6 +26,7 @@ class AdminArticleController extends Controller
     ) {
         $this->middleware('deny403', ['except' => 'index']);
         $this->indexView = 'dashboard.article.index';
+        $this->indexRoute = 'dashboard.dashboard.article.index';
         $this->editView = 'dashboard.article.edit';
         $this->withCategory = true;
         $this->filterIssueAndCategory = true;
@@ -57,7 +58,7 @@ class AdminArticleController extends Controller
 
         $this->syncTags($article, $request->get('tags'));
 
-        return redirect(route($this->indexView))->with('message', trans('validation.notice.publish_success'));
+        return redirect(route($this->indexRoute))->with('message', trans('validation.notice.publish_success'));
     }
 
     /**
@@ -79,6 +80,6 @@ class AdminArticleController extends Controller
 
         $this->syncTags($article, $request->get('tags'));
 
-        return redirect(route($this->indexView))->with('message', trans('validation.notice.update_article_success'));
+        return redirect(route($this->indexRoute))->with('message', trans('validation.notice.update_article_success'));
     }
 }

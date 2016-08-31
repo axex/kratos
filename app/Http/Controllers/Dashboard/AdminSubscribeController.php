@@ -98,7 +98,7 @@ class AdminSubscribeController extends Controller
     public function destroy($id)
     {
         $this->subscribeRepository->destroy($id);
-        return redirect()->route('dashboard.subscribe.index')->with('message', trans('validation.notice.delete_subscribe_success'));
+        return redirect()->route('dashboard.dashboard.subscribe.index')->with('message', trans('validation.notice.delete_subscribe_success'));
     }
 
     /**
@@ -111,6 +111,6 @@ class AdminSubscribeController extends Controller
     {
         $checkedList = explode(',', $request->get('checkedList'));
         Subscribe::whereIn('id', $checkedList)->delete();
-        return redirect()->route('dashboard.subscribe.index')->with('message', trans('validation.notice.delete_subscribe_success'));
+        return redirect()->route('dashboard.dashboard.subscribe.index')->with('message', trans('validation.notice.delete_subscribe_success'));
     }
 }

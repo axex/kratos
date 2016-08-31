@@ -13,7 +13,7 @@
     </h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('dashboard.console') }}"><i class="fa fa-dashboard"></i> 主页</a></li>
-        <li><a href="{{ route('dashboard.article.index') }}">内容管理 - 期数</a></li>
+        <li><a href="{{ route('dashboard.dashboard.article.index') }}">内容管理 - 期数</a></li>
         <li class="active">新增期数</li>
     </ol>
 @stop
@@ -23,7 +23,7 @@
     @include('widgets.back-content-alert')
 
     <h2 class="page-header">新增期数</h2>
-    <form method="post" action="{{ route('dashboard.issue.store') }}" accept-charset="utf-8">
+    <form method="post" action="{{ route('dashboard.dashboard.issue.store') }}" accept-charset="utf-8">
         {{ csrf_field() }}
         <div class="nav-tabs-custom">
 

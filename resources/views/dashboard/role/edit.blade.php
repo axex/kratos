@@ -8,7 +8,7 @@
   </h1>
   <ol class="breadcrumb">
     <li><a href="{{ route('dashboard.console') }}"><i class="fa fa-dashboard"></i> 主页</a></li>
-    <li><a href="{{ route('dashboard.role.index') }}">用户管理 - 角色</a></li>
+    <li><a href="{{ route('dashboard.dashboard.role.index') }}">用户管理 - 角色</a></li>
     <li class="active">修改角色</li>
   </ol>
 @stop
@@ -18,7 +18,7 @@
   @include('widgets.back-content-alert')
 
   <h2 class="page-header">修改角色</h2>
-  <form method="post" action="{{ route('dashboard.role.update', $role->id) }}" accept-charset="utf-8">
+  <form method="post" action="{{ route('dashboard.dashboard.role.update', $role->id) }}" accept-charset="utf-8">
     {{ method_field('put') }}
     {{ csrf_field() }}
     <div class="nav-tabs-custom">

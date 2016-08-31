@@ -8,7 +8,7 @@
   </h1>
   <ol class="breadcrumb">
     <li><a href="{{ route('dashboard.console') }}"><i class="fa fa-dashboard"></i> 主页</a></li>
-    <li><a href="{{ route('dashboard.role.index') }}">用户管理 - 角色</a></li>
+    <li><a href="{{ route('dashboard.dashboard.role.index') }}">用户管理 - 角色</a></li>
     <li class="active">新增角色</li>
   </ol>
 @stop
@@ -18,7 +18,7 @@
   @include('widgets.back-content-alert')
 
   <h2 class="page-header">新增角色</h2>
-  <form method="post" action="{{ route('dashboard.role.store') }}" accept-charset="utf-8">
+  <form method="post" action="{{ route('dashboard.dashboard.role.store') }}" accept-charset="utf-8">
     {{ csrf_field() }}
     <div class="nav-tabs-custom">
 

@@ -16,13 +16,13 @@
 
     @include('widgets.back-content-alert')
 
-    <a href="{{ route('dashboard.issue.create') }}" class="btn btn-primary margin-bottom">新增期数</a>
+    <a href="{{ route('dashboard.dashboard.issue.create') }}" class="btn btn-primary margin-bottom">新增期数</a>
 
     <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title">期数列表</h3>
             <div class="box-tools">
-                <form action="{{ route('dashboard.issue.index') }}" method="get">
+                <form action="{{ route('dashboard.dashboard.issue.index') }}" method="get">
                     <div class="input-group">
                         <input type="text" class="form-control input-sm pull-right" name="q"
                                value="{{ Input::get('q') }}" style="width: 150px;" placeholder="搜索期数">
@@ -63,7 +63,7 @@
                             <input type="checkbox" value="{{ $issue->id }}" name="checkbox">
                         </td>
                         <td>
-                            <a href="{{ route('dashboard.issue.edit', $issue->id) }}"><i class="fa fa-fw fa-pencil" title="修改"></i></a>
+                            <a href="{{ route('dashboard.dashboard.issue.edit', $issue->id) }}"><i class="fa fa-fw fa-pencil" title="修改"></i></a>
                             <a href="javascript:void(0);"><i class="fa fa-fw fa-link" title="预览"></i></a>
                             <a href="javascript:void(0);"><i class="fa fa-fw fa-minus-circle delete_item" title="删除" data-toggle="modal" data-show-count="{{ count( $issue->articles ) }}" data-id="{{ $issue->id }}"></i></a>
                         </td>
@@ -139,7 +139,7 @@
     <!--jQuery 提交表单，实现DELETE删除单篇文章-->
     $('.delete_item').click(function(){
     var id = $(this).data('id');
-    var action = '{{ route('dashboard.issue.index') }}';
+    var action = '{{ route('dashboard.dashboard.issue.index') }}';
     var new_action = action + '/' + id;
     $(this).attr('data-target', '#myModal');
     $('#hidden-delete-form').attr('action', new_action);

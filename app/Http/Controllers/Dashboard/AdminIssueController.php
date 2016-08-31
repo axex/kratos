@@ -65,7 +65,7 @@ class AdminIssueController extends Controller
         ]);
 
         if ($status) {
-            return redirect()->route('dashboard.issue.index')->with('message', trans('validation.notice.create_issue_success'));
+            return redirect()->route('dashboard.dashboard.issue.index')->with('message', trans('validation.notice.create_issue_success'));
         }
         return back()->with('fail', trans('validation.notice.database_error'));
     }
@@ -112,7 +112,7 @@ class AdminIssueController extends Controller
         ]);
 
         if ($status) {
-            return redirect()->route('dashboard.issue.index')->with('message', trans('validation.notice.update_issue_success'));
+            return redirect()->route('dashboard.dashboard.issue.index')->with('message', trans('validation.notice.update_issue_success'));
         }
         return back()->with('message', trans('validation.notice.database_error'));
     }
@@ -125,9 +125,9 @@ class AdminIssueController extends Controller
     {
         $status = $this->issueRepository->delete($id);
         if ($status) {
-            return redirect()->route('dashboard.issue.index')->with('message', trans('validation.notice.delete_issue_success'));
+            return redirect()->route('dashboard.dashboard.issue.index')->with('message', trans('validation.notice.delete_issue_success'));
         }
-        return redirect()->route('dashboard.issue.index')->with('message', trans('validation.notice.database_error'));
+        return redirect()->route('dashboard.dashboard.issue.index')->with('message', trans('validation.notice.database_error'));
     }
 
     /**
@@ -141,8 +141,8 @@ class AdminIssueController extends Controller
         $checkedList = explode(',', $request->get('checkedList'));
         $status = $this->issueRepository->batchDelete($checkedList);
         if ($status) {
-            return redirect()->route('dashboard.issue.index')->with('message', trans('validation.notice.delete_issue_success'));
+            return redirect()->route('dashboard.dashboard.issue.index')->with('message', trans('validation.notice.delete_issue_success'));
         }
-        return redirect()->route('dashboard.issue.index')->with('message', trans('validation.notice.database_error'));
+        return redirect()->route('dashboard.dashboard.issue.index')->with('message', trans('validation.notice.database_error'));
     }
 }

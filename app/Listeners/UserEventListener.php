@@ -78,7 +78,7 @@ class UserEventListener
         \Log::info('user ' . $user->username . '[' . $user->email . '] has been created');
         $logs = [
             'user_id' => $user->id,
-            'url' => route('dashboard.user.create'),
+            'url' => route('dashboard.dashboard.user.create'),
             'content' => '创建新用户：' . $user->username . '[' . $user->email . ']'
         ];
         writeToSystemLog($logs);

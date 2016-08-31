@@ -26,6 +26,7 @@ class AdminSubmissionController extends Controller
         IssueRepository $issueRepository
     ) {
         $this->indexView = 'dashboard.submission.index';
+        $this->indexRoute = 'dashboard.submission.index';
         $this->editView = 'dashboard.submission.edit';
         $this->articleRepository = $articleRepository;
         $this->categoryRepository = $categoryRepository;
@@ -55,6 +56,6 @@ class AdminSubmissionController extends Controller
             $this->articleRepository->update($article, $request->all());
         }
 
-        return redirect(route($this->indexView))->with('message', trans('validation.notice.update_article_success'));
+        return redirect(route($this->indexRoute))->with('message', trans('validation.notice.update_article_success'));
     }
 }

@@ -128,7 +128,7 @@
     <!--jQuery 提交表单，实现DELETE删除单篇文章-->
     $('.delete_item').click(function(){
     var id = $(this).data('id');
-    var action = '{{ route('dashboard.subscribe.index') }}';
+    var action = '{{ route('dashboard.dashboard.subscribe.index') }}';
     var new_action = action + '/' + id;
     $('#hidden-delete-form').attr('action', new_action);
     $('#hidden-delete-form').submit();

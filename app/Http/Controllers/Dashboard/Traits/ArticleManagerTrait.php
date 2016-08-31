@@ -8,6 +8,8 @@ trait ArticleManagerTrait
 {
     protected $indexView;
 
+    protected $indexRoute;
+
     protected $editView;
 
     protected $articleRepository;
@@ -84,9 +86,9 @@ trait ArticleManagerTrait
         $status = $this->articleRepository->delete($id);
 
         if ($status) {
-            return redirect()->route($this->indexView)->with('message', trans('validation.notice.delete_article_success'));
+            return redirect()->route($this->indexRoute)->with('message', trans('validation.notice.delete_article_success'));
         }
-        return redirect()->route($this->indexView)->with('fail', trans('validation.notice.database_error'));
+        return redirect()->route($this->indexRoute)->with('fail', trans('validation.notice.database_error'));
     }
 
     /**
@@ -99,7 +101,7 @@ trait ArticleManagerTrait
     {
         $checkedList = explode(',', $request->get('checkedList'));
         $this->articleRepository->batchDelete($checkedList);
-        return redirect()->route($this->indexView)->with('message', trans('validation.notice.delete_article_success'));
+        return redirect()->route($this->indexRoute)->with('message', trans('validation.notice.delete_article_success'));
     }
 
     /**

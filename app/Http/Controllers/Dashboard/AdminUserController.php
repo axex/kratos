@@ -70,7 +70,7 @@ class AdminUserController extends Controller
 
             event(new AddUser($user)); // 触发事件
 
-            return redirect()->route('dashboard.user.index')->with('message', trans('validation.notice.create_user_success'));
+            return redirect()->route('dashboard.dashboard.user.index')->with('message', trans('validation.notice.create_user_success'));
         }
 
         return back()->with('fail', trans('validation.notice.database_error'));
@@ -118,7 +118,7 @@ class AdminUserController extends Controller
 
         if ($status) {
             $this->userRepository->sync($user, [$request->role]);
-            return redirect()->route('dashboard.user.index')->with('message', trans('validation.notice.update_user_success'));
+            return redirect()->route('dashboard.dashboard.user.index')->with('message', trans('validation.notice.update_user_success'));
         }
         return back()->with('fail', trans('validation.notice.database_error'));
     }
@@ -130,6 +130,6 @@ class AdminUserController extends Controller
     public function destroy($id)
     {
         $this->userRepository->delete($id);
-        return redirect()->route('dashboard.user.index')->with('message', trans('validation.notice.delete_user_success'));
+        return redirect()->route('dashboard.dashboard.user.index')->with('message', trans('validation.notice.delete_user_success'));
     }
 }

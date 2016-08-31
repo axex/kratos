@@ -49,7 +49,7 @@ class AdminCategoryController extends Controller
     {
         $category = $this->categoryRepository->create($request->all());
         if ($category) {
-            return redirect()->route('dashboard.category.index')->with('message', trans('validation.notice.create_category_success'));
+            return redirect()->route('dashboard.dashboard.category.index')->with('message', trans('validation.notice.create_category_success'));
         }
         return back()->with('fail', trans('validation.notice.database_error'));
     }
@@ -87,7 +87,7 @@ class AdminCategoryController extends Controller
         $category = $this->categoryRepository->findOrFail($id);
         $status = $this->categoryRepository->update($category, $request->all());
         if ($status) {
-            return redirect()->route('dashboard.category.index')->with('message', trans('validation.notice.update_category_success'));
+            return redirect()->route('dashboard.dashboard.category.index')->with('message', trans('validation.notice.update_category_success'));
         }
         return back()->with('fail', trans('validation.notice.database_error'));
     }
@@ -101,6 +101,6 @@ class AdminCategoryController extends Controller
     {
         $this->categoryRepository->delete($id);
 
-        return redirect()->route('dashboard.category.index')->with('message', trans('validation.notice.delete_category_success'));
+        return redirect()->route('dashboard.dashboard.category.index')->with('message', trans('validation.notice.delete_category_success'));
     }
 }

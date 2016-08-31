@@ -16,7 +16,7 @@
 
     @include('widgets.back-content-alert')
 
-    <a href="{{ route('dashboard.category.create') }}" class="btn btn-primary margin-bottom">新增分类</a>
+    <a href="{{ route('dashboard.dashboard.category.create') }}" class="btn btn-primary margin-bottom">新增分类</a>
 
     <div class="box box-primary">
         <div class="box-header with-border">
@@ -38,7 +38,7 @@
                     <tr>
                         <td class="text-muted">{{ $cat->name }}</td>
                         <td>
-                            <a href="{{ route('dashboard.category.index') }}/{{ $cat->id }}/edit"><i class="fa fa-fw fa-pencil" title="修改"></i></a>
+                            <a href="{{ route('dashboard.dashboard.category.index') }}/{{ $cat->id }}/edit"><i class="fa fa-fw fa-pencil" title="修改"></i></a>
                             <a href="javascript:void(0);"><i class="fa fa-fw fa-link" title="查看"></i></a>
                             <a href="javascript:void(0);"><i class="fa fa-fw fa-minus-circle delete_item" title="删除" data-toggle="modal" data-show-count="{{ count( $cat->articles ) }}" data-id="{{ $cat->id }}"></i></a>
                         </td>
@@ -57,7 +57,7 @@
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form action="{{ route('dashboard.category.destroy') }}" method="post" accept-charset="utf-8" id="hidden-delete-form">
+                    <form action="{{ route('dashboard.dashboard.category.destroy') }}" method="post" accept-charset="utf-8" id="hidden-delete-form">
                         {{ method_field('delete') }}
                         {{ csrf_field() }}
                         <div class="modal-header">
@@ -82,7 +82,7 @@
     @section('filledScript')
     <!--jQuery 提交表单，实现DELETE删除资源-->
     $('.delete_item').click(function(){
-    var action = '{{ route('dashboard.category.index') }}';
+    var action = '{{ route('dashboard.dashboard.category.index') }}';
     var id = $(this).data('id');
     var count = $(this).data('show-count');
     var new_action = action + '/' + id;

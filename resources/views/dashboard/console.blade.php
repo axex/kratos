@@ -24,7 +24,7 @@
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
                 </div>
-                <a href="{{ route('dashboard.subscribe.index') }}" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ route('dashboard.dashboard.subscribe.index') }}" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -39,7 +39,7 @@
                 <div class="icon">
                     <i class="ion ion-document"></i>
                 </div>
-                <a href="{{ route('dashboard.article.index') }}" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ route('dashboard.dashboard.article.index') }}" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->

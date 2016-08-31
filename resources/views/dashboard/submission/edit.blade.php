@@ -8,7 +8,7 @@
   </h1>
   <ol class="breadcrumb">
     <li><a href="{{ route('dashboard.console') }}"><i class="fa fa-dashboard"></i> 主页</a></li>
-    <li><a href="{{ route('dashboard.article.index') }}">内容管理 - 投稿</a></li>
+    <li><a href="{{ route('dashboard.dashboard.article.index') }}">内容管理 - 投稿</a></li>
     <li class="active">修改投稿</li>
   </ol>
 @stop
