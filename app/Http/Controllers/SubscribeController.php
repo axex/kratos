@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\EmailRequest;
 use App\Repositories\SubscribeRepository;
 use App\Services\Mail\MailService;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class SubscribeController extends Controller
 {
@@ -16,9 +14,10 @@ class SubscribeController extends Controller
      * @var string
      */
     protected $confirmCode;
-    protected $subscribeRepository;
-    protected $mail;
 
+    protected $subscribeRepository;
+
+    protected $mail;
 
     /**
      * SubscribeController constructor.
@@ -28,16 +27,16 @@ class SubscribeController extends Controller
      */
     public function __construct(SubscribeRepository $subscribeRepository, MailService $mail)
     {
-        $this->confirmCode = str_random(48);
+        $this->confirmCode = getVerifyCode();
         $this->subscribeRepository = $subscribeRepository;
         $this->mail = $mail;
     }
-
 
     /**
      * 订阅
      *
      * @param EmailRequest $request
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(EmailRequest $request)
@@ -73,11 +72,13 @@ class SubscribeController extends Controller
      *
      * @param string $confirmCode
      * @param string $email
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function confirmEmail($confirmCode, $email)
     {
         $subscribeUser = $this->subscribeRepository->confirm($confirmCode, $email);
+
         if ($subscribeUser) {
             return view('frontend.subscribe.success', compact('subscribeUser'));
         }
@@ -88,12 +89,14 @@ class SubscribeController extends Controller
      * 直接修改资料再次验证邮箱
      *
      * @param string $confirmCode
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function resendEmail($confirmCode)
     {
         $subscribeUser = $this->subscribeRepository->checkUser($confirmCode);
         $this->mail->send('frontend.subscribe.resend', ['confirmCode' => $confirmCode, 'email' => $subscribeUser->email], $subscribeUser->email, trans('email.updateProfile'));
+
         return view('frontend.subscribe.confirm');
     }
 
@@ -102,11 +105,13 @@ class SubscribeController extends Controller
      * 修改资料页
      *
      * @param string $confirmCode
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function profile($confirmCode)
     {
         $subscribeUser = $this->subscribeRepository->checkUser($confirmCode);
+
         return view('frontend.subscribe.profile', compact('subscribeUser'));
     }
 
@@ -115,6 +120,7 @@ class SubscribeController extends Controller
      * 更新订阅资料
      *
      * @param EmailRequest $request
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function updateProfile(EmailRequest $request)
@@ -122,6 +128,7 @@ class SubscribeController extends Controller
         $email = $request->get('email');
 
         $subscribeUser = $this->subscribeRepository->checkUser($request->get('confirmCode'));
+
         $checkEmail = $this->subscribeRepository->checkEmail($email);
 
         // 数据库有此邮箱 不管激活与否
@@ -130,7 +137,8 @@ class SubscribeController extends Controller
         }
 
         // 数据库中没有此邮箱
-        $this->subscribeRepository->update($subscribeUser, $request->except('confirmCode'));
+        $this->subscribeRepository->update($request->except(['confirmCode', '_token', '_method']), $subscribeUser->id);
+
         return view('frontend.subscribe.update', compact('subscribeUser'));
 
     }
@@ -140,11 +148,13 @@ class SubscribeController extends Controller
      * 取消订阅
      *
      * @param string $confirmCode
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function unsubscribe($confirmCode)
     {
         $subscribeUser = $this->subscribeRepository->checkUser($confirmCode);
+
         return view('frontend.subscribe.unsubscribe', compact('subscribeUser'));
 
     }
@@ -154,13 +164,16 @@ class SubscribeController extends Controller
      * 软删除订阅者
      *
      * @param string $confirmCode
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function delete($confirmCode)
     {
         $subscribeUser = $this->subscribeRepository->checkUser($confirmCode);
+
         if ($subscribeUser) {
             $this->subscribeRepository->delete($subscribeUser);
+
             return view('frontend.subscribe.delete');
         }
     }

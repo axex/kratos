@@ -12,4 +12,14 @@ class PublishingArticleRepository extends ArticleManager
         return PublishingArticle::class;
     }
 
+    /**
+     * 指定期数的文章
+     *
+     * @param $issue
+     * @return static
+     */
+    public function articles($issue)
+    {
+        return $this->model->with(['tags', 'category'])->where('issue', $issue)->get()->groupBy('category_id');
+    }
 }

@@ -14,13 +14,6 @@ interface RepositoryInterface
     public function makeModel();
 
     /**
-     * @param array $columns
-     *
-     * @return mixed
-     */
-    public function all($columns = ['*']);
-
-    /**
      * @param array $attributes
      *
      * @return mixed
@@ -29,17 +22,20 @@ interface RepositoryInterface
 
     /**
      * @param array $attributes
+     * @param $id
+     * @param string $column
      *
      * @return mixed
      */
-    public function update(array $attributes);
+    public function update(array $attributes, $id, $column = 'id');
 
     /**
      * @param $id
+     * @param array $columns
      *
      * @return mixed
      */
-    public function delete($id);
+    public function find($id, $columns = ['*']);
 
     /**
      * @param $id
@@ -48,5 +44,30 @@ interface RepositoryInterface
      * @return mixed
      */
     public function findOrFail($id, $columns = ['*']);
+
+    /**
+     * @param $attribute
+     * @param $value
+     * @param array $columns
+     *
+     * @return mixed
+     */
+    public function findBy($attribute, $value, $columns = ['*']);
+
+    /**
+     * @param array $where
+     * @param array $columns
+     *
+     * @return mixed
+     */
+    public function findWhere($where, $columns = ['*']);
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function destroy($id);
+
 
 }

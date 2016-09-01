@@ -58,6 +58,6 @@ class User extends BaseModel implements AuthenticatableContract,
     public function setEmailAttribute($email)
     {
         $this->attributes['email'] = $email;
-        $this->attributes['reset_code'] = str_random(48);
+        $this->attributes['reset_code'] = getVerifyCode();
     }
 }

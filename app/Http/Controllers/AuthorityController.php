@@ -11,12 +11,9 @@ use App\Repositories\AuthorityRepository;
 use App\Services\Mail\MailService;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class AuthorityController extends Controller
 {
-
     protected $authorityRepository;
 
     /**
@@ -29,7 +26,6 @@ class AuthorityController extends Controller
         $this->authorityRepository = $authorityRepository;
     }
 
-
     /**
      * 注册页
      *
@@ -40,22 +36,20 @@ class AuthorityController extends Controller
         return view('authority.register');
     }
 
-
     /**
      * 验证注册
      *
      * @param RegisterRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function postRegister(RegisterRequest $request)
     {
-        $user = $this->authorityRepository->create(
-            array_merge($request->all())
-        );
+        $user = $this->authorityRepository->create($request->all());
         $this->authorityRepository->login($user);
+
         return redirect()->intended(route('dashboard.console'));
     }
-
 
     /**
      * 登录页
@@ -67,11 +61,11 @@ class AuthorityController extends Controller
         return view('authority.login');
     }
 
-
     /**
      * 验证登录
      *
      * @param LoginRequest $request
+     *
      * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function postLogin(LoginRequest $request)
@@ -90,7 +84,6 @@ class AuthorityController extends Controller
         return back()->withInput()->withErrors(trans('auth.failed'));
     }
 
-
     /**
      * 退出
      *
@@ -103,7 +96,6 @@ class AuthorityController extends Controller
         return redirect('/');
     }
 
-
     /**
      * 密码重置页面
      *
@@ -114,58 +106,65 @@ class AuthorityController extends Controller
         return view('authority.password');
     }
 
-
     /**
      * 密码重置发送邮件
      *
      * @param EmailRequest $request
      * @param MailService $mail
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function postEmail(EmailRequest $request, MailService $mail)
     {
         $email = $request->get('email');
-        $user = $this->authorityRepository->getUserWithEmail($email);
+        $user = $this->authorityRepository->getUser('email', $email);
+
         if ($user) {
             $mail->send('authority.mail', ['reset_code' => $user->reset_code], $email, trans('passwords.subject'));
+
             return back()->with('status', trans('passwords.sent'));
         }
+
         return back()->with('fail', trans('passwords.nouser'));
     }
-
 
     /**
      * 密码重置页面
      *
-     * @param string $resetCode
+     * @param $resetCode
+     *
      * @return $this
      */
     public function getReset($resetCode)
     {
-        $user = $this->authorityRepository->getUserWithResetCode($resetCode);
+        $user = $this->authorityRepository->getUser('reset_code', $resetCode);
+
         if (! $user) {
             throw new NotFoundHttpException;
         }
+
         return view('authority.reset')->with(['resetCode' => $resetCode, 'email' => $user->email]);
     }
-
 
     /**
      * 密码重置
      *
      * @param RegisterRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function postReset(RegisterRequest $request)
     {
-        $user = $this->authorityRepository->getUserWithResetCode($request->get('reset_code'));
+        $user = $this->authorityRepository->getUser('reset_code', $request->get('reset_code'));
         if ($user) {
-            $this->authorityRepository->update($user, [
+            $this->authorityRepository->update([
                 'password' => $request->get('password'),
-                'reset_code' => str_random(48)
-            ]);
+                'reset_code' => getVerifyCode()
+            ], $user->id);
+
             return redirect()->route('login')->with('status', trans('passwords.reset'));
         }
+
         return back()->with('fail', trans('passwords.nouser'));
     }
 }

@@ -3,28 +3,18 @@
 namespace App\Repositories;
 
 use App\Models\Issue;
-use App\Models\PublishingArticle;
+use App\Repositories\Criteria\Repository;
 
-class IssueRepository
+class IssueRepository extends Repository
 {
-    protected $issue;
-
-    protected $article;
-
-    /**
-     * IssueRepository constructor.
-     * @param Issue $issue
-     * @param PublishingArticle $article
-     */
-    public function __construct(Issue $issue, PublishingArticle $article)
+    protected function model()
     {
-        $this->issue = $issue;
-        $this->article = $article;
+        return Issue::class;
     }
 
     public function all()
     {
-        $issues = $this->issue->latestByIssue()->get();
+        $issues = $this->model->latestByIssue()->get();
         return $issues;
     }
 
@@ -35,7 +25,7 @@ class IssueRepository
      */
     public function publishedIssues()
     {
-        return $this->issue->latest('issue')->published()->get();
+        return $this->model->latest('issue')->published()->get();
     }
 
     /**
@@ -46,18 +36,7 @@ class IssueRepository
      */
     public function getIssues($num = 20)
     {
-        return $this->issue->latest('issue')->published()->limit($num)->get();
-    }
-
-    /**
-     * 期数下的文章
-     *
-     * @param $issue
-     * @return static
-     */
-    public function articles($issue)
-    {
-        return $this->article->with(['tags', 'category'])->where('issue', $issue)->get()->groupBy('category_id');
+        return $this->model->latest('issue')->published()->limit($num)->get();
     }
 
     /**
@@ -67,7 +46,7 @@ class IssueRepository
      */
     public function paginate()
     {
-        $issues = $this->issue->with('articles')->latestByIssue()->paginate(\Cache::get('page_size', 10));
+        $issues = $this->model->with('articles')->latestByIssue()->paginate(\Cache::get('page_size', 10));
         return $issues;
     }
 
@@ -81,42 +60,6 @@ class IssueRepository
     {
         $issues = $this->issue->where('issue', $q)->paginate(\Cache::get('page_size', 10));
         return $issues;
-    }
-
-    /**
-     * 新建期数
-     *
-     * @param array $attributes
-     * @return static
-     */
-    public function create(array $attributes)
-    {
-        $issue = $this->issue->create($attributes);
-        return $issue;
-    }
-
-    /**
-     * 查找指定期数
-     *
-     * @param int $id
-     * @return mixed
-     */
-    public function findOrFail($id)
-    {
-        $issue = $this->issue->findOrFail($id);
-        return $issue;
-    }
-
-    /**
-     * 更新期数
-     *
-     * @param $issue
-     * @param array $attributes
-     * @return mixed
-     */
-    public function update($issue, array $attributes)
-    {
-        return $issue->update($attributes);
     }
 
     /**

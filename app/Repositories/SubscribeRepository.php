@@ -3,57 +3,26 @@
 namespace App\Repositories;
 
 use App\Models\Subscribe;
+use App\Repositories\Criteria\Repository;
 
-class SubscribeRepository
+class SubscribeRepository extends Repository
 {
-    protected $subscribe;
-
-    protected $confirmCode;
-
-    /**
-     * SubscribeRepository constructor.
-     *
-     * @param Subscribe $subscribe
-     */
-    public function __construct(Subscribe $subscribe)
+    protected function model()
     {
-        $this->subscribe = $subscribe;
-        $this->confirmCode = str_random(48);
-    }
-
-    /**
-     * 新建订阅
-     *
-     * @param array $attributes
-     * @return static
-     */
-    public function create(array $attributes)
-    {
-        return $this->subscribe->create($attributes);
+        return Subscribe::class;
     }
 
     /**
      * 订阅数
      *
      * @param array $values
+     *
      * @return mixed
      */
     public function count(array $values)
     {
-        $subscribes = $this->subscribe->where('is_confirmed', 1)->whereBetween('created_at', $values)->count();
+        $subscribes = $this->model->where('is_confirmed', 1)->whereBetween('created_at', $values)->count();
         return $subscribes;
-    }
-
-    /**
-     * 更新资料
-     *
-     * @param Subscribe $subscribe
-     * @param array $attributes
-     * @return bool|int
-     */
-    public function update($subscribe, array $attributes)
-    {
-        return $subscribe->update($attributes);
     }
 
     /**
@@ -61,11 +30,13 @@ class SubscribeRepository
      *
      * @param string $confirmCode
      * @param string $email
+     *
      * @return mixed
      */
     public function confirm($confirmCode, $email)
     {
-        $subscribe = $this->subscribe->where(['confirm_code' => $confirmCode, 'email' => $email])->first();
+        $subscribe = $this->findWhere(['confirm_code' => $confirmCode, 'email' => $email]);
+
         if ($subscribe) {
             $subscribe->is_confirmed = 1;
             if ($subscribe->save()) {
@@ -77,12 +48,13 @@ class SubscribeRepository
     /**
      * 软删除订阅者
      *
-     * @param Subscribe $subscribe
+     * @param $subscribe
+     * @return void
      */
     public function delete($subscribe)
     {
         $subscribe->is_confirmed = 0;
-        $subscribe->confirm_code = $this->confirmCode;
+        $subscribe->confirm_code = getVerifyCode();
         $subscribe->save();
         $subscribe->delete();
     }
@@ -92,15 +64,18 @@ class SubscribeRepository
      * 1. 被软删除或未激活。 2. 已经激活存在 3. 新邮箱
      *
      * @param string $email
+     *
      * @return mixed
      */
     public function checkEmail($email)
     {
-        $subscribe = $this->subscribe->where('email', $email)->withTrashed()->first();
+        $subscribe = $this->model->where('email', $email)->withTrashed()->first();
+
         // 邮箱是否被软删除
-        if ($subscribe->trashed()) {
+        if ($subscribe && $subscribe->trashed()) {
             $subscribe->restore();
         }
+
         return $subscribe;
     }
 
@@ -108,11 +83,13 @@ class SubscribeRepository
      * 查找订阅者
      *
      * @param string $confirmCode
+     *
      * @return mixed
      */
     public function checkUser($confirmCode)
     {
-        $subscribe = $this->subscribe->where('confirm_code', $confirmCode)->first();
+        $subscribe = $this->findBy('confirm_code', $confirmCode);
+
         return $subscribe;
     }
 
@@ -123,26 +100,15 @@ class SubscribeRepository
      */
     public function paginate()
     {
-        $subscribes = $this->subscribe->latest()->paginate(\Cache::get('page_size', 10));
+        $subscribes = $this->model->latest()->paginate(\Cache::get('page_size', 10));
         return $subscribes;
-    }
-
-    /**
-     * 查找指定订阅用户
-     *
-     * @param int $id
-     * @return mixed
-     */
-    public function findOrFail($id)
-    {
-        $subscribe = $this->subscribe->findOrFail($id);
-        return $subscribe;
     }
 
     /**
      * 永久删除订阅用户
      *
      * @param $id
+     *
      * @return mixed
      */
     public function destroy($id)

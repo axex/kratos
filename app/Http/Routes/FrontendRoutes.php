@@ -23,7 +23,7 @@ class FrontendRoutes
 
             # 修改订阅资料
             $router->get('profile/{confirm_code}', 'SubscribeController@profile');
-            $router->post('profile', 'SubscribeController@updateProfile');
+            $router->put('profile', 'SubscribeController@updateProfile');
 
             # 邮箱确认订阅
             $router->get('resend/{confirm_code}', 'SubscribeController@resendEmail');

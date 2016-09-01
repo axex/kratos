@@ -5,24 +5,31 @@ namespace App\Http\Controllers;
 use App\Repositories\PublishingArticleRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\IssueRepository;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class IssueController extends Controller
 {
+    protected $issueRepository;
+
+    protected $articleRepository;
+
+    public function __construct(
+        IssueRepository $issueRepository,
+        PublishingArticleRepository $articleRepository)
+    {
+        $this->issueRepository = $issueRepository;
+        $this->articleRepository = $articleRepository;
+    }
+
     /**
-     * @param IssueRepository $issueRepository
      * @param CategoryRepository $categoryRepository
      * @param string $issue
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(
-        IssueRepository $issueRepository,
-        CategoryRepository $categoryRepository,
-        $issue
-    ) {
-        $issueArticles = $issueRepository->articles($issue);
+    public function index(CategoryRepository $categoryRepository, $issue)
+    {
+        $issueArticles = $this->articleRepository->articles($issue);
         $recommendedCategoryId = $categoryRepository->recommendedCategoryIdWithCache();
         $defaultCategoryId = $categoryRepository->defaultCategoryIdWithCache();
         $recommArticles = [];
@@ -42,7 +49,7 @@ class IssueController extends Controller
         // 把推荐分类文章放在集合第一个  其他分类文章放在集合最后一个
         $articles = collect();
         $articles = $articles->merge($recommArticles)->merge($normalArticles)->merge($otherArticles)->groupBy('category_id');
-        $latestIssues = $issueRepository->getIssues();
+        $latestIssues = $this->issueRepository->getIssues();
         return view('frontend.issues.index', compact('issue', 'articles', 'latestIssues'));
     }
 
@@ -52,22 +59,20 @@ class IssueController extends Controller
      *
      * @link http://wenda.golaravel.com/question/1094
      * @param Request $request
-     * @param PublishingArticleRepository $articleRepository
-     * @param IssueRepository $issueRepository
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function search(
-        Request $request,
-        PublishingArticleRepository $articleRepository,
-        IssueRepository $issueRepository
-    ) {
-        if (! $request->get('q')) {
+    public function search(Request $request)
+    {
+        $q = $request->get('q');
+
+        if (! $q) {
             return back();
         }
 
-        $articles = $articleRepository->search();
-        $latestIssues = $issueRepository->getIssues();
+        $articles = $this->articleRepository->search($q);
+        $latestIssues = $this->issueRepository->getIssues();
 
-        return view('frontend.issues.search', compact('articles', 'latestIssues'));
+        return view('frontend.issues.search', compact('q', 'articles', 'latestIssues'));
     }
 }

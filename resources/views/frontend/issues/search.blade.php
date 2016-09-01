@@ -18,7 +18,7 @@
     <main class="container" id="main">
         <section id="content">
             <form id="st-search-form">
-                <input type="text" name="q" id="st-search-input"/>
+                <input type="text" value="{{ $q }}" name="q" id="st-search-input"/>
                 <input type="submit" value="搜索" id="st-search-btn">
             </form>
             <div id="st-results-container">

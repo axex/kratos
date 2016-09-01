@@ -101,7 +101,7 @@ $factory->define(Subscribe::class, function (Generator $faker) use ($dates) {
     return array_merge([
         'name' => $faker->name,
         'email' => $faker->unique()->email,
-        'confirm_code' => str_random(48),
+        'confirm_code' => getVerifyCode(),
         'is_confirmed' => $faker->randomElement([0, 1]),
     ], $dates);
 });

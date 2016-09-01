@@ -79,3 +79,16 @@ if (! function_exists('writeToSystemLog')) {
         return false;
     }
 }
+
+if (! function_exists('getVerifyCode')) {
+
+    /**
+     * 获取激活码
+     *
+     * @return string
+     */
+    function getVerifyCode()
+    {
+        return str_random(48);
+    }
+}
