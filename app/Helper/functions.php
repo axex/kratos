@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\SystemLog;
+use App\Models\SystemSetting;
+
 /*
 |--------------------------------------------------------------------------
 | 自定义公共函数库Helper
@@ -100,6 +102,10 @@ if (! function_exists('getPerPageRows')) {
      */
     function getPerPageRows()
     {
-        return \Cache::get('systemSetting')->page_size ?: 10;
+        $setting = \Cache::rememberForever('systemSetting', function () {
+            return (object) SystemSetting::first()->toArray();
+        });
+
+        return $setting->page_size;
     }
 }
