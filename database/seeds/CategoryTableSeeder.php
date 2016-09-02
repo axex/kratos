@@ -19,9 +19,9 @@ class CategoryTableSeeder extends Seeder
 
         Category::create([
             'name' => '其他',
-            'slug' => 'default'
+            'slug' => 'other'
         ]);
-        $categories = factory(Category::class)->times(10)->make();
-        Category::insert($categories->toArray());
+//        $categories = factory(Category::class)->times(10)->make();
+//        Category::insert($categories->toArray());
     }
 }

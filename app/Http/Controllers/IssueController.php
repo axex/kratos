@@ -31,7 +31,7 @@ class IssueController extends Controller
     {
         $issueArticles = $this->articleRepository->articles($issue);
         $recommendedCategoryId = $categoryRepository->recommendedCategoryIdWithCache();
-        $defaultCategoryId = $categoryRepository->defaultCategoryIdWithCache();
+        $otherCategoryId = $categoryRepository->otherCategoryIdWithCache();
         $recommArticles = [];
         $normalArticles = collect(); // 创建一个新集合
         $otherArticles = [];
@@ -39,7 +39,7 @@ class IssueController extends Controller
             if ($key == $recommendedCategoryId) {
                 // 推荐分类文章
                 $recommArticles = $value;
-            } elseif ($key == $defaultCategoryId) {
+            } elseif ($key == $otherCategoryId) {
                 // 其他分类文章
                 $otherArticles = $value;
             } else {

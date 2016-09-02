@@ -28,9 +28,9 @@ class CategoryRepository extends Repository
      *
      * @return mixed
      */
-    public function defaultCategoryId()
+    public function otherCategoryId()
     {
-        return $this->model->default()->value('id');
+        return $this->model->other()->value('id');
     }
 
     /**
@@ -50,10 +50,10 @@ class CategoryRepository extends Repository
      *
      * @return mixed
      */
-    public function defaultCategoryIdWithCache()
+    public function otherCategoryIdWithCache()
     {
-        return Cache::remember('defaultCategoryId', date('Y-m-d', strtotime('+1 week')), function () {
-            return $this->defaultCategoryId();
+        return Cache::remember('otherCategoryId', date('Y-m-d', strtotime('+1 week')), function () {
+            return $this->otherCategoryId();
         });
     }
 

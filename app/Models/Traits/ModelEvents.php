@@ -33,9 +33,9 @@ trait ModelEvents
      * @param Builder $query
      * @return $this
      */
-    public function scopeDefault(Builder $query)
+    public function scopeOther(Builder $query)
     {
-        return $query->where('slug', 'default');
+        return $query->where('slug', 'other');
     }
 
     /**
