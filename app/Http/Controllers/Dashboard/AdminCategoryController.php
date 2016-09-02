@@ -28,6 +28,7 @@ class AdminCategoryController extends Controller
     public function index()
     {
         $categories = $this->categoryRepository->paging('articles');
+
         return view('dashboard.category.index', compact('categories'));
     }
 
@@ -48,6 +49,7 @@ class AdminCategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         $category = $this->categoryRepository->create($request->all());
+
         if ($category) {
             return redirect()->route('dashboard.dashboard.category.index')->with('message', trans('validation.notice.create_category_success'));
         }
@@ -91,6 +93,7 @@ class AdminCategoryController extends Controller
     {
         $category = $this->categoryRepository->findOrFail($id);
         $status = $this->categoryRepository->update($request->all(), $category->id);
+
         if ($status) {
             return redirect()->route('dashboard.dashboard.category.index')->with('message', trans('validation.notice.update_category_success'));
         }

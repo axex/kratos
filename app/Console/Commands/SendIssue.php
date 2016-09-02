@@ -49,7 +49,7 @@ class SendIssue extends Command
         $issue = Issue::published()->latest('issue')->pluck('issue');
         $issueArticles = Issue::published()->latest()->first()->articles->groupBy('category_id');
         $recommendId = Category::recommend()->pluck('id');
-        $otherId = Category::other()->pluck('id');
+        $otherId = Category::default()->pluck('id');
         $recommArticles = [];
         $normalArticles = collect(); // 创建一个新集合
         $otherArticles = [];

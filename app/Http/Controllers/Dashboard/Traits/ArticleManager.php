@@ -108,6 +108,7 @@ trait ArticleManager
     {
         $checkedList = explode(',', $request->get('checkedList'));
         $this->articleRepository->destroy($checkedList);
+
         return redirect()->route($this->indexRoute)->with('message', trans('validation.notice.delete_article_success'));
     }
 
