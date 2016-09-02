@@ -22,6 +22,7 @@ class SubscribeRepository extends Repository
     public function count(array $values)
     {
         $subscribes = $this->model->where('is_confirmed', 1)->whereBetween('created_at', $values)->count();
+
         return $subscribes;
     }
 
@@ -35,11 +36,12 @@ class SubscribeRepository extends Repository
      */
     public function confirm($confirmCode, $email)
     {
-        $subscribe = $this->findWhere(['confirm_code' => $confirmCode, 'email' => $email]);
+        $subscribe = $this->findWhere(['confirm_code' => $confirmCode, 'email' => $email])->first();
 
         if ($subscribe) {
             $subscribe->is_confirmed = 1;
             if ($subscribe->save()) {
+
                 return $subscribe;
             }
         }
@@ -94,26 +96,16 @@ class SubscribeRepository extends Repository
     }
 
     /**
-     * 订阅用户分页
-     *
-     * @return mixed
-     */
-    public function paginate()
-    {
-        $subscribes = $this->model->latest()->paginate(\Cache::get('page_size', 10));
-        return $subscribes;
-    }
-
-    /**
      * 永久删除订阅用户
      *
      * @param $id
      *
      * @return mixed
      */
-    public function destroy($id)
+    public function forceDelete($id)
     {
         $subscribe = $this->findOrFail($id);
+
         return $subscribe->forceDelete();
     }
 }

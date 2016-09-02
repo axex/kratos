@@ -12,13 +12,12 @@ use Illuminate\Http\Request;
 class AdminUserController extends Controller
 {
     protected $userRepository;
-    /**
-     * @var RoleRepository
-     */
+
     private $roleRepository;
 
     /**
      * AdminUserController constructor.
+     *
      * @param UserRepository $userRepository
      * @param RoleRepository $roleRepository
      */
@@ -30,6 +29,7 @@ class AdminUserController extends Controller
 
     /**
      * @param Request $request
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(Request $request)
@@ -39,7 +39,7 @@ class AdminUserController extends Controller
         if ($name) {
             $users = $this->userRepository->search($name);
         } else {
-            $users = $this->userRepository->paginate();
+            $users = $this->userRepository->paging('roles');
         }
 
         return view('dashboard.user.index', compact('users'));
@@ -53,11 +53,13 @@ class AdminUserController extends Controller
     public function create()
     {
         $roles = $this->roleRepository->all();
+
         return view('dashboard.user.create', compact('roles'));
     }
 
     /**
      * @param UserRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(UserRequest $request)
@@ -80,7 +82,8 @@ class AdminUserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -90,6 +93,7 @@ class AdminUserController extends Controller
 
     /**
      * @param int $id
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
@@ -104,6 +108,7 @@ class AdminUserController extends Controller
     /**
      * @param UserRequest $request
      * @param int $id
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UserRequest $request, $id)
@@ -111,25 +116,28 @@ class AdminUserController extends Controller
         $user = $this->userRepository->findOrFail($id);
 
         if ($request->has('password')) {
-            $status = $this->userRepository->update($user, $request->all());
+            $status = $this->userRepository->update($request->all(), $user->id);
         } else {
-            $status = $this->userRepository->update($user, $request->except('password'));
+            $status = $this->userRepository->update($request->except('password'), $user->id);
         }
 
         if ($status) {
             $this->userRepository->sync($user, [$request->role]);
             return redirect()->route('dashboard.dashboard.user.index')->with('message', trans('validation.notice.update_user_success'));
         }
+
         return back()->with('fail', trans('validation.notice.database_error'));
     }
 
     /**
      * @param int $id
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        $this->userRepository->delete($id);
+        $this->userRepository->destroy($id);
+
         return redirect()->route('dashboard.dashboard.user.index')->with('message', trans('validation.notice.delete_user_success'));
     }
 }

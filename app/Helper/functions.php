@@ -92,3 +92,14 @@ if (! function_exists('getVerifyCode')) {
         return str_random(48);
     }
 }
+
+if (! function_exists('getPerPageRows')) {
+
+    /**
+     * @return mixed
+     */
+    function getPerPageRows()
+    {
+        return \Cache::get('systemSetting')->page_size ?: 10;
+    }
+}

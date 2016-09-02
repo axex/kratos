@@ -2,35 +2,18 @@
 namespace App\Repositories;
 
 use App\Models\SystemSetting;
+use App\Repositories\Criteria\Repository;
 
-class SystemSettingRepository
+class SystemSettingRepository extends Repository
 {
-    protected $setting;
-
-    /**
-     * SystemSettingRepository constructor.
-     * @param SystemSetting $setting
-     */
-    public function __construct(SystemSetting $setting)
+    protected function model()
     {
-        $this->setting = $setting;
+        return SystemSetting::class;
     }
 
     public function first()
     {
-        $settings = $this->setting->first();
+        $settings = $this->model->first();
         return $settings;
-    }
-
-    /**
-     * 更新系统配置
-     *
-     * @param array $attributes
-     * @return mixed
-     */
-    public function update(array $attributes)
-    {
-        $setting = $this->first();
-        return $setting->update($attributes);
     }
 }

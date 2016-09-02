@@ -66,7 +66,6 @@ class SubscribeController extends Controller
         return view('frontend.subscribe.repeat', compact('subscribeUser'));
     }
 
-
     /**
      * 确认邮箱
      *
@@ -84,7 +83,6 @@ class SubscribeController extends Controller
         }
     }
 
-
     /**
      * 直接修改资料再次验证邮箱
      *
@@ -100,7 +98,6 @@ class SubscribeController extends Controller
         return view('frontend.subscribe.confirm');
     }
 
-
     /**
      * 修改资料页
      *
@@ -114,7 +111,6 @@ class SubscribeController extends Controller
 
         return view('frontend.subscribe.profile', compact('subscribeUser'));
     }
-
 
     /**
      * 更新订阅资料
@@ -137,12 +133,11 @@ class SubscribeController extends Controller
         }
 
         // 数据库中没有此邮箱
-        $this->subscribeRepository->update($request->except(['confirmCode', '_token', '_method']), $subscribeUser->id);
+        $this->subscribeRepository->update($request->except('confirmCode'), $subscribeUser->id);
 
         return view('frontend.subscribe.update', compact('subscribeUser'));
 
     }
-
 
     /**
      * 取消订阅
@@ -158,7 +153,6 @@ class SubscribeController extends Controller
         return view('frontend.subscribe.unsubscribe', compact('subscribeUser'));
 
     }
-
 
     /**
      * 软删除订阅者

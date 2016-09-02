@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Models\Subscribe;
 use App\Repositories\SubscribeRepository;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class AdminSubscribeController extends Controller
@@ -22,7 +19,6 @@ class AdminSubscribeController extends Controller
         $this->subscribeRepository = $subscribeRepository;
     }
 
-
     /**
      * Display a listing of the resource.
      *
@@ -30,7 +26,8 @@ class AdminSubscribeController extends Controller
      */
     public function index()
     {
-        $subscribes = $this->subscribeRepository->paginate();
+        $subscribes = $this->subscribeRepository->paging();
+
         return view('dashboard.subscribe.index', compact('subscribes'));
     }
 
@@ -97,7 +94,8 @@ class AdminSubscribeController extends Controller
      */
     public function destroy($id)
     {
-        $this->subscribeRepository->destroy($id);
+        $this->subscribeRepository->forceDelete($id);
+
         return redirect()->route('dashboard.dashboard.subscribe.index')->with('message', trans('validation.notice.delete_subscribe_success'));
     }
 
@@ -110,7 +108,9 @@ class AdminSubscribeController extends Controller
     public function batchDelete(Request $request)
     {
         $checkedList = explode(',', $request->get('checkedList'));
-        Subscribe::whereIn('id', $checkedList)->delete();
+
+        $this->subscribeRepository->destroy($checkedList);
+
         return redirect()->route('dashboard.dashboard.subscribe.index')->with('message', trans('validation.notice.delete_subscribe_success'));
     }
 }

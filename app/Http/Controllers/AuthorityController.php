@@ -14,16 +14,16 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AuthorityController extends Controller
 {
-    protected $authorityRepository;
+    protected $authRepository;
 
     /**
      * AuthorityController constructor.
-     * @param AuthorityRepository $authorityRepository
+     * @param AuthorityRepository $authRepository
      */
-    public function __construct(AuthorityRepository $authorityRepository)
+    public function __construct(AuthorityRepository $authRepository)
     {
         $this->middleware('guest', ['except' => 'logout']);
-        $this->authorityRepository = $authorityRepository;
+        $this->authRepository = $authRepository;
     }
 
     /**
@@ -45,8 +45,8 @@ class AuthorityController extends Controller
      */
     public function postRegister(RegisterRequest $request)
     {
-        $user = $this->authorityRepository->create($request->all());
-        $this->authorityRepository->login($user);
+        $user = $this->authRepository->create($request->all());
+        $this->authRepository->login($user);
 
         return redirect()->intended(route('dashboard.console'));
     }
@@ -70,7 +70,7 @@ class AuthorityController extends Controller
      */
     public function postLogin(LoginRequest $request)
     {
-        $user = $this->authorityRepository->attempt(
+        $user = $this->authRepository->attempt(
             $request->get('username'),
             $request->get('password'),
             $request->has('remember')
@@ -92,7 +92,7 @@ class AuthorityController extends Controller
     public function logout()
     {
         event(new UserLogout(Auth::user()));   // 触发退出事件
-        $this->authorityRepository->logout();
+        $this->authRepository->logout();
         return redirect('/');
     }
 
@@ -117,7 +117,7 @@ class AuthorityController extends Controller
     public function postEmail(EmailRequest $request, MailService $mail)
     {
         $email = $request->get('email');
-        $user = $this->authorityRepository->getUser('email', $email);
+        $user = $this->authRepository->getUser('email', $email);
 
         if ($user) {
             $mail->send('authority.mail', ['reset_code' => $user->reset_code], $email, trans('passwords.subject'));
@@ -137,7 +137,7 @@ class AuthorityController extends Controller
      */
     public function getReset($resetCode)
     {
-        $user = $this->authorityRepository->getUser('reset_code', $resetCode);
+        $user = $this->authRepository->getUser('reset_code', $resetCode);
 
         if (! $user) {
             throw new NotFoundHttpException;
@@ -155,9 +155,9 @@ class AuthorityController extends Controller
      */
     public function postReset(RegisterRequest $request)
     {
-        $user = $this->authorityRepository->getUser('reset_code', $request->get('reset_code'));
+        $user = $this->authRepository->getUser('reset_code', $request->get('reset_code'));
         if ($user) {
-            $this->authorityRepository->update([
+            $this->authRepository->update([
                 'password' => $request->get('password'),
                 'reset_code' => getVerifyCode()
             ], $user->id);

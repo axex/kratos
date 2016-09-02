@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Dashboard\Traits\ArticleManagerTrait;
+use App\Http\Controllers\Dashboard\Traits\ArticleManager;
 use App\Http\Requests\Dashboard\ArticleRequest;
 use App\Repositories\CategoryRepository;
 use App\Repositories\IssueRepository;
@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 
 class AdminArticleController extends Controller
 {
-    use ArticleManagerTrait;
+    use ArticleManager;
 
     /**
      * AdminArticleController constructor.
@@ -28,7 +28,7 @@ class AdminArticleController extends Controller
         $this->indexView = 'dashboard.article.index';
         $this->indexRoute = 'dashboard.dashboard.article.index';
         $this->editView = 'dashboard.article.edit';
-        $this->withCategory = true;
+        $this->withCategory = ['category'];
         $this->filterIssueAndCategory = true;
         $this->articleRepository = $articleRepository;
         $this->categoryRepository = $categoryRepository;
@@ -41,7 +41,8 @@ class AdminArticleController extends Controller
     public function create()
     {
         $categories = $this->categoryRepository->all();
-        $issues = $this->issueRepository->all();
+        $issues = $this->issueRepository->all([], 'issue');
+
         return view('dashboard.article.create', compact('categories', 'issues'));
     }
 
@@ -72,7 +73,7 @@ class AdminArticleController extends Controller
     {
         $article = $this->articleRepository->findOrFail($id);
 
-        $status = $this->articleRepository->update($article, $request->all());
+        $status = $this->articleRepository->update($request->all(), $article->id);
 
         if (! $status) {
             return back()->with('fail', trans('validation.notice.database_error'));

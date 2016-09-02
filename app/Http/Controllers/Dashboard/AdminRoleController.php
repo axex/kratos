@@ -15,6 +15,7 @@ class AdminRoleController extends Controller
 
     /**
      * AdminRoleController constructor.
+     *
      * @param RoleRepository $roleRepository
      * @param PermissionRepository $permissionRepository
      */
@@ -24,13 +25,14 @@ class AdminRoleController extends Controller
         $this->roleRepository = $roleRepository;
         $this->permissionRepository = $permissionRepository;
     }
+
     /**
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $roles = $this->roleRepository->paginate();
+        $roles = $this->roleRepository->paging();
         return view('dashboard.role.index', compact('roles'));
     }
 
@@ -48,6 +50,7 @@ class AdminRoleController extends Controller
      * Store a newly created resource in storage.
      *
      * @param RoleRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(RoleRequest $request)
@@ -71,7 +74,8 @@ class AdminRoleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -81,6 +85,7 @@ class AdminRoleController extends Controller
 
     /**
      * @param  int $id
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
@@ -97,6 +102,7 @@ class AdminRoleController extends Controller
     /**
      * @param RoleRequest $request
      * @param  int $id
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(RoleRequest $request, $id)
@@ -105,10 +111,10 @@ class AdminRoleController extends Controller
 
         $role = $this->roleRepository->findOrFail($id);
 
-        $status = $this->roleRepository->update($role, $request->all());
+        $status = $this->roleRepository->update($request->all(), $role->id);
 
         if ($status) {
-            if (! $permissions) {
+            if (!$permissions) {
                 $permissions = [];
             }
 
@@ -121,11 +127,12 @@ class AdminRoleController extends Controller
 
     /**
      * @param  int $id
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        $this->roleRepository->delete($id);
+        $this->roleRepository->destroy($id);
 
         return redirect()->route('dashboard.dashboard.role.index')->with('message', trans('validation.notice.delete_role_success'));
     }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard\Traits;
 use App\Services\Tag\TagService;
 use Illuminate\Http\Request;
 
-trait ArticleManagerTrait
+trait ArticleManager
 {
     protected $indexView;
 
@@ -18,22 +18,25 @@ trait ArticleManagerTrait
 
     protected $categoryRepository;
 
-    protected $withCategory = false;
+    protected $withCategory = [];
 
     protected $filterIssueAndCategory = false;
 
     /**
      * @param Request $request
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(Request $request)
     {
         $q = $request->get('q');
+
         if ($q) {
             $articles = $this->articleRepository->search($q);
         } else {
-            $articles = $this->articleRepository->all($this->withCategory);
+            $articles = $this->articleRepository->paging($this->withCategory);
         }
+
         return view($this->indexView, compact('articles'));
     }
 
@@ -41,6 +44,7 @@ trait ArticleManagerTrait
      * Display the specified resource.
      *
      * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -52,6 +56,7 @@ trait ArticleManagerTrait
      * 编辑文章页面
      *
      * @param int $id
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
@@ -62,7 +67,7 @@ trait ArticleManagerTrait
 
         $categories = $this->categoryRepository->all();
 
-        $issues = $this->issueRepository->all();
+        $issues = $this->issueRepository->all([], 'issue');
         if ($this->filterIssueAndCategory) {
             // 排除掉当前目录和期数
             $categories = $categories->filter(function ($item) use ($article) {
@@ -79,11 +84,12 @@ trait ArticleManagerTrait
 
     /**
      * @param int $id
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        $status = $this->articleRepository->delete($id);
+        $status = $this->articleRepository->destroy($id);
 
         if ($status) {
             return redirect()->route($this->indexRoute)->with('message', trans('validation.notice.delete_article_success'));
@@ -95,12 +101,13 @@ trait ArticleManagerTrait
      * 批量删除
      *
      * @param Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function batchDelete(Request $request)
     {
         $checkedList = explode(',', $request->get('checkedList'));
-        $this->articleRepository->batchDelete($checkedList);
+        $this->articleRepository->destroy($checkedList);
         return redirect()->route($this->indexRoute)->with('message', trans('validation.notice.delete_article_success'));
     }
 

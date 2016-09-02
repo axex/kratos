@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Dashboard\Traits\ArticleManagerTrait;
+use App\Http\Controllers\Dashboard\Traits\ArticleManager;
 use App\Http\Requests\Dashboard\ArticleRequest;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ContributeArticleRepository;
@@ -12,7 +12,7 @@ use App\Repositories\PublishingArticleRepository;
 
 class AdminSubmissionController extends Controller
 {
-    use ArticleManagerTrait;
+    use ArticleManager;
 
     /**
      * AdminSubmissionController constructor.
@@ -50,10 +50,10 @@ class AdminSubmissionController extends Controller
         if ($request->is_check == '1') {
             $status = $publishingArticleRepository->create($request->all());
             if ($status) {
-                $this->articleRepository->delete($id);
+                $this->articleRepository->destroy($id);
             }
         } else {
-            $this->articleRepository->update($article, $request->all());
+            $this->articleRepository->update($request->all(), $article->id);
         }
 
         return redirect(route($this->indexRoute))->with('message', trans('validation.notice.update_article_success'));

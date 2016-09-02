@@ -14,6 +14,34 @@ interface RepositoryInterface
     public function makeModel();
 
     /**
+     * @param array $with
+     * @param string $by
+     *
+     * @return mixed
+     *
+     */
+    public function withAndLatest($with = [], $by = 'created_at');
+
+    /**
+     * @param array $with
+     * @param string $by
+     *
+     * @return mixed
+     */
+    public function all($with = [], $by = 'created_at');
+
+    /**\
+     * @param array $with
+     * @param string $by
+     * @param array $columns
+     * @param string $pageName
+     * @param null $page
+     *
+     * @return mixed
+     */
+    public function paging($with = [], $by = 'created_at', $columns = ['*'], $pageName = 'page', $page = null);
+
+    /**
      * @param array $attributes
      *
      * @return mixed

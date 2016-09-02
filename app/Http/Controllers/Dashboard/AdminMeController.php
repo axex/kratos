@@ -11,15 +11,16 @@ use App\Http\Controllers\Controller;
 
 class AdminMeController extends Controller
 {
-    protected $authorityRepository;
+    protected $authRepository;
 
     /**
      * AdminMeController constructor.
-     * @param AuthorityRepository $authorityRepository
+     *
+     * @param AuthorityRepository $authRepository
      */
-    public function __construct(AuthorityRepository $authorityRepository)
+    public function __construct(AuthorityRepository $authRepository)
     {
-        $this->authorityRepository = $authorityRepository;
+        $this->authRepository = $authRepository;
     }
 
     public function me()
@@ -31,18 +32,23 @@ class AdminMeController extends Controller
      * 修改个人资料
      *
      * @param MeRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function meProfile(MeRequest $request)
     {
-        $user = $this->authorityRepository->user();
+        $user = $this->authRepository->user();
+
         if ($request->has('password')) {
             $attributes = $request->all();
         } else {
             $attributes = $request->except('password');
         }
-        $this->authorityRepository->update($user, $attributes);
+
+        $this->authRepository->update($attributes, $user->id);
+
         event(new UserUpdate($user));
+
         return redirect(route('dashboard.me'))->with('message', trans('validation.notice.update_profile_success'));
     }
 
@@ -53,6 +59,7 @@ class AdminMeController extends Controller
      * 因此在这方法里面进行验证, 再把错误用 json 返回到页面上
      *
      * @param Request $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function avatarUpload(Request $request)
@@ -66,7 +73,7 @@ class AdminMeController extends Controller
                 'errors' => $validator->messages()
             ]);
         }
-        $user = $this->authorityRepository->user();
+        $user = $this->authRepository->user();
         $destination = 'avatar/' . $user->username . '/';   // 文件最终存放目录
 
         file_exists($destination) ? '' : mkdir($destination, 0777);
@@ -76,7 +83,7 @@ class AdminMeController extends Controller
         $avatarPath = '/' . $destination . $newName;
         $oldAvatar = substr($user->avatar, 1); // 旧头像路径, 把路径最前面的 / 删掉
         if ($file->move($destination, $newName)) {
-            $this->authorityRepository->update($user, ['avatar' => $avatarPath]);
+            $this->authRepository->update(['avatar' => $avatarPath], $user->id);
             file_exists($oldAvatar) ? unlink($oldAvatar) : '';
             return \Response::json(
                 [

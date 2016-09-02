@@ -2,25 +2,13 @@
 
 namespace App\Repositories;
 
-
 use App\Models\Permission;
+use App\Repositories\Criteria\Repository;
 
-class PermissionRepository
+class PermissionRepository extends Repository
 {
-    protected $permission;
-
-    /**
-     * PermissionRepository constructor.
-     * @param Permission $permission
-     */
-    public function __construct(Permission $permission)
+    protected function model()
     {
-
-        $this->permission = $permission;
-    }
-
-    public function all()
-    {
-        return $this->permission->get();
+        return Permission::class;
     }
 }

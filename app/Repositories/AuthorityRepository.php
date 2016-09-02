@@ -51,7 +51,6 @@ class AuthorityRepository extends Repository
         ], $remember, $login);
     }
 
-
     /**
      * 查找用户
      *

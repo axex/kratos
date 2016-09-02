@@ -2,62 +2,43 @@
 namespace App\Repositories;
 
 use App\Models\SystemLog;
+use App\Repositories\Criteria\Repository;
 use Maatwebsite\Excel\Facades\Excel;
 
-class SystemLogRepository
+class SystemLogRepository extends Repository
 {
-    protected $log;
-
-    /**
-     * SystemSettingRepository constructor.
-     * @param SystemLog $log
-     */
-    public function __construct(SystemLog $log)
+    protected function model()
     {
-        $this->log = $log;
-    }
-
-    public function all()
-    {
-        return $this->log->with('user')->latest()->get();
-    }
-
-    public function find($id)
-    {
-        return $this->log->find($id);
-    }
-
-    public function paginate()
-    {
-        return $this->log->with('user')->latest()->paginate(\Cache::get('page_size', 10));
+        return SystemLog::class;
     }
 
     /**
      *
      * @param string $username
      * @param string $ip
+     *
      * @return mixed
      */
     public function search($username, $ip)
     {
-        $logs = tap($this->log->with('user'), function ($query) use ($username, $ip) {
+        $logs = tap($this->model->with('user'), function ($query) use ($username, $ip) {
 
-            if ($username) {
+            if ($username && !$ip) {
                 $query->join('users', function ($join) use ($username) {
                     $join->where('users.username', 'like', $username . '%');
                 });
             }
 
-            if ($ip) {
+            if (!$username && $ip) {
                 $query->where('operator_ip', 'like', $ip . '%');
             }
 
             if ($username && $ip) {
                 $query->join('users', function ($join) use ($username, $ip) {
-                    $join->where('operator_ip', 'like', $ip . '%')->where('users.username', 'like', $username . '%');
+                    $join->where('system_logs.operator_ip', 'like', $ip . '%')->where('users.username', 'like', $username . '%');
                 });
             }
-        })->paginate(\Cache::get('page_size', 10));
+        })->paginate(getPerPageRows());
 
         return $logs;
     }

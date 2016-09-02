@@ -3,85 +3,14 @@
 namespace App\Repositories;
 
 use App\Models\Category;
+use App\Repositories\Criteria\Repository;
 use Illuminate\Support\Facades\Cache;
 
-class CategoryRepository
+class CategoryRepository extends Repository
 {
-    protected $category;
-
-    /**
-     * CategoryRepository constructor.
-     * @param $category
-     */
-    public function __construct(Category $category)
+    protected function model()
     {
-        $this->category = $category;
-    }
-
-    public function all()
-    {
-        $categories = $this->category->latest()->get();
-        return $categories;
-    }
-
-    /**
-     * 分类分页
-     *
-     * @return mixed
-     */
-    public function paginate()
-    {
-        $categories = $this->category->with('articles')->latest()->paginate(\Cache::get('page_size', 10));
-        return $categories;
-    }
-
-
-    /**
-     * 新建分类
-     *
-     * @param array $attributes
-     * @return static
-     */
-    public function create(array $attributes)
-    {
-        $category = $this->category->create($attributes);
-        return $category;
-    }
-
-    /**
-     * 查找指定分类
-     *
-     * @param int $id
-     * @return mixed
-     */
-    public function findOrFail($id)
-    {
-        $category = $this->category->findOrFail($id);
-        return $category;
-    }
-
-    /**
-     * 更新分类
-     *
-     * @param $category
-     * @param array $attributes
-     * @return mixed
-     */
-    public function update($category, array $attributes)
-    {
-        return $category->update($attributes);
-    }
-
-    /**
-     * 删除分类
-     *
-     * @param $id
-     * @return bool
-     */
-    public function delete($id)
-    {
-        $category = $this->findOrFail($id);
-        return $category->delete();
+        return Category::class;
     }
 
     /**
@@ -91,7 +20,7 @@ class CategoryRepository
      */
     public function recommendedCategoryId()
     {
-        return $this->category->recommend()->value('id');
+        return $this->model->recommend()->value('id');
     }
 
     /**
@@ -101,7 +30,7 @@ class CategoryRepository
      */
     public function defaultCategoryId()
     {
-        return $this->category->default()->value('id');
+        return $this->model->default()->value('id');
     }
 
     /**

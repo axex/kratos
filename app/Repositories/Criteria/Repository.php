@@ -39,6 +39,48 @@ abstract class Repository implements RepositoryInterface
     }
 
     /**
+     * @param array $with
+     * @param string $by
+     *
+     * @return $this
+     */
+    public function withAndLatest($with = [], $by = 'created_at')
+    {
+        $this->model = tap($this->model->latest($by), function ($query) use ($with) {
+            if ($with) {
+                $query->with($with);
+            }
+        });
+
+        return $this;
+    }
+
+    /**
+     * @param array $with
+     * @param string $by
+     *
+     * @return mixed
+     */
+    public function all($with = [], $by = 'created_at')
+    {
+        return $this->withAndLatest($with, $by)->get();
+    }
+
+    /**
+     * @param array $with
+     * @param string $by
+     * @param array $columns
+     * @param string $pageName
+     * @param null $page
+     *
+     * @return mixed
+     */
+    public function paging($with = [], $by = 'created_at', $columns = ['*'], $pageName = 'page', $page = null)
+    {
+        return $this->withAndLatest($with, $by)->paginate(getPerPageRows(), $columns, $pageName, $page);
+    }
+
+    /**
      * @param array $attributes
      *
      * @return mixed
@@ -98,19 +140,18 @@ abstract class Repository implements RepositoryInterface
 
     /**
      * @param array $where
+     * @param string $operator
      * @param array $columns
      *
-     * @return mixed
+     * @return $this
      */
-    public function findWhere($where, $columns = ['*'])
+    public function findWhere($where, $operator = '=', $columns = ['*'])
     {
-        $model = $this->model;
-
         foreach ($where as $field => $value) {
-            $model = $model->where($field, $value);
+            $this->model = $this->model->where($field, $operator, $value);
         }
 
-        return $model->first($columns);
+        return $this;
     }
 
     /**

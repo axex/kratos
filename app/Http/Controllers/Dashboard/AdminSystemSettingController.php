@@ -13,6 +13,7 @@ class AdminSystemSettingController extends Controller
 
     /**
      * AdminSystemSettingController constructor.
+     *
      * @param SystemSettingRepository $settingRepository
      */
     public function __construct(SystemSettingRepository $settingRepository)
@@ -29,7 +30,7 @@ class AdminSystemSettingController extends Controller
     public function index()
     {
         $system = Cache::rememberForever('systemSetting', function () {
-            return (object) $this->settingRepository->first()->toArray();
+            return (object)$this->settingRepository->first()->toArray();
         });
 
         return view('dashboard.system_setting.index', compact('system'));
@@ -38,15 +39,17 @@ class AdminSystemSettingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
-        $status = $this->settingRepository->update($request->all());
+        $setting = $this->settingRepository->first();
+        $status = $this->settingRepository->update($request->all(), $setting->id);
 
         if ($status) {
-            Cache::forever('systemSetting', (object) $request->except('_token'));
+            Cache::forever('systemSetting', (object)$request->except('_token'));
 
             return redirect()->route('dashboard.system.setting')->with('message', trans('validation.notice.update_system_success'));
         }
