@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
-class EmailRequest extends Request
+class EmailRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.

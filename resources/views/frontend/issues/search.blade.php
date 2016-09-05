@@ -18,7 +18,7 @@
     <main class="container" id="main">
         <section id="content">
             <form id="st-search-form">
-                <input type="text" id="st-search-input"/>
+                <input type="text" value="{{ $q }}" name="q" id="st-search-input"/>
                 <input type="submit" value="搜索" id="st-search-btn">
             </form>
             <div id="st-results-container">
@@ -28,14 +28,14 @@
                 @foreach($articles as $article)
                     <div class="st-result">
                         <h3>
-                            <a href="/issue{{ $article->issue->issue }}">{{ $article->title }}</a>
+                            <a href="/issue{{ $article->issue }}">{{ $article->title }}</a>
                         </h3>
-                        <div><span>Kratos第{{ $article->issue->issue }}期</span></div>
+                        <div><span>Kratos第{{ $article->issue }}期</span></div>
                     </div>
                 @endforeach
                 @endif
             </div>
-            {!! $articles->appends(['kword' => Input::get('kword')])->render() !!}
+            {!! $articles->appends(['q' => Request::get('q')])->render() !!}
         </section>
         <aside id="aside">
             <h2>最新发布</h2>

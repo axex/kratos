@@ -19,6 +19,7 @@ class CreateSystemLogsTable extends Migration
             $table->string('content')->nullable()->comment('操作内容');
             $table->string('operator_ip')->nullable()->comment('操作者ip');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->index('operator_ip');
             $table->timestamps();
         });
     }

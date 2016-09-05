@@ -1,7 +1,7 @@
 <?php
-use App\Role;
-use App\User;
-use App\Permission;
+use App\Models\Role;
+use App\Models\User;
+use App\Models\Permission;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 

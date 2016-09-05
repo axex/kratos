@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Issue;
 
 class IssueTableSeeder extends Seeder
 {
@@ -11,7 +12,7 @@ class IssueTableSeeder extends Seeder
      */
     public function run()
     {
-        $issues = factory(\App\Issue::class)->times(30)->make();
-        \App\Issue::insert($issues->toArray());
+        $issues = factory(Issue::class)->times(30)->make();
+        Issue::insert($issues->toArray());
     }
 }

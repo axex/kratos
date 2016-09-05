@@ -113,9 +113,8 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
-        Ender\UEditor\UEditorServiceProvider::class, // ueditor
+        Overtrue\LaravelUEditor\UEditorServiceProvider::class, // Ueditor
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,  // ide-helper
-        Barryvdh\Debugbar\ServiceProvider::class,   // Laravel Debugbar
         Zizaco\Entrust\EntrustServiceProvider::class,   // Entrust RBAC
         Maatwebsite\Excel\ExcelServiceProvider::class,  // lravel-excel
         Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
@@ -165,8 +164,6 @@ return [
 
     'aliases' => [
 
-        'UEditor'   => Ender\UEditor\UEditor::class,
-        'Debugbar'  => Barryvdh\Debugbar\Facade::class,   // Laravel Debugbar
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class, // Entrust
         'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
         'App'       => Illuminate\Support\Facades\App::class,

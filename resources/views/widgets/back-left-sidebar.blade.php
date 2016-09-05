@@ -33,8 +33,8 @@
                     <i class="fa fa-dashboard"></i> <span>控制面板</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('backend.console') }}"><i class="fa fa-circle-o"></i> 概述</a></li>
-                    <li><a href="{{ route('backend.me') }}"><i class="fa fa-circle-o"></i> 个人资料</a></li>
+                    <li><a href="{{ route('dashboard.console') }}"><i class="fa fa-circle-o"></i> 概述</a></li>
+                    <li><a href="{{ route('dashboard.me') }}"><i class="fa fa-circle-o"></i> 个人资料</a></li>
                 </ul>
             </li>
             <!--/.控制台 active treeview-->
@@ -46,10 +46,10 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('backend.issue.index') }}"><i class="fa fa-circle-o"></i> 期数</a></li>
-                    <li><a href="{{ route('backend.article.index') }}"><i class="fa fa-circle-o"></i> 文章</a></li>
-                    <li><a href="{{ route('backend.submission.index') }}"><i class="fa fa-circle-o"></i> 投稿</a></li>
-                    <li><a href="{{ route('backend.category.index') }}"><i class="fa fa-circle-o"></i> 分类</a></li>
+                    <li><a href="{{ route('dashboard.dashboard.issue.index') }}"><i class="fa fa-circle-o"></i> 期数</a></li>
+                    <li><a href="{{ route('dashboard.dashboard.article.index') }}"><i class="fa fa-circle-o"></i> 文章</a></li>
+                    <li><a href="{{ route('dashboard.submission.index') }}"><i class="fa fa-circle-o"></i> 投稿</a></li>
+                    <li><a href="{{ route('dashboard.dashboard.category.index') }}"><i class="fa fa-circle-o"></i> 分类</a></li>
                 </ul>
             </li>
             <!--/.内容管理 treeview-->
@@ -82,10 +82,10 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('backend.user.index') }}"><i class="fa fa-circle-o"></i>后台用户</a></li>
-                    <li><a href="{{ route('backend.subscribe.index') }}"><i class="fa fa-circle-o"></i>订阅用户</a></li>
-                    <li><a href="{{ route('backend.role.index') }}"><i class="fa fa-circle-o"></i>角色</a></li>
-                    <li><a href="{{ route('backend.permission.index') }}"><i class="fa fa-circle-o"></i>权限</a></li>
+                    <li><a href="{{ route('dashboard.dashboard.user.index') }}"><i class="fa fa-circle-o"></i>后台用户</a></li>
+                    <li><a href="{{ route('dashboard.dashboard.subscribe.index') }}"><i class="fa fa-circle-o"></i>订阅用户</a></li>
+                    <li><a href="{{ route('dashboard.dashboard.role.index') }}"><i class="fa fa-circle-o"></i>角色</a></li>
+                    <li><a href="{{ route('dashboard.dashboard.permission.index') }}"><i class="fa fa-circle-o"></i>权限</a></li>
                 </ul>
             </li>
             <!--/.用户管理 treeview-->
@@ -112,8 +112,8 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('backend.system.setting') }}"><i class="fa fa-square-o"></i>系统配置</a></li>
-                    <li><a href="{{ route('backend.system.log.index') }}"><i class="fa fa-square-o"></i>系统日志</a></li>
+                    <li><a href="{{ route('dashboard.system.setting') }}"><i class="fa fa-square-o"></i>系统配置</a></li>
+                    <li><a href="{{ route('dashboard.system.log.index') }}"><i class="fa fa-square-o"></i>系统日志</a></li>
                 </ul>
             </li>
             <!--/.系统管理 treeview-->

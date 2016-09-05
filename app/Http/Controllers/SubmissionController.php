@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Article;
-use App\Category;
-use App\Issue;
-use App\Tag;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Http\Requests\SubmissionRequest;
+use App\Repositories\ContributeArticleRepository;
+use App\Services\Tag\TagService;
+use Illuminate\Support\Facades\Lang;
 
 class SubmissionController extends Controller
 {
@@ -18,28 +14,27 @@ class SubmissionController extends Controller
         return view('frontend.submission.add');
     }
 
-    public function store(Requests\SubmissionRequest $request)
+    /**
+     * 投稿页
+     *
+     * @param SubmissionRequest $request
+     * @param ContributeArticleRepository $articleRepository
+     *
+     * @return $this|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function store(SubmissionRequest $request, ContributeArticleRepository $articleRepository)
     {
         // url 已经被提交过
-        $url = Article::where('url', $request->get('url'))->first();
+        $url = $articleRepository->checkUrl($request->get('url'));
+
         if ($url) {
-            return back()->with('repeatUrl', $url->issue->issue)->withInput();
+            return back()->with('repeatUrl', Lang::get('validation.custom.url.repeat'))->withInput();
         }
-        $category = Category::first();
-        $issue = Issue::latest('published_at')->first();
-        $article = Article::create(array_merge([
-                'category_id' => $category->id,
-                'issue_id' => $issue->id,
-                'is_check' => 0
-            ], $request->except('tags'))
-        );
+        $article = $articleRepository->create($request->all());
 
         // 中文逗号换成英文逗号并转为数组
-        $explodeTags = explode(',', str_replace('，', ',', $request->get('tags')));
-        foreach ($explodeTags as $tag) {
-            $tags = Tag::updateOrCreate(['name' => $tag]);
-            $article->tags()->attach($tags->id);
-        }
+        $explodeTags = explode(',', $request->get('tags'));
+        app(TagService::class)->sync($article, $explodeTags);
 
         return view('frontend.submission.done');
     }

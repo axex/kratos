@@ -5,9 +5,12 @@ $(document).ready(function() {
         success:       showResponse,
         dataType: 'json'
     };
-    $('#avatar').on('change', function(){
-        $('#uploading').text('正在上传...');
-        $('#upload-form').ajaxForm(options).submit();
+
+    $('#avatar').change(function () {
+        if (this.value) {
+            $('#uploading').text('正在上传...');
+            $('#upload-form').ajaxForm(options).submit();
+        }
     });
 });
 function showRequest() {
@@ -28,10 +31,9 @@ function showResponse(response)  {
             }
         });
         $("#validation-errors").show();
+        $('#uploading').text('上传头像');
     } else {
-
         $('#user-avatar').attr('src',response.avatar);
         $('#uploading').text('上传头像');
-
     }
 }

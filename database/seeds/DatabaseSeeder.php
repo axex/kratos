@@ -18,12 +18,13 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleTableSeeder::class);
         $this->call(UserTableSeeder::class);
         $this->call(CategoryTableSeeder::class);
-        $this->call(IssueTableSeeder::class);
-        $this->call(ArticleTbaleSeeder::class);
-        $this->call(TagTableSeeder::class);
-        $this->call(ArticleTagTableSeeder::class);
-        $this->call(SubscribeTableSeeder::class);
-        $this->call(SystemSettingTableSeeder::class);
+//        $this->call(IssueTableSeeder::class);
+//        $this->call(PublishingArticleTbaleSeeder::class);
+//        $this->call(ContributeArticleTableSeeder::class);
+//        $this->call(SubscribeTableSeeder::class);
+//        $this->call(SystemSettingTableSeeder::class);
+//        $this->call(TagTableSeeder::class);
+//        $this->call(TaggableTableSeeder::class);
 
         Model::reguard();
     }

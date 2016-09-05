@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\Issue;
-use App\Category;
+use App\Models\Issue;
+use App\Models\Category;
+use App\Models\Subscribe;
 use App\Jobs\SendIssueEmail;
-use App\Subscribe;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 

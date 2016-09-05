@@ -2,8 +2,8 @@
 
 namespace App\Jobs;
 
-use App\Jobs\Job;
-use App\Subscribe;
+use App\Models\Subscribe;
+use Illuminate\Mail\Mailer;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
@@ -20,7 +20,9 @@ class SendIssueEmail extends Job implements SelfHandling, ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param Subscribe $user
+     * @param $issue
+     * @param $articles
      */
     public function __construct(Subscribe $user, $issue, $articles)
     {
@@ -33,14 +35,14 @@ class SendIssueEmail extends Job implements SelfHandling, ShouldQueue
     /**
      * Execute the job.
      *
-     * @return void
+     * @param Mailer $mail
      */
-    public function handle(\Mail $mail)
+    public function handle(Mailer $mail)
     {
         $user = $this->user;
         $issue = $this->issue;
         $articles = $this->articles;
-        $mail::send('send', [
+        $mail->send('send', [
             'issue' => $issue,
             'articles' => $articles,
             'unsubscribe' => route('unsubscribe', ['confirm_code' => $user->confirm_code])
