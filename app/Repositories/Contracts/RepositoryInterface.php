@@ -51,11 +51,12 @@ interface RepositoryInterface
     /**
      * @param array $attributes
      * @param $id
+     * @param string $field
      * @param string $column
      *
      * @return mixed
      */
-    public function update(array $attributes, $id, $column = 'id');
+    public function update(array $attributes, $id, $field = 'id', $column = 'id');
 
     /**
      * @param $id
